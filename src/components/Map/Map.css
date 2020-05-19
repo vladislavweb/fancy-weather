@@ -1,0 +1,10 @@
+.Map-wrapper {
+  height: 400px;
+  width: 400px;
+  border-radius: 10px;
+}
+
+.Map-wrapper p {
+  text-align: right;
+  color: white;
+}

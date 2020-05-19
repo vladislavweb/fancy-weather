@@ -1,0 +1,20 @@
+.ControlPanel {
+  display: flex;
+}
+
+.ControlPanel button:nth-child(1) {
+  margin-right: 10px;
+}
+
+.ControlPanel button:nth-child(3) {
+  border-right: 0;
+  border-left: 0;
+}
+
+.ControlPanel button:nth-child(5) {
+  border-right: 0;
+}
+
+.ControlPanel button:nth-child(4) {
+  margin-right: 10px;
+}

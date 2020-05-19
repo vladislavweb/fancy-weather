@@ -1,0 +1,32 @@
+.SearchPanel {
+  display: flex;
+}
+
+.SearchPanel form {
+  display: flex;
+}
+
+.SearchPanel input {
+  font-size: 20px;
+}
+
+.SearchPanel button:nth-child(2) {
+  border-left: 0;
+  border-right: 0;
+}
+
+.SearchPanel button[type='button']:nth-child(2) {
+  background-image: url('./assets/microphone.svg');
+  background-repeat: no-repeat;
+  background-size: 30px;
+  width: 40px;
+  background-position: 3px 3px;
+}
+
+.SearchPanel button[type='submit'] {
+  background-image: url('./assets/search.svg');
+  background-repeat: no-repeat;
+  background-size: 30px;
+  width: 40px;
+  background-position: 3px 3px;
+}
