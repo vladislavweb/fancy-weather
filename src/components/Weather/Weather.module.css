@@ -1,3 +1,7 @@
 .Weather {
-  
+  width: 100%; 
+}
+
+.ThreeDay {
+  display: flex;
 }

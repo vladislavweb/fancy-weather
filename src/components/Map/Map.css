@@ -1,10 +1,15 @@
 .Map-wrapper {
   height: 400px;
   width: 400px;
+  margin-left: auto;
   border-radius: 10px;
 }
 
 .Map-wrapper p {
   text-align: right;
   color: white;
+}
+
+.Map-wrapper .mapboxgl-map {
+  border-radius: 5px;
 }

@@ -5,8 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: gray;
+  background-image: url('./back.jpg');
+  color: white;
+}
 
+.hidden {
+  display: none;
 }
 
 code {

@@ -9,7 +9,7 @@ const SearchPanel = props => {
 
   const { changeTheme } = useContext(MainContext);
 
-  const [field, setField] = useState('1');
+  const [field, setField] = useState('');
 
   const [buttons] = useState([
     {
@@ -25,7 +25,6 @@ const SearchPanel = props => {
   const handleSubmit = (event) => {
     event.preventDefault();
     changeSearchString(field);
-    console.log(field, "submit");
   };
 
   const changeThemeHandler = () => {

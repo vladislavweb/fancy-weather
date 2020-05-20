@@ -15,7 +15,7 @@ const App = () => {
     } else {
       setTheme('light')
     }
-  }
+  };
 
   const changeSearchString = (value) => {
     setSearchString(value);

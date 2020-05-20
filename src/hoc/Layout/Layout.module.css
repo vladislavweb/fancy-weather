@@ -5,9 +5,9 @@
 }
 
 .Layout[data-theme='light'] {
-  background: yellow;
+
 }
 
 .Layout[data-theme='dark'] {
-  background: blue;
+
 }
