@@ -21,6 +21,12 @@ const App = () => {
     setSearchString(value);
   };
 
+  if (localStorage.getItem('touched') === null) {
+    localStorage.setItem('language', 'en');
+    localStorage.setItem('scale', 'cel');
+    localStorage.setItem('touched', true)
+  }
+
   return (
     <MainContext.Provider value={{searchString, changeSearchString, theme, changeTheme}}>
       <Layout data-theme={theme}>

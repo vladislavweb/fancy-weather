@@ -9,12 +9,21 @@ let lat = 0;
 let long = 0;
 const link = 'https://api.openweathermap.org/data/2.5/forecast?';
 const keyWeather = 'eac54b3672659f3dd10f71d884f30279';
-let lang = 'ru';
 
 const Weather = props => {
   const { searchString } = useContext(MainContext);
 
-  const [weatherNow, setWeatherNow] = useState({});
+  const [weatherNow, setWeatherNow] = useState({
+    lang: localStorage.getItem('language'),
+    country: '-',
+    city: '-',
+    weather: '-',
+    speed: 0,
+    humidity: 0,
+    feel: 0,
+    temp: 0,
+  });
+
   const [weatherThree, setWeatherThree] = useState({});
 
   useEffect(() => {
@@ -23,11 +32,9 @@ const Weather = props => {
       navigator.geolocation.getCurrentPosition((position) => {
         lat = position.coords.latitude;
         long = position.coords.longitude;
-
-        fetch(`${link}lat=${lat}&lon=${long}&appid=${keyWeather}&lang=${lang}&cnt=40&units=metric`)
+        fetch(`${link}lat=${lat}&lon=${long}&appid=${keyWeather}&lang=en&cnt=40&units=metric`)
           .then(res => res.json())
           .then(res => {
-            console.log(res)
             let now = (Date.now() / 1000).toFixed();
             for (let i = 0; i < 8; i++) {
               if (res.list[i].dt > now) {
@@ -36,6 +43,7 @@ const Weather = props => {
             };
 
             setWeatherNow({
+              lang: localStorage.getItem('language'),
               country: res.city.country,
               city: res.city.name,
               weather: res.list[varik[0]].weather[0].description,
@@ -44,7 +52,6 @@ const Weather = props => {
               feel: res.list[varik[0]].main.feels_like,
               temp: res.list[varik[0]].main.temp,
             });
-
           });
       });
       isFound = false;

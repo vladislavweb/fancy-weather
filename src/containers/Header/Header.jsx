@@ -2,14 +2,8 @@ import React from 'react';
 import classes from './Header.module.css';
 import ControlPanel from '../../components/ControlPanel/ControlPanel';
 import SearchPanel from '../../components/SearchPanel/SearchPanel'
-
-const ChangeLanguage = () => {
-  console.log('lang');
-};
-
-const ChangeScale = () => {
-  console.log('scale');
-};
+import changeShowLang from '../../scripts/changeShowLang';
+import changeShowScale from '../../scripts/changeShowScale';
 
 const ControlHandling = (event) => {
   const currentClick = event.target.textContent;
@@ -18,19 +12,24 @@ const ControlHandling = (event) => {
       console.log('Смена картинки');
       break;
     case 'RU':
-      ChangeLanguage();
+      localStorage.setItem('language', 'ru');
+      changeShowLang('ru');
       break;
     case 'EN':
-      ChangeLanguage();
+      localStorage.setItem('language', 'en');
+      changeShowLang('en')
       break;
     case 'BE':
-      ChangeLanguage();
+      localStorage.setItem('language', 'be');
+      changeShowLang('be');
       break;
     case '°F':
-      ChangeScale();
+      localStorage.setItem('scale', 'far');
+      changeShowScale('far');
       break;
     case '°C':
-      ChangeScale();
+      localStorage.setItem('scale', 'cel');
+      changeShowScale('cel');
       break;
     default:
       break;

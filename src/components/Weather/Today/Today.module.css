@@ -1,23 +1,66 @@
-.Today {
+.today {
   text-align: center;
 }
 
-.Location {
+.location {
 
 }
 
-.Date {
+.city {
+  margin: 0;
+  font-size: 60px;
+  font-weight: bold;
+}
+
+.country {
+  margin: 0;
+  font-size: 25px;
+}
+
+.date {
+  font-size: 40px;
+}
+
+.time {
+  font-size: 40px;
+}
+
+.about {
 
 }
 
-.Time {
-
+.aboutWeather {
+  font-size: 40px;
 }
 
-.About {
-
-}
-
-.Parameters {
+.aboutIcon {
   
 }
+
+.parameters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.temperature {
+  font-size: 130px;
+}
+
+.details {
+  margin-left: 30px;
+  text-align: left;
+}
+
+.feel {
+  font-size: 30px;
+}
+
+.speed {
+  font-size: 30px;
+}
+
+.humidity {
+  font-size: 30px;
+}
+
