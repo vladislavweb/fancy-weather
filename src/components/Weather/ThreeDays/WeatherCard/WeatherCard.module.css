@@ -1,0 +1,27 @@
+.weatherCard {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1%;
+  padding: 1%;
+  border: 2px solid white;
+  border-radius: 5%;
+  text-align: center;
+}
+
+.date {
+  width: 100%;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.temperature {
+  width: 100%;
+  font-size: 40px;
+}
+
+.weatherInfo {
+  width: 100%;
+  font-size: 25px;
+}

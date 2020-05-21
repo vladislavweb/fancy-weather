@@ -14,7 +14,8 @@
 
 .country {
   margin: 0;
-  font-size: 25px;
+  font-weight: bold;
+  letter-spacing: 2px;
 }
 
 .date {
@@ -26,15 +27,18 @@
 }
 
 .about {
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .aboutWeather {
   font-size: 40px;
 }
 
-.aboutIcon {
-  
+.aboutIcon img {
+  width: 150px;
+  height: 150px;
 }
 
 .parameters {
@@ -52,15 +56,6 @@
   text-align: left;
 }
 
-.feel {
+.feel, .speed, .humidity, .country {
   font-size: 30px;
 }
-
-.speed {
-  font-size: 30px;
-}
-
-.humidity {
-  font-size: 30px;
-}
-

@@ -1,5 +1,6 @@
 .ControlPanel {
   display: flex;
+  background: black;
 }
 
 .ControlPanel button:nth-child(1) {

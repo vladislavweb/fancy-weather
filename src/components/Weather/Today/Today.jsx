@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import classes from './Today.module.css';
 import changeShowLang from '../../../scripts/changeShowLang';
 import changeShowScale from '../../../scripts/changeShowScale';
+import data from '../../../assets/data';
 
 const Today = props => {
+  const [img, setImg] = useState('');
   const [ruCity, setRuCity] = useState('');
   const [ruWeather, setRuWeather] = useState('');
   const [beCity, setBeCity] = useState('');
   const [beWeather, setBeWeather] = useState('');
-  const [date] = useState(new Date().toDateString());
+  const [ruCountry, setRuCountry] = useState('');
+  const [beCountry, setBeCountry] = useState('');
   const [time, setTime] = useState({
     hours: new Date().getHours(),
     minutes: new Date().getMinutes(),
@@ -17,32 +20,53 @@ const Today = props => {
 
   useEffect(
     () => {
-      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-ru`)
-        .then((res) => res.json())
-        .then((data) => {
-          setRuCity(data.text[0]);
-        });
-
-      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-ru`)
-        .then((res) => res.json())
-        .then((data) => {
-          setRuWeather(data.text[0]);
-        });
-
-      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-be`)
-        .then((res) => res.json())
-        .then((data) => {
-          setBeCity(data.text[0]);
-        });
-
-      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-be`)
-        .then((res) => res.json())
-        .then((data) => {
-          setBeWeather(data.text[0]);
-        });
+      setImg(`http://openweathermap.org/img/wn/${props.img}@2x.png`);
     },
-    [props.city, props.weather]
+    [props.img]
   );
+
+  useEffect(
+    () => {
+      if (props.country.length > 1) {
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.country}&lang=en-ru`)
+          .then((res) => res.json())
+          .then((data) => {
+            setRuCountry(data.text[0]);
+          });
+
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.country}&lang=en-be`)
+          .then((res) => res.json())
+          .then((data) => {
+            setBeCountry(data.text[0]);
+          });
+
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-ru`)
+          .then((res) => res.json())
+          .then((data) => {
+            setRuCity(data.text[0]);
+          });
+
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-be`)
+          .then((res) => res.json())
+          .then((data) => {
+            setBeCity(data.text[0]);
+          });
+
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-ru`)
+          .then((res) => res.json())
+          .then((data) => {
+            setRuWeather(data.text[0]);
+          });
+
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-be`)
+          .then((res) => res.json())
+          .then((data) => {
+            setBeWeather(data.text[0]);
+          });
+      }
+    },
+    [props.city]
+  )
 
   useEffect(() => {
     changeShowScale(localStorage.getItem('scale'));
@@ -67,7 +91,7 @@ const Today = props => {
             {ruCity}
           </p>
           <p className={classes.country}>
-            {props.country}
+            {ruCountry}
           </p>
         </span>
         <span className='en'>
@@ -83,17 +107,34 @@ const Today = props => {
             {beCity}
           </p>
           <p className={classes.country}>
-            {props.country}
+            {beCountry}
           </p>
         </span>
       </div>
 
       <div className={classes.date}>
-        {date}
+        <span className='ru'>
+          {data.days.ru[new Date().getDay()]} &nbsp;
+          {data.months.ru[new Date().getMonth()]} &nbsp;
+          {new Date().getDate()} &nbsp;
+          {new Date().getFullYear()}
+        </span>
+        <span className='en'>
+          {data.days.en[new Date().getDay()]} &nbsp;
+          {data.months.en[new Date().getMonth()]} &nbsp;
+          {new Date().getDate()} &nbsp;
+          {new Date().getFullYear()}
+        </span>
+        <span className='be'>
+          {data.days.be[new Date().getDay()]} &nbsp;
+          {data.months.be[new Date().getMonth()]} &nbsp;
+          {new Date().getDate()} &nbsp;
+          {new Date().getFullYear()}
+        </span>
       </div>
 
       <div className={classes.time}>
-        {time.hours}:{time.minutes}:{time.seconds} 
+        {time.hours}:{time.minutes}:{time.seconds}
       </div>
 
       <div className={classes.about}>
@@ -109,6 +150,7 @@ const Today = props => {
           </span>
         </div>
         <div className={classes.aboutIcon}>
+          <img src={img} alt=""/>
         </div>
       </div>
 
@@ -133,6 +175,18 @@ const Today = props => {
         </div>
 
         <div className={classes.details}>
+          <div className={classes.speed}>
+            <span className='ru'>
+              Скорость ветра: {props.speed}м/с
+            </span>
+            <span className='en'>
+              Wind speed: {props.speed}mph
+            </span>
+            <span className='be'>
+              Хуткасць ветру: {props.speed}м/с
+            </span>
+          </div>
+
           <div className={classes.feel}>
             <span className='ru'>
               <span className='cel'>
@@ -160,18 +214,6 @@ const Today = props => {
             </span>
           </div>
 
-          <div className={classes.speed}>
-            <span className='ru'>
-              Скорость ветра: {props.speed}м/с
-            </span>
-            <span className='en'>
-              Wind speed: {props.speed}mph
-            </span>
-            <span className='be'>
-              Хуткасць ветру: {props.speed}м/с
-            </span>
-          </div>
-
           <div className={classes.humidity}>
             <span className='ru'>
               Влажность: {props.humidity}%
@@ -190,3 +232,34 @@ const Today = props => {
 };
 
 export default Today;
+
+
+
+// useEffect(
+//   () => {
+//     fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-ru`)
+//       .then((res) => res.json())
+//       .then((data) => {
+//         setRuCity(data.text[0]);
+//       });
+
+//     fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-be`)
+//       .then((res) => res.json())
+//       .then((data) => {
+//         setBeCity(data.text[0]);
+//       });
+
+//     fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-ru`)
+//       .then((res) => res.json())
+//       .then((data) => {
+//         setRuWeather(data.text[0]);
+//       });
+
+//     fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-be`)
+//       .then((res) => res.json())
+//       .then((data) => {
+//         setBeWeather(data.text[0]);
+//       });
+//   },
+//   [props.city, props.weather]
+// );
