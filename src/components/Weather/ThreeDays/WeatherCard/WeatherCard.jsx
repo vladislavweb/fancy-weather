@@ -62,10 +62,10 @@ const WeatherCard = props => {
 
       <div className={classes.temperature}>
         <span className='cel'>
-          {(props.info.avgTemp).toFixed().toString()} °F
+          {(props.info.avgTemp).toFixed().toString()} °C
         </span>
         <span className='far'>
-          {(props.info.avgTemp * 1.8 + 32).toFixed().toString()} °C
+          {(props.info.avgTemp * 1.8 + 32).toFixed().toString()} °F
         </span>
       </div>
     </div>

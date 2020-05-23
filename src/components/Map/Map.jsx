@@ -5,9 +5,28 @@ import Mark from './assets/MyLocation.svg';
 import { MainContext } from '../../MainContext';
 
 let isFound = true;
+let grad = 0;
+let min = 0;
+let sec = 0;
+const urlMap = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
+const tokenMap = 'pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ';
+const tokenGeo = 'BtHcuGO81EUArGaV164zvKD5sTuERK2O'
+const urlGeo = 'https://www.mapquestapi.com/geocoding/v1/address?key='
 
 const Map = props => {
   const { searchString, changeSearchString } = useContext(MainContext);
+
+  const [latCoord, setLatCoord] = useState({
+    gradus: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  const [longCoord, setLongCoord] = useState({
+    gradus: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   const [map, setMap] = useState({
     viewport: {
@@ -15,7 +34,7 @@ const Map = props => {
       height: "400px",
       latitude: 0,
       longitude: 0,
-      zoom: 10,
+      zoom: 11,
     },
   });
 
@@ -33,7 +52,7 @@ const Map = props => {
             height: "400px",
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            zoom: 10,
+            zoom: 11,
           },
         });
 
@@ -41,38 +60,47 @@ const Map = props => {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
+
+        setLatCoord({
+          gradus: (position.coords.latitude).toFixed(),
+          minutes: ((position.coords.latitude - (position.coords.latitude).toFixed()) * 60),
+          seconds: ((position.coords.latitude - (position.coords.latitude).toFixed()) * 60 * 60),
+        });
+
+        setLongCoord({
+          gradus: (position.coords.longitude).toFixed(),
+          minutes: ((position.coords.longitude - (position.coords.longitude).toFixed()) * 60),
+          seconds: ((position.coords.longitude - (position.coords.longitude).toFixed()) * 60 * 60),
+        });
       });
       isFound = false;
-    }
-  })
+    };
+  });
 
   useEffect(() => {
     if (searchString) {
       if (searchString.length > 3) {
-        fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchString}.json?access_token=pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ`)
-          .then(res => res.json())
-          .then(
-            (result) => {
-              if (result.features.length > 0) {
-                setMap({
-                  viewport: {
-                    width: "400px",
-                    height: "400px",
-                    latitude: result.features[0].center[1],
-                    longitude: result.features[0].center[0],
-                    zoom: 10,
-                  },
-                });
-                setPoint({
-                  latitude: result.features[0].center[1],
-                  longitude: result.features[0].center[0],
-                })
-                changeSearchString('');
-              }
-            }
-          )
-      }
-    }
+        fetch(`${urlGeo}${tokenGeo}&location=${searchString}`)
+          .then(data => data.json())
+          .then((data) => {
+            setMap({
+              viewport: {
+                width: "400px",
+                height: "400px",
+                latitude: data.results[0].locations[0].latLng.lat,
+                longitude: data.results[0].locations[0].latLng.lng,
+                zoom: 11,
+              },
+            });
+            setPoint({
+              latitude: data.results[0].locations[0].latLng.lat,
+              longitude: data.results[0].locations[0].latLng.lng,
+            });
+
+            changeSearchString('');
+          })
+      };
+    };
   });
 
 
@@ -81,17 +109,18 @@ const Map = props => {
       <ReactMapGL
         {...map.viewport}
         onViewportChange={(viewport) => setMap({ viewport })}
-        mapboxApiAccessToken="pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ"
+        mapboxApiAccessToken={tokenMap}
         mapStyle="mapbox://styles/mapbox/streets-v11">
         <Marker
-          mapboxApiAccessToken="pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ"
+          mapboxApiAccessToken={tokenMap}
           longitude={point.longitude}
           latitude={point.latitude}>
           <img src={Mark} alt="Marker" height="40px" width="40px" />
         </Marker>
       </ReactMapGL>
       <div>
-        <p>latitude: {map.viewport.latitude}</p>
+        {latCoord.gradus} {latCoord.minutes} {latCoord.seconds}
+        <p>latitude: {(map.viewport.latitude).toFixed()}</p>
         <p>longitude: {map.viewport.longitude}</p>
       </div>
     </div>

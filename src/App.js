@@ -22,6 +22,7 @@ const App = () => {
   };
 
   if (localStorage.getItem('touched') === null) {
+    localStorage.setItem('volume', 1)
     localStorage.setItem('language', 'en');
     localStorage.setItem('scale', 'cel');
     localStorage.setItem('touched', true)
