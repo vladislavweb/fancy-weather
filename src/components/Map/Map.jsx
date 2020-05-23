@@ -12,6 +12,7 @@ const urlMap = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
 const tokenMap = 'pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ';
 const tokenGeo = 'BtHcuGO81EUArGaV164zvKD5sTuERK2O'
 const urlGeo = 'https://www.mapquestapi.com/geocoding/v1/address?key='
+console.log(urlGeo);
 
 const Map = props => {
   const { searchString, changeSearchString } = useContext(MainContext);
