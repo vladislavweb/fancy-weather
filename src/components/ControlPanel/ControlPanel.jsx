@@ -37,7 +37,7 @@ const ControlPanel = props => {
   ]);
 
   return (
-    <div className='ControlPanel' onClick={props.onClick}>
+    <div className='ControlPanel' onClick={props.onClick} style={{display: 'flex'}}>
       {
         buttons.map((item, index) => (
           <Button key={index} {...item} />
