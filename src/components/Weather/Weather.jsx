@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import classes from './Weather.module.css';
+import  './Weather.css';
 import ThreeDays from './ThreeDays/ThreeDays';
 import { MainContext } from '../../MainContext';
 import Today from './Today/Today';
@@ -14,13 +14,77 @@ const tokenGeo = 'BtHcuGO81EUArGaV164zvKD5sTuERK2O'
 const urlGeo = 'https://www.mapquestapi.com/geocoding/v1/address?key='
 
 const Weather = props => {
+  const nowToday = (day, weath) => {
+    if (day === 'n') {
+      switch (weath) {
+        case 'clear sky':
+          setImgNow('csn');
+          break;
+        case 'few clouds':
+          setImgNow('fcn');
+          break;
+        case 'scattered clouds':
+          setImgNow('scn');
+          break;
+        case 'broken clouds':
+          setImgNow('bc');
+          break;
+        case 'shower rain':
+          setImgNow('sr');
+          break;
+        case 'rain':
+          setImgNow('rn');
+          break;
+        case 'thunderstorm':
+          setImgNow('thunderstorm');
+          break;
+        case 'snow':
+          setImgNow('sn');
+          break;
+        case 'mist':
+          setImgNow('mist');
+          break;
+        default:
+      }
+    } else if (day === 'd') {
+      switch (weath) {
+        case 'clear sky':
+          setImgNow('csd');
+          break;
+        case 'few clouds':
+          setImgNow('fcd');
+          break;
+        case 'scattered clouds':
+          setImgNow('scd');
+          break;
+        case 'broken clouds':
+          setImgNow('bc');
+          break;
+        case 'shower rain':
+          setImgNow('sr');
+          break;
+        case 'rain':
+          setImgNow('rd');
+          break;
+        case 'thunderstorm':
+          setImgNow('thunderstorm');
+          break;
+        case 'snow':
+          setImgNow('sd');
+          break;
+        case 'mist':
+          setImgNow('mist');
+          break;
+        default:
+      }
+    }
+  }
+
   const { searchString, changeSearchString } = useContext(MainContext);
-
   const [country, setCountry] = useState('');
-
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-
-
+  const [imgNow, setImgNow] = useState('csn');
+  const [imgThree, setImgThree] = useState({one: '', two: '', three: '',});
   const [weatherNow, setWeatherNow] = useState({
     lang: localStorage.getItem('language'),
     city: '-',
@@ -29,7 +93,6 @@ const Weather = props => {
     humidity: 0,
     feel: 0,
     temp: 0,
-    img: '',
   });
 
   const [weatherThree, setWeatherThree] = useState([
@@ -65,6 +128,12 @@ const Weather = props => {
         fetch(`${link}lat=${lat}&lon=${long}&appid=${keyWeather}&lang=en&cnt=32&units=metric`)
           .then(res => res.json())
           .then(res => {
+            if (res.list[0].weather[0].icon.split('').includes('n')) {
+              nowToday('n', res.list[0].weather[0].description)
+            } else if (res.list[0].weather[0].icon.split('').includes('d')) {
+              nowToday('d', res.list[0].weather[0].description)
+            }
+
             setWeatherNow({
               lang: localStorage.getItem('language'),
               city: res.city.name,
@@ -73,7 +142,6 @@ const Weather = props => {
               humidity: res.list[0].main.humidity,
               feel: res.list[0].main.feels_like,
               temp: res.list[0].main.temp,
-              img: res.list[0].weather[0].icon,
             });
 
             setIsDataLoaded(true);
@@ -158,9 +226,9 @@ const Weather = props => {
   });
 
   return (
-    <div className={classes.Weather}>
+    <div className='Weather'>
       {
-        isDataLoaded && <Today {...weatherNow} country={country} />
+        isDataLoaded && <Today {...weatherNow} country={country} imgNow={imgNow}/>
       }
       <ThreeDays weatherThree={weatherThree} />
     </div>

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import classes from './Today.module.css';
+import  './Today.css';
 import changeShowLang from '../../../scripts/changeShowLang';
 import changeShowScale from '../../../scripts/changeShowScale';
 import data from '../../../assets/data';
 
+let block = true
+
 const Today = props => {
-  const [img, setImg] = useState('');
+  console.log('render today');
+
   const [ruCity, setRuCity] = useState('');
   const [ruWeather, setRuWeather] = useState('');
   const [beCity, setBeCity] = useState('');
@@ -17,13 +20,6 @@ const Today = props => {
     minutes: new Date().getMinutes(),
     seconds: new Date().getSeconds(),
   });
-
-  useEffect(
-    () => {
-      setImg(`http://openweathermap.org/img/wn/${props.img}@2x.png`);
-    },
-    [props.img]
-  );
 
   useEffect(
     () => {
@@ -68,51 +64,71 @@ const Today = props => {
     [props.city]
   )
 
-  useEffect(() => {
-    changeShowScale(localStorage.getItem('scale'));
-    changeShowLang(localStorage.getItem('language'));
-  });
+  useEffect(
+    () => {
+      changeShowScale(localStorage.getItem('scale'));
+      changeShowLang(localStorage.getItem('language'));
+    },
+    []
+  );
 
-  setTimeout(() => {
-    setTime(
-      {
-        hours: new Date().getHours(),
-        minutes: new Date().getMinutes(),
-        seconds: new Date().getSeconds(),
-      },
-    );
-  }, 1000);
+  // setTimeout(() => {
+  //   setTime(
+  //     {
+  //       hours: new Date().getHours(),
+  //       minutes: new Date().getMinutes(),
+  //       seconds: new Date().getSeconds(),
+  //     },
+  //   );
+  // }, 1000);
+
+  useEffect(
+    () => {
+      const timeout = setTimeout(() => {
+        setTime(
+          {
+            hours: new Date().getHours(),
+            minutes: new Date().getMinutes(),
+            seconds: new Date().getSeconds(),
+          },
+        );
+
+        return () => clearTimeout(timeout)
+      }, 1000);
+    },
+    [time]
+  )
 
   return (
-    <div className={classes.today}>
-      <div className={classes.location}>
+    <div className='today'>
+      <div className='location'>
         <span className='ru'>
-          <p className={classes.city}>
+          <p className='city'>
             {ruCity}
           </p>
-          <p className={classes.country}>
+          <p className='country'>
             {ruCountry}
           </p>
         </span>
         <span className='en'>
-          <p className={classes.city}>
+          <p className='city'>
             {props.city}
           </p>
-          <p className={classes.country}>
+          <p className='country'>
             {props.country}
           </p>
         </span>
         <span className='be'>
-          <p className={classes.city}>
+          <p className='city'>
             {beCity}
           </p>
-          <p className={classes.country}>
+          <p className='country'>
             {beCountry}
           </p>
         </span>
       </div>
 
-      <div className={classes.date}>
+      <div className='date'>
         <span className='ru'>
           {data.days.ru[new Date().getDay()]} &nbsp;
           {data.months.ru[new Date().getMonth()]} &nbsp;
@@ -133,12 +149,12 @@ const Today = props => {
         </span>
       </div>
 
-      <div className={classes.time}>
+      <div className='time'>
         {time.hours}:{time.minutes}:{time.seconds}
       </div>
 
-      <div className={classes.about}>
-        <div className={classes.aboutWeather}>
+      <div className='about'>
+        <div className='about-weather'>
           <span className='ru'>
             {ruWeather}
           </span>
@@ -149,13 +165,12 @@ const Today = props => {
             {beWeather}
           </span>
         </div>
-        <div className={classes.aboutIcon}>
-          <img src={img} alt=""/>
+        <div className={`aboutIcon ${props.imgNow}`}>
         </div>
       </div>
 
-      <div className={classes.parameters}>
-        <div className={classes.temperature}>
+      <div className='parameters'>
+        <div className='temperature'>
           <div className='cel'>
             <span>
               {(props.temp / 1).toFixed()}
@@ -174,8 +189,8 @@ const Today = props => {
           </div>
         </div>
 
-        <div className={classes.details}>
-          <div className={classes.speed}>
+        <div className='details'>
+          <div className='speed'>
             <span className='ru'>
               Скорость ветра: {props.speed}м/с
             </span>
@@ -187,7 +202,7 @@ const Today = props => {
             </span>
           </div>
 
-          <div className={classes.feel}>
+          <div className='feel'>
             <span className='ru'>
               <span className='cel'>
                 Ощущается как: {(props.feel / 1).toFixed()} °C
@@ -214,7 +229,7 @@ const Today = props => {
             </span>
           </div>
 
-          <div className={classes.humidity}>
+          <div className='humidity'>
             <span className='ru'>
               Влажность: {props.humidity}%
             </span>

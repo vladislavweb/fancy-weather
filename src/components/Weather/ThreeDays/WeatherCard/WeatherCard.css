@@ -1,4 +1,4 @@
-.weatherCard {
+.weather-card {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -10,18 +10,18 @@
   text-align: center;
 }
 
-.date {
+.weather-card .date {
   width: 100%;
   font-size: 22px;
   font-weight: bold;
 }
 
-.temperature {
+.weather-card .temperature {
   width: 100%;
   font-size: 40px;
 }
 
-.weatherInfo {
+.weather-card .weather-info {
   width: 100%;
   font-size: 25px;
 }

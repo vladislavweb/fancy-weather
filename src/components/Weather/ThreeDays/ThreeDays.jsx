@@ -1,10 +1,10 @@
 import React from 'react';
-import classes from './ThreeDays.module.css';
+import './ThreeDays.css';
 import WeatherCard from './WeatherCard/WeatherCard';
 
 const ThreeDays = props => {
   return (
-    <div className={classes.ThreeDays}>
+    <div className='ThreeDays'>
       {
         props.weatherThree.map((info, index) => {
           return (

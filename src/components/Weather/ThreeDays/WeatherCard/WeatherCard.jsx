@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import classes from './WeatherCard.module.css';
+import './WeatherCard.css';
 import data from '../../../../assets/data';
 
 const WeatherCard = props => {
@@ -26,8 +26,8 @@ const WeatherCard = props => {
   );
 
   return (
-    <div className={classes.weatherCard}>
-      <div className={classes.date}>
+    <div className='weather-card'>
+      <div className='date'>
         <span className='ru'>
           {data.days.ru[new Date().getDay() + props.next]} &nbsp;
           {data.months.ru[new Date().getMonth()]} &nbsp;
@@ -48,7 +48,7 @@ const WeatherCard = props => {
         </span>
       </div>
 
-      <div className={classes.weatherInfo}>
+      <div className='weather-info'>
         <span className='ru'>
           {ruWeather}
         </span>
@@ -60,7 +60,7 @@ const WeatherCard = props => {
         </span>
       </div>
 
-      <div className={classes.temperature}>
+      <div className='temperature'>
         <span className='cel'>
           {(props.info.avgTemp).toFixed().toString()} °C
         </span>

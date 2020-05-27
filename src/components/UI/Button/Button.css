@@ -1,4 +1,4 @@
-.Button {
+.btn {
   height: 40px;
   padding: 5px 10px;
   color: white;
@@ -8,6 +8,6 @@
   cursor: pointer;
 }
 
-.Button:hover {
+.btn:hover {
   background:rgba(186,210,255,.6)
 }

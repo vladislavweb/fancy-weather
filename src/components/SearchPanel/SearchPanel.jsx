@@ -3,6 +3,7 @@ import './SearchPanel.css';
 import Input from '../UI/Input/Input';
 import Button from '../UI/Button/Button';
 import { MainContext } from '../../MainContext';
+import toggleKeyboard from '../../scripts/toggleKeyboard';
 
 const SearchPanel = props => {
   const { changeSearchString } = useContext(MainContext);
@@ -77,11 +78,19 @@ const SearchPanel = props => {
       text: '',
       type: 'button',
       click: speak,
+      class: 'speak',
+    },
+    {
+      text: '',
+      type: 'button',
+      click: toggleKeyboard,
+      class: 'toggle-keyboard',
     },
     {
       text: '',
       type: 'submit',
       click: () => console.log('sub'),
+      class: 'submit-form',
     },
   ]);
 
@@ -103,7 +112,6 @@ const SearchPanel = props => {
             <Button key={index} {...item}/>
           ))
         }
-        <button onClick={() => changeThemeHandler()}>lol</button>
       </form>
     </div>
   );

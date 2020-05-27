@@ -7,41 +7,40 @@ const ControlPanel = props => {
     {
       text: "",
       type: "button",
+      class: 'changeBack',
     },
     {
       text: "RU",
       type: "button",
+      class: 'lang-ru',
     },
     {
       text: "EN",
       type: "button",
+      class: 'lang-en',
     },
     {
       text: "BE",
       type: "button",
+      class: 'lang-be',
     },
     {
       text: "°F",
       type: "button",
+      class: 'scale-far',
     },
     {
       text: "°C",
       type: "button",
+      class: 'scale-cel'
     },
   ]);
-  
+
   return (
-    <div
-      className='ControlPanel'
-      onClick={props.onClick}
-    >
+    <div className='ControlPanel' onClick={props.onClick}>
       {
         buttons.map((item, index) => (
-          <Button
-            key={index}
-            text={item.text}
-            type={item.type}
-          />
+          <Button key={index} {...item} />
         ))
       }
     </div>

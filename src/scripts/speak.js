@@ -1,5 +1,10 @@
+import React, { useContext } from 'react';
+import { MainContext } from '../../MainContext';
+
 const speak = () => {
-  let currentLang = localStorage.getItem("language");
+  const { changeSearchString } = useContext(MainContext);
+
+  let currentLang = localStorage.getItem('language');
   let SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
   let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   let speechRecognitionList = new SpeechGrammarList();
@@ -10,32 +15,41 @@ const speak = () => {
   recognition.interimResults = false;
 
   switch (currentLang) {
-    case "ru":
+    case 'ru':
       recognition.lang = "ru-US";
       break;
-    case "en":
+    case 'en':
       recognition.lang = "en-US";
       break;
-    case "be":
+    case 'be':
       recognition.lang = "be-US";
       break;
     default:
-  }
+  };
 
   recognition.onresult = function (event) {
+    let currentVolume = localStorage.getItem("volume");
     let last = event.results.length - 1;
     let command = event.results[last][0].transcript.toLowerCase();
     console.log("Произнесено: ", command);
-    if (command === "plus" || command === "плюс" || command === "") {
+    if (command === "plus" || command === "плюс" || command === "плюс") {
       console.log("plus");
-    }
-
-    if (command === "minus" || command === "минус" || command === "мінус") {
+      if (currentVolume < 1) {
+        localStorage.setItem("volume", (currentVolume / 1 + 0.1).toFixed(1));
+      }
+    } else if (command === "minus" || command === "минус" || command === "мінус") {
       console.log("minus");
-    }
-
-    if (command === "sky" || command === "небо" || command === "неба") {
+      if (currentVolume >= 0) {
+        localStorage.setItem("volume", (currentVolume / 1 - 0.1).toFixed(1));
+      }
+    } else if (command === "sky" || command === "небо" || command === "неба") {
       console.log("sky");
+      let synth = window.speechSynthesis;
+      let utterThis = new SpeechSynthesisUtterance("sky");
+      utterThis.volume = localStorage.getItem("volume");
+      synth.speak(utterThis);
+    } else {
+      changeSearchString(command);
     }
   };
 
@@ -44,7 +58,7 @@ const speak = () => {
   };
 
   recognition.onerror = function (event) {
-    console.log("error");
+    console.log('error');
   };
 
   recognition.start();

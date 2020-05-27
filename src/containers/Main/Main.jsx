@@ -1,11 +1,11 @@
 import React from "react";
-import classes from "./Main.module.css";
+import  "./Main.css";
 import Map from '../../components/Map/Map';
 import Weather from '../../components/Weather/Weather';
 
 const Main = props => {
   return (
-    <main className={classes.Main}>
+    <main className='Main'>
       <Weather/>
       <Map/>
     </main>

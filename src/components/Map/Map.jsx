@@ -12,7 +12,6 @@ const urlMap = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
 const tokenMap = 'pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ';
 const tokenGeo = 'BtHcuGO81EUArGaV164zvKD5sTuERK2O'
 const urlGeo = 'https://www.mapquestapi.com/geocoding/v1/address?key='
-console.log(urlGeo);
 
 const Map = props => {
   const { searchString, changeSearchString } = useContext(MainContext);
@@ -20,13 +19,11 @@ const Map = props => {
   const [latCoord, setLatCoord] = useState({
     gradus: 0,
     minutes: 0,
-    seconds: 0,
   });
 
   const [longCoord, setLongCoord] = useState({
     gradus: 0,
     minutes: 0,
-    seconds: 0,
   });
 
   const [map, setMap] = useState({
@@ -47,6 +44,10 @@ const Map = props => {
   useEffect(() => {
     if (isFound) {
       navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position.coords.longitude);
+        console.log(Math.floor(position.coords.longitude));
+        
+        
         setMap({
           viewport: {
             width: "400px",
@@ -63,15 +64,13 @@ const Map = props => {
         });
 
         setLatCoord({
-          gradus: (position.coords.latitude).toFixed(),
-          minutes: ((position.coords.latitude - (position.coords.latitude).toFixed()) * 60),
-          seconds: ((position.coords.latitude - (position.coords.latitude).toFixed()) * 60 * 60),
+          gradus: position.coords.latitude.toFixed(),
+          minutes: ((position.coords.latitude - Math.floor(position.coords.latitude)) * 60).toFixed(),
         });
 
         setLongCoord({
-          gradus: (position.coords.longitude).toFixed(),
-          minutes: ((position.coords.longitude - (position.coords.longitude).toFixed()) * 60),
-          seconds: ((position.coords.longitude - (position.coords.longitude).toFixed()) * 60 * 60),
+          gradus: position.coords.longitude.toFixed(),
+          minutes: ((position.coords.longitude - Math.floor(position.coords.longitude)) * 60).toFixed(),
         });
       });
       isFound = false;
@@ -119,10 +118,9 @@ const Map = props => {
           <img src={Mark} alt="Marker" height="40px" width="40px" />
         </Marker>
       </ReactMapGL>
-      <div>
-        {latCoord.gradus} {latCoord.minutes} {latCoord.seconds}
-        <p>latitude: {(map.viewport.latitude).toFixed()}</p>
-        <p>longitude: {map.viewport.longitude}</p>
+      <div className='coordinates'>
+        <p>latitude: {latCoord.gradus}° {latCoord.minutes}'</p>
+        <p>longitude: {longCoord.gradus}° {longCoord.minutes}'</p>
       </div>
     </div>
   );

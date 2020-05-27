@@ -1,9 +1,10 @@
 import React from 'react';
-import classes from './Header.module.css';
+import  './Header.css';
 import ControlPanel from '../../components/ControlPanel/ControlPanel';
 import SearchPanel from '../../components/SearchPanel/SearchPanel'
 import changeShowLang from '../../scripts/changeShowLang';
 import changeShowScale from '../../scripts/changeShowScale';
+import VirtualKeyboard from '../../components/VirtualKeyboard/VirtualKeyboard';
 
 const ControlHandling = (event) => {
   const currentClick = event.target.textContent;
@@ -34,15 +35,16 @@ const ControlHandling = (event) => {
     default:
       break;
   };
-}
+};
 
 const Header = props => {
   return (
-    <header className={classes.Header}>
+    <header className='Header'>
       <ControlPanel
         onClick={ControlHandling}
       />
-      <SearchPanel/>
+      <SearchPanel />
+      <VirtualKeyboard />
     </header>
   );
 };
