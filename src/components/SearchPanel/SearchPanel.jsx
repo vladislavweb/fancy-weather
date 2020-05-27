@@ -106,7 +106,7 @@ const SearchPanel = props => {
   return (
     <div className="SearchPanel">
       <form onSubmit={handleSubmit}>
-        <Input value={field} onChange={e => setField(e.target.value)} style={{display: 'flex'}}/>
+        <Input value={field} onChange={e => setField(e.target.value)} />
         {
           buttons.map((item, index) => (
             <Button key={index} {...item}/>

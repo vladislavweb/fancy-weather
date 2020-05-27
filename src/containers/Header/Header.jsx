@@ -39,7 +39,7 @@ const ControlHandling = (event) => {
 
 const Header = props => {
   return (
-    <header className='Header' style={{display: 'flex'}}>
+    <header className='Header'>
       <ControlPanel
         onClick={ControlHandling}
       />
