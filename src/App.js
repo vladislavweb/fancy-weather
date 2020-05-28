@@ -9,6 +9,9 @@ const App = () => {
   const [city, setCity] = useState();
   const [searchString, setSearchString] = useState();
   const [theme, setTheme] = useState('black');
+  const [isGeo, setIsGeo] = useState(true);
+  const [isMicrophone, setIsMicrophone] = useState(true);
+  const [request, setRequest] = useState(false);
 
   const changeTheme = () => {
     if (theme === 'light') {
@@ -16,6 +19,18 @@ const App = () => {
     } else {
       setTheme('light')
     }
+  };
+
+  const changeRequest = value => {
+    setRequest(value);
+  };
+
+  const changeGeo = value => {
+    setIsGeo(value);
+  };
+
+  const changeMicrophone = value => {
+    setIsMicrophone(value);
   };
 
   const changeSearchString = (value) => {
@@ -34,7 +49,7 @@ const App = () => {
   }
 
   return (
-    <MainContext.Provider value={{searchString, changeSearchString, theme, changeTheme, city, changeCity}}>
+    <MainContext.Provider value={{searchString, changeSearchString, theme, changeTheme, city, changeCity, isGeo, changeGeo, isMicrophone, changeMicrophone, request, changeRequest}}>
       <Layout data-theme={theme}>
         <Header />
         <Main />

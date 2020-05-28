@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './SearchPanel.css';
 import Input from '../UI/Input/Input';
 import Button from '../UI/Button/Button';
@@ -7,8 +7,17 @@ import toggleKeyboard from '../../scripts/toggleKeyboard';
 
 const SearchPanel = props => {
   const { changeSearchString } = useContext(MainContext);
+  const { changeMicrophone } = useContext(MainContext);
+
+  useEffect(
+    () => {
+      changeMicrophone(false);
+    },
+    []
+  );
 
   const speak = () => {
+    changeMicrophone(false);
     let currentLang = localStorage.getItem('language');
     let SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
     let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -60,6 +69,7 @@ const SearchPanel = props => {
     };
 
     recognition.onerror = function (event) {
+      changeMicrophone(true);
       console.log('error');
     };
 
@@ -86,7 +96,7 @@ const SearchPanel = props => {
     {
       text: '',
       type: 'submit',
-      click: () => console.log('sub'),
+      click: () => console.log('submit'),
       class: 'submit-form',
     },
   ]);

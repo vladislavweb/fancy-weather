@@ -4,16 +4,14 @@ import ReactMapGL, { Marker } from "react-map-gl";
 import Mark from './assets/MyLocation.svg';
 import { MainContext } from '../../MainContext';
 
-// http://open.mapquestapi.com/geocoding/v1/reverse?key=KEY&location=30.333472,-81.470448&includeRoadMetadata=true&includeNearestIntersection=true
-
-const geoReverse = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=';
 let isFound = true;
+const geoReverse = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=';
 const tokenMap = 'pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ';
 const tokenGeo = 'BtHcuGO81EUArGaV164zvKD5sTuERK2O'
 const urlGeo = 'https://www.mapquestapi.com/geocoding/v1/address?key='
 
 const Map = props => {
-  const { searchString, changeSearchString } = useContext(MainContext);
+  const { searchString, changeSearchString, changeGeo } = useContext(MainContext);
 
   const { changeCity } = useContext(MainContext);
 
@@ -49,8 +47,9 @@ const Map = props => {
           .then(data => data.json())
           .then((data) => {
             changeCity(data.results[0].locations[0].adminArea5)
-            sessionStorage.setItem('location', data.results[0].locations[0].adminArea5)
           })
+
+        changeGeo(false);
 
         setMap({
           viewport: {
@@ -93,20 +92,22 @@ const Map = props => {
         fetch(`${urlGeo}${tokenGeo}&location=${searchString}`)
           .then(data => data.json())
           .then((data) => {
-            sessionStorage.setItem('location', data.results[0].locations[0].adminArea5)
-            setMap({
-              viewport: {
-                width: "400px",
-                height: "400px",
+            if (data.results[0].locations[0].adminArea5) {
+              setMap({
+                viewport: {
+                  width: "400px",
+                  height: "400px",
+                  latitude: data.results[0].locations[0].latLng.lat,
+                  longitude: data.results[0].locations[0].latLng.lng,
+                  zoom: 11,
+                },
+              });
+
+              setPoint({
                 latitude: data.results[0].locations[0].latLng.lat,
                 longitude: data.results[0].locations[0].latLng.lng,
-                zoom: 11,
-              },
-            });
-            setPoint({
-              latitude: data.results[0].locations[0].latLng.lat,
-              longitude: data.results[0].locations[0].latLng.lng,
-            });
+              });
+            }
           })
       };
     };

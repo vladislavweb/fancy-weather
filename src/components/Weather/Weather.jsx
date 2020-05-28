@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import  './Weather.css';
+import './Weather.css';
 import ThreeDays from './ThreeDays/ThreeDays';
 import { MainContext } from '../../MainContext';
 import Today from './Today/Today';
@@ -81,7 +81,7 @@ const Weather = props => {
     }
   }
 
-  const { searchString, changeSearchString } = useContext(MainContext);
+  const { searchString, changeSearchString, changeRequest } = useContext(MainContext);
   const { city, changeCity } = useContext(MainContext);
   const [country, setCountry] = useState('');
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -119,6 +119,7 @@ const Weather = props => {
   useEffect(() => {
     if (isFound) {
       navigator.geolocation.getCurrentPosition((position) => {
+        changeRequest(false);
         lat = position.coords.latitude;
         long = position.coords.longitude;
 
@@ -178,74 +179,78 @@ const Weather = props => {
 
   useEffect(() => {
     if (searchString) {
+      localStorage.setItem('isRequest', true);
       fetch(`${urlGeo}${tokenGeo}&location=${searchString}`)
         .then(data => data.json())
         .then((data) => {
-          lat = data.results[0].locations[0].latLng.lat;
-          long = data.results[0].locations[0].latLng.lng;
+          if (data.results[0].locations[0].adminArea5) {
+            changeRequest(false);
+            lat = data.results[0].locations[0].latLng.lat;
+            long = data.results[0].locations[0].latLng.lng;
 
-          fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?types=country&access_token=${tokenMap}`)
-            .then(res => res.json())
-            .then(res => {
-              setCountry(res.features[0].place_name);
-            })
+            fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?types=country&access_token=${tokenMap}`)
+              .then(res => res.json())
+              .then(res => {
+                setCountry(res.features[0].place_name);
+              })
 
-          fetch(`${urlGeo}${tokenGeo}&accept-language=en&location=${searchString}`)
-            .then(data => data.json())
-            .then((data) => {
-              changeCity(data.results[0].locations[0].adminArea5)
-              sessionStorage.setItem('location', data.results[0].locations[0].adminArea5)
-            })
+            fetch(`${urlGeo}${tokenGeo}&location=${searchString}`)
+              .then(data => data.json())
+              .then((data) => {
+                changeCity(data.results[0].locations[0].adminArea5)
+              })
 
-          // fetch(`${geoReverse}${tokenGeo}&location=${lat},${long}`)
-          //   .then(data => data.json())
-          //   .then((data) => {
-          //     changeCity(data.results[0].locations[0].adminArea5)
-          //     sessionStorage.setItem('location', data.results[0].locations[0].adminArea5)
-          //   })
+            // fetch(`${geoReverse}${tokenGeo}&location=${lat},${long}`)
+            //   .then(data => data.json())
+            //   .then((data) => {
+            //     changeCity(data.results[0].locations[0].adminArea5)
+            //     sessionStorage.setItem('location', data.results[0].locations[0].adminArea5)
+            //   })
 
-          fetch(`${link}lat=${lat}&lon=${long}&appid=${keyWeather}&lang=en&cnt=32&units=metric`)
-            .then(res => res.json())
-            .then(res => {
-              if (res.list[0].weather[0].icon.split('').includes('n')) {
-                nowToday('n', res.list[0].weather[0].icon.substring(0, 2))
-              } else if (res.list[0].weather[0].icon.split('').includes('d')) {
-                nowToday('d', res.list[0].weather[0].icon.substring(0, 2))
-              }
+            fetch(`${link}lat=${lat}&lon=${long}&appid=${keyWeather}&lang=en&cnt=32&units=metric`)
+              .then(res => res.json())
+              .then(res => {
+                if (res.list[0].weather[0].icon.split('').includes('n')) {
+                  nowToday('n', res.list[0].weather[0].icon.substring(0, 2))
+                } else if (res.list[0].weather[0].icon.split('').includes('d')) {
+                  nowToday('d', res.list[0].weather[0].icon.substring(0, 2))
+                }
 
-              setWeatherNow({
-                lang: localStorage.getItem('language'),
-                weather: res.list[0].weather[0].description,
-                speed: res.list[0].wind.speed,
-                humidity: res.list[0].main.humidity,
-                feel: res.list[0].main.feels_like,
-                temp: res.list[0].main.temp,
-                img: res.list[0].weather[0].icon,
-              });
+                setWeatherNow({
+                  lang: localStorage.getItem('language'),
+                  weather: res.list[0].weather[0].description,
+                  speed: res.list[0].wind.speed,
+                  humidity: res.list[0].main.humidity,
+                  feel: res.list[0].main.feels_like,
+                  temp: res.list[0].main.temp,
+                  img: res.list[0].weather[0].icon,
+                });
 
-              setWeatherThree([
-                {
-                  avgTemp: (res.list[8].main.temp_max + res.list[8].main.temp_min) / 2,
-                  day: res.list[8].weather[0].icon.charAt(2),
-                  img: res.list[8].weather[0].icon.substring(0, 2),
-                  weather: res.list[8].weather[0].description,
-                },
-                {
-                  avgTemp: (res.list[16].main.temp_max + res.list[16].main.temp_min) / 2,
-                  day: res.list[16].weather[0].icon.charAt(2),
-                  img: res.list[16].weather[0].icon.substring(0, 2),
-                  weather: res.list[16].weather[0].description,
-                },
-                {
-                  avgTemp: (res.list[24].main.temp_max + res.list[24].main.temp_min) / 2,
-                  day: res.list[24].weather[0].icon.charAt(2),
-                  img: res.list[24].weather[0].icon.substring(0, 2),
-                  weather: res.list[24].weather[0].description,
-                },
-              ]);
-            })
-
+                setWeatherThree([
+                  {
+                    avgTemp: (res.list[8].main.temp_max + res.list[8].main.temp_min) / 2,
+                    day: res.list[8].weather[0].icon.charAt(2),
+                    img: res.list[8].weather[0].icon.substring(0, 2),
+                    weather: res.list[8].weather[0].description,
+                  },
+                  {
+                    avgTemp: (res.list[16].main.temp_max + res.list[16].main.temp_min) / 2,
+                    day: res.list[16].weather[0].icon.charAt(2),
+                    img: res.list[16].weather[0].icon.substring(0, 2),
+                    weather: res.list[16].weather[0].description,
+                  },
+                  {
+                    avgTemp: (res.list[24].main.temp_max + res.list[24].main.temp_min) / 2,
+                    day: res.list[24].weather[0].icon.charAt(2),
+                    img: res.list[24].weather[0].icon.substring(0, 2),
+                    weather: res.list[24].weather[0].description,
+                  },
+                ]);
+              })
             changeSearchString('');
+            } else {
+              changeRequest(true)
+            }
           })
     };
   });

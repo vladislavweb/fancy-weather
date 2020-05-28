@@ -5,15 +5,13 @@
   border-radius: 10px;
 }
 
-.Map-wrapper p {
-  text-align: center;
-  color: white;
-}
-
 .Map-wrapper .mapboxgl-map {
-  border-radius: 5px;
+  border-radius: 20% 50% 30% 40%;
 }
 
 .coordinates {
+  font-weight: bold;
   font-size: 25px;
+  text-align: right;
+  color: white;
 }
