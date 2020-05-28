@@ -33,6 +33,7 @@
 }
 
 .today .about-weather {
+  text-transform: uppercase;
   font-size: 40px;
 }
 
@@ -41,7 +42,7 @@
   height: 150px;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 300px;
+  background-size: 265px;
 }
 
 .today .parameters {

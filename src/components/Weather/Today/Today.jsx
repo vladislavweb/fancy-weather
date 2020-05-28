@@ -4,11 +4,7 @@ import changeShowLang from '../../../scripts/changeShowLang';
 import changeShowScale from '../../../scripts/changeShowScale';
 import data from '../../../assets/data';
 
-let block = true
-
 const Today = props => {
-  console.log('render today');
-
   const [ruCity, setRuCity] = useState('');
   const [ruWeather, setRuWeather] = useState('');
   const [beCity, setBeCity] = useState('');
@@ -62,7 +58,7 @@ const Today = props => {
       }
     },
     [props.city]
-  )
+  );
 
   useEffect(
     () => {
@@ -97,7 +93,7 @@ const Today = props => {
       }, 1000);
     },
     [time]
-  )
+  );
 
   return (
     <div className='today'>
@@ -159,7 +155,7 @@ const Today = props => {
             {ruWeather}
           </span>
           <span className='en'>
-            {props.weather}
+            {props.weather.toUpperCase()}
           </span>
           <span className='be'>
             {beWeather}

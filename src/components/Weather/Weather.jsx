@@ -17,62 +17,62 @@ const Weather = props => {
   const nowToday = (day, weath) => {
     if (day === 'n') {
       switch (weath) {
-        case 'clear sky':
+        case '01':
           setImgNow('csn');
           break;
-        case 'few clouds':
+        case '02':
           setImgNow('fcn');
           break;
-        case 'scattered clouds':
+        case '03':
           setImgNow('scn');
           break;
-        case 'broken clouds':
+        case '04':
           setImgNow('bc');
           break;
-        case 'shower rain':
+        case '09':
           setImgNow('sr');
           break;
-        case 'rain':
+        case '10':
           setImgNow('rn');
           break;
-        case 'thunderstorm':
+        case '11':
           setImgNow('thunderstorm');
           break;
-        case 'snow':
+        case '13':
           setImgNow('sn');
           break;
-        case 'mist':
+        case '50':
           setImgNow('mist');
           break;
         default:
       }
     } else if (day === 'd') {
       switch (weath) {
-        case 'clear sky':
+        case '01':
           setImgNow('csd');
           break;
-        case 'few clouds':
+        case '02':
           setImgNow('fcd');
           break;
-        case 'scattered clouds':
+        case '03':
           setImgNow('scd');
           break;
-        case 'broken clouds':
+        case '04':
           setImgNow('bc');
           break;
-        case 'shower rain':
+        case '09':
           setImgNow('sr');
           break;
-        case 'rain':
+        case '10':
           setImgNow('rd');
           break;
-        case 'thunderstorm':
+        case '11':
           setImgNow('thunderstorm');
           break;
-        case 'snow':
+        case '13':
           setImgNow('sd');
           break;
-        case 'mist':
+        case '50':
           setImgNow('mist');
           break;
         default:
@@ -83,7 +83,7 @@ const Weather = props => {
   const { searchString, changeSearchString } = useContext(MainContext);
   const [country, setCountry] = useState('');
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-  const [imgNow, setImgNow] = useState('csn');
+  const [imgNow, setImgNow] = useState('');
   const [imgThree, setImgThree] = useState({one: '', two: '', three: '',});
   const [weatherNow, setWeatherNow] = useState({
     lang: localStorage.getItem('language'),
@@ -98,16 +98,19 @@ const Weather = props => {
   const [weatherThree, setWeatherThree] = useState([
     {
       avgTemp: 0,
+      day: '',
       img: '',
       weather: '',
     },
     {
       avgTemp: 0,
+      day: '',
       img: '',
       weather: '',
     },
     {
       avgTemp: 0,
+      day: '',
       img: '',
       weather: '',
     },
@@ -128,11 +131,7 @@ const Weather = props => {
         fetch(`${link}lat=${lat}&lon=${long}&appid=${keyWeather}&lang=en&cnt=32&units=metric`)
           .then(res => res.json())
           .then(res => {
-            if (res.list[0].weather[0].icon.split('').includes('n')) {
-              nowToday('n', res.list[0].weather[0].description)
-            } else if (res.list[0].weather[0].icon.split('').includes('d')) {
-              nowToday('d', res.list[0].weather[0].description)
-            }
+            nowToday(res.list[0].weather[0].icon.charAt(2), res.list[0].weather[0].icon.substring(0, 2))
 
             setWeatherNow({
               lang: localStorage.getItem('language'),
@@ -149,25 +148,28 @@ const Weather = props => {
             setWeatherThree([
               {
                 avgTemp: (res.list[8].main.temp_max + res.list[8].main.temp_min) / 2,
-                img: '',
+                day: res.list[8].weather[0].icon.charAt(2),
+                img: res.list[8].weather[0].icon.substring(0, 2),
                 weather: res.list[8].weather[0].description,
               },
               {
                 avgTemp: (res.list[16].main.temp_max + res.list[16].main.temp_min) / 2,
-                img: '',
+                day: res.list[16].weather[0].icon.charAt(2),
+                img: res.list[16].weather[0].icon.substring(0, 2),
                 weather: res.list[16].weather[0].description,
               },
               {
                 avgTemp: (res.list[24].main.temp_max + res.list[24].main.temp_min) / 2,
-                img: '',
+                day: res.list[24].weather[0].icon.charAt(2),
+                img: res.list[24].weather[0].icon.substring(0, 2),
                 weather: res.list[24].weather[0].description,
               },
-            ])
+            ]);
           });
       });
       isFound = false;
-    }
-  })
+    };
+  });
 
   useEffect(() => {
     if (searchString) {
@@ -187,8 +189,12 @@ const Weather = props => {
             fetch(`${link}lat=${lat}&lon=${long}&appid=${keyWeather}&lang=en&cnt=32&units=metric`)
               .then(res => res.json())
               .then(res => {
-                console.log(res);
-                
+                if (res.list[0].weather[0].icon.split('').includes('n')) {
+                  nowToday('n', res.list[0].weather[0].icon.substring(0, 2))
+                } else if (res.list[0].weather[0].icon.split('').includes('d')) {
+                  nowToday('d', res.list[0].weather[0].icon.substring(0, 2))
+                }
+
                 setWeatherNow({
                   lang: localStorage.getItem('language'),
                   city: res.city.name,
@@ -216,7 +222,7 @@ const Weather = props => {
                     img: '',
                     weather: res.list[24].weather[0].description,
                   },
-                ])
+                ]);
               })
 
             changeSearchString('');

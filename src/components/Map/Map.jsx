@@ -119,8 +119,18 @@ const Map = props => {
         </Marker>
       </ReactMapGL>
       <div className='coordinates'>
-        <p>latitude: {latCoord.gradus}° {latCoord.minutes}'</p>
-        <p>longitude: {longCoord.gradus}° {longCoord.minutes}'</p>
+        <span className='ru'>
+          <p className='long'>Долгота: {longCoord.gradus}° {longCoord.minutes}'</p>
+          <p className='lati'>Широта: {latCoord.gradus}° {latCoord.minutes}'</p>
+        </span>
+        <span className='en'>
+          <p className='long'>Longitude: {longCoord.gradus}° {longCoord.minutes}'</p>
+          <p className='lati'>Latitude: {latCoord.gradus}° {latCoord.minutes}'</p>
+        </span>
+        <span className='be'>
+          <p className='long'>Шырата: {longCoord.gradus}° {longCoord.minutes}'</p>
+          <p className='lati'>Даўгата: {latCoord.gradus}° {latCoord.minutes}'</p>
+        </span>
       </div>
     </div>
   );

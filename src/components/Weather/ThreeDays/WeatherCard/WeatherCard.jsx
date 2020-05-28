@@ -5,6 +5,82 @@ import data from '../../../../assets/data';
 const WeatherCard = props => {
   const [ruWeather, setRuWeather] = useState('');
   const [beWeather, setBeWeather] = useState('');
+  const [img, setImg] = useState('');
+
+  const nowToday = (day, weath) => {
+    console.log(props);
+    
+    if (day === 'n') {
+      switch (weath) {
+        case '01':
+          setImg('csn');
+          break;
+        case '02':
+          setImg('fcn');
+          break;
+        case '03':
+          setImg('scn');
+          break;
+        case '04':
+          setImg('bc');
+          break;
+        case '09':
+          setImg('sr');
+          break;
+        case '10':
+          setImg('rn');
+          break;
+        case '11':
+          setImg('thunderstorm');
+          break;
+        case '13':
+          setImg('sn');
+          break;
+        case '50':
+          setImg('mist');
+          break;
+        default:
+      }
+    } else if (day === 'd') {
+      switch (weath) {
+        case '01':
+          setImg('csd');
+          break;
+        case '02':
+          setImg('fcd');
+          break;
+        case '03':
+          setImg('scd');
+          break;
+        case '04':
+          setImg('bc');
+          break;
+        case '09':
+          setImg('sr');
+          break;
+        case '10':
+          setImg('rd');
+          break;
+        case '11':
+          setImg('thunderstorm');
+          break;
+        case '13':
+          setImg('sd');
+          break;
+        case '50':
+          setImg('mist');
+          break;
+        default:
+      }
+    }
+  }
+
+  useEffect(
+    () => {
+      nowToday(props.info.day, props.info.img)
+    },
+    [props.info.img]
+  );
 
   useEffect(
     () => {
@@ -49,15 +125,18 @@ const WeatherCard = props => {
       </div>
 
       <div className='weather-info'>
-        <span className='ru'>
-          {ruWeather}
-        </span>
-        <span className='en'>
-          {props.info.weather}
-        </span>
-        <span className='be'>
-          {beWeather}
-        </span>
+        <div className='weather-description'>
+          <span className='ru'>
+            {ruWeather}
+          </span>
+          <span className='en'>
+            {props.info.weather}
+          </span>
+          <span className='be'>
+            {beWeather}
+          </span>
+        </div>
+        <div className={`weather-three-icon ${img}`}></div>
       </div>
 
       <div className='temperature'>

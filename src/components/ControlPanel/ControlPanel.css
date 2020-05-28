@@ -3,7 +3,12 @@
 }
 
 .ControlPanel button:nth-child(1) {
+  width: 40px;
   margin-right: 10px;
+  background-image: url('./assets/refresh.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 22px;
 }
 
 .ControlPanel button:nth-child(3) {

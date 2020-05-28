@@ -38,17 +38,14 @@ const SearchPanel = props => {
       let command = event.results[last][0].transcript.toLowerCase();
       console.log("Произнесено: ", command);
       if (command === "plus" || command === "плюс" || command === "плюс") {
-        console.log("plus");
         if (currentVolume < 1) {
           localStorage.setItem("volume", (currentVolume / 1 + 0.1).toFixed(1));
         }
       } else if (command === "minus" || command === "минус" || command === "мінус") {
-        console.log("minus");
         if (currentVolume >= 0) {
           localStorage.setItem("volume", (currentVolume / 1 - 0.1).toFixed(1));
         }
       } else if (command === "sky" || command === "небо" || command === "неба") {
-        console.log("sky");
         let synth = window.speechSynthesis;
         let utterThis = new SpeechSynthesisUtterance("sky");
         utterThis.volume = localStorage.getItem("volume");
@@ -106,10 +103,10 @@ const SearchPanel = props => {
   return (
     <div className="SearchPanel">
       <form onSubmit={handleSubmit}>
-        <Input value={field} onChange={e => setField(e.target.value)} style={{display: 'flex'}}/>
+        <Input value={field} onChange={e => setField(e.target.value)} />
         {
           buttons.map((item, index) => (
-            <Button key={index} {...item}/>
+            <Button key={index} {...item} />
           ))
         }
       </form>
