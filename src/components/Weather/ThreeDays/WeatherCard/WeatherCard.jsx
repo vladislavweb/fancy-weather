@@ -8,8 +8,6 @@ const WeatherCard = props => {
   const [img, setImg] = useState('');
 
   const nowToday = (day, weath) => {
-    console.log(props);
-    
     if (day === 'n') {
       switch (weath) {
         case '01':
@@ -71,9 +69,9 @@ const WeatherCard = props => {
           setImg('mist');
           break;
         default:
-      }
-    }
-  }
+      };
+    };
+  };
 
   useEffect(
     () => {

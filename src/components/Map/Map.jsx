@@ -4,17 +4,18 @@ import ReactMapGL, { Marker } from "react-map-gl";
 import Mark from './assets/MyLocation.svg';
 import { MainContext } from '../../MainContext';
 
+// http://open.mapquestapi.com/geocoding/v1/reverse?key=KEY&location=30.333472,-81.470448&includeRoadMetadata=true&includeNearestIntersection=true
+
+const geoReverse = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=';
 let isFound = true;
-let grad = 0;
-let min = 0;
-let sec = 0;
-const urlMap = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
 const tokenMap = 'pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ';
 const tokenGeo = 'BtHcuGO81EUArGaV164zvKD5sTuERK2O'
 const urlGeo = 'https://www.mapquestapi.com/geocoding/v1/address?key='
 
 const Map = props => {
   const { searchString, changeSearchString } = useContext(MainContext);
+
+  const { changeCity } = useContext(MainContext);
 
   const [latCoord, setLatCoord] = useState({
     gradus: 0,
@@ -44,10 +45,13 @@ const Map = props => {
   useEffect(() => {
     if (isFound) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position.coords.longitude);
-        console.log(Math.floor(position.coords.longitude));
-        
-        
+        fetch(`${geoReverse}${tokenGeo}&location=${position.coords.latitude},${position.coords.longitude}`)
+          .then(data => data.json())
+          .then((data) => {
+            changeCity(data.results[0].locations[0].adminArea5)
+            sessionStorage.setItem('location', data.results[0].locations[0].adminArea5)
+          })
+
         setMap({
           viewport: {
             width: "400px",
@@ -72,17 +76,24 @@ const Map = props => {
           gradus: position.coords.longitude.toFixed(),
           minutes: ((position.coords.longitude - Math.floor(position.coords.longitude)) * 60).toFixed(),
         });
-      });
+        }, error => {
+          console.log(error);
+        },
+        {
+          enableHighAccuracy: true,
+        }
+      )
       isFound = false;
     };
   });
 
   useEffect(() => {
     if (searchString) {
-      if (searchString.length > 3) {
+      if (searchString.length > 1) {
         fetch(`${urlGeo}${tokenGeo}&location=${searchString}`)
           .then(data => data.json())
           .then((data) => {
+            sessionStorage.setItem('location', data.results[0].locations[0].adminArea5)
             setMap({
               viewport: {
                 width: "400px",
@@ -96,13 +107,10 @@ const Map = props => {
               latitude: data.results[0].locations[0].latLng.lat,
               longitude: data.results[0].locations[0].latLng.lng,
             });
-
-            changeSearchString('');
           })
       };
     };
-  });
-
+  }, [searchString]);
 
   return (
     <div className="Map-wrapper">

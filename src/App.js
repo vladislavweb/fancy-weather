@@ -6,6 +6,7 @@ import Main from './containers/Main/Main';
 import { MainContext } from './MainContext';
 
 const App = () => {
+  const [city, setCity] = useState();
   const [searchString, setSearchString] = useState();
   const [theme, setTheme] = useState('black');
 
@@ -21,6 +22,10 @@ const App = () => {
     setSearchString(value);
   };
 
+  const changeCity = (value) => {
+    setCity(value);
+  };
+
   if (localStorage.getItem('touched') === null) {
     localStorage.setItem('volume', 1)
     localStorage.setItem('language', 'en');
@@ -29,7 +34,7 @@ const App = () => {
   }
 
   return (
-    <MainContext.Provider value={{searchString, changeSearchString, theme, changeTheme}}>
+    <MainContext.Provider value={{searchString, changeSearchString, theme, changeTheme, city, changeCity}}>
       <Layout data-theme={theme}>
         <Header />
         <Main />

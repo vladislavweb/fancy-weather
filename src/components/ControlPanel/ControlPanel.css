@@ -2,13 +2,34 @@
   display: flex;
 }
 
-.ControlPanel button:nth-child(1) {
+.changeBack {
   width: 40px;
   margin-right: 10px;
   background-image: url('./assets/refresh.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 22px;
+  border-radius: 5px;
+}
+
+.lang-ru {
+  border-radius: 5px 0 0 5px;
+}
+
+.lang-be {
+  border-radius: 0 5px 5px 0;
+}
+
+.scale-far {
+  border-radius: 5px 0 0 5px;
+}
+
+.scale-cel {
+  border-radius: 0 5px 5px 0;
+}
+
+.submit-form {
+  border-radius: 0 5px 5px 0;
 }
 
 .ControlPanel button:nth-child(3) {

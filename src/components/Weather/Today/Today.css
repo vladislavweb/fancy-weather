@@ -38,11 +38,11 @@
 }
 
 .today .aboutIcon {
-  width: 150px;
+  width: 200px;
   height: 150px;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 265px;
+  background-size: 200px;
 }
 
 .today .parameters {

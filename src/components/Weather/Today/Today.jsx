@@ -5,6 +5,10 @@ import changeShowScale from '../../../scripts/changeShowScale';
 import data from '../../../assets/data';
 
 const Today = props => {
+  const [newRuCity, setNewRuCity] = useState('');
+  const [newEnCity, setNewEnCity] = useState('');
+  const [newBeCity, setNewBeCity] = useState('');
+  const [enCity, setEnCity] = useState('');
   const [ruCity, setRuCity] = useState('');
   const [ruWeather, setRuWeather] = useState('');
   const [beCity, setBeCity] = useState('');
@@ -19,7 +23,27 @@ const Today = props => {
 
   useEffect(
     () => {
+      console.log(props.city);
+      
+      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-ru`)
+        .then((res) => res.json())
+        .then((data) => {
+          setNewRuCity(data.text[0]);
+        });
+
+      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-be`)
+        .then((res) => res.json())
+        .then((data) => {
+          setNewBeCity(data.text[0]);
+        });
+    }, [props.city]
+  )
+
+  useEffect(
+    () => {
       if (props.country.length > 1) {
+        let newCity = sessionStorage.getItem('location')
+        console.log(newCity);
         fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.country}&lang=en-ru`)
           .then((res) => res.json())
           .then((data) => {
@@ -32,13 +56,19 @@ const Today = props => {
             setBeCountry(data.text[0]);
           });
 
-        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-ru`)
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${newCity}&lang=en-ru`)
           .then((res) => res.json())
           .then((data) => {
             setRuCity(data.text[0]);
           });
 
-        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-be`)
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${newCity}&lang=ru-en`)
+          .then((res) => res.json())
+          .then((data) => {
+            setEnCity(data.text[0]);
+          });
+
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${newCity}&lang=en-be`)
           .then((res) => res.json())
           .then((data) => {
             setBeCity(data.text[0]);
@@ -57,7 +87,7 @@ const Today = props => {
           });
       }
     },
-    [props.city]
+    [props.weather]
   );
 
   useEffect(
@@ -98,6 +128,7 @@ const Today = props => {
   return (
     <div className='today'>
       <div className='location'>
+        {props.city} {newRuCity} {newBeCity}
         <span className='ru'>
           <p className='city'>
             {ruCity}
@@ -108,7 +139,7 @@ const Today = props => {
         </span>
         <span className='en'>
           <p className='city'>
-            {props.city}
+            {enCity}
           </p>
           <p className='country'>
             {props.country}
