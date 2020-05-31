@@ -196,7 +196,11 @@ const WeatherApi = ({ children }) => {
             throw Error('Ожидается n или d');
         };
 
-        changeBackground(picture.urls.regular);
+        if (picture) {
+          changeBackground(picture.urls.regular);
+        } else {
+          console.log('Запросы unsplash на этот час истекли!');
+        };
 
         setSpeakWeather(weather);
 
