@@ -9,15 +9,17 @@ import { WeatherContext } from '../../Context/WeatherContext';
 const SearchPanel = props => {
   const { searchString, changeSearchString, changeMicrophone } = useContext(MainContext);
   const { getData } = useContext(WeatherContext);
+  const [str, setStr] = useState('');
 
   useEffect(
     () => {
       changeMicrophone(false);
     },
-    []
+    [changeMicrophone]
   );
 
   const speak = () => {
+    let input = document.getElementsByClassName('search-input')[0];
     document.getElementsByClassName('SearchPanel')[0].classList.add('speaked')
     changeMicrophone(false);
     let currentLang = localStorage.getItem('language');
@@ -76,6 +78,7 @@ const SearchPanel = props => {
         synth.speak(utterThis);
       } else {
         changeSearchString(command);
+        setStr(input.value);
       };
     };
 
@@ -118,6 +121,14 @@ const SearchPanel = props => {
     event.preventDefault();
     getData()
   };
+
+  useEffect(
+    () => {
+      changeSearchString(str)
+      getData()
+    },
+    [str]
+  )
 
   return (
     <div className="SearchPanel">
