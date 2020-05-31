@@ -118,7 +118,6 @@ const WeatherApi = ({ children }) => {
   };
 
   const changeWeatherNow = (res) => {
-    console.log(res)
     setWeatherNow({
       lang: localStorage.getItem('language'),
       weather: res.list[0].weather[0].description,
@@ -128,7 +127,6 @@ const WeatherApi = ({ children }) => {
       temp: res.list[0].main.temp,
       img: res.list[0].weather[0].icon,
     });
-    console.log(weatherNow)
   };
 
   const changeWeatherThreeDays = (res) => {
@@ -163,7 +161,6 @@ const WeatherApi = ({ children }) => {
   const getData = async (useDefaultPosition = false, position) => {
     setIsRequestMap(true);
     const coords = useDefaultPosition ? position : await fetchCoordinates(searchString);
-    console.log(position)
     if (useDefaultPosition || coords.results[0].locations.length > 0) {
       if (useDefaultPosition || coords.results[0].locations[0].adminArea5.length > 0) {
         changeRequest(false);
@@ -179,8 +176,6 @@ const WeatherApi = ({ children }) => {
         changeCity(city.results[0].locations[0].adminArea5);
 
         const weather = await fetchWeather(lat, long);
-
-        console.log(weather)
 
         let weatherForNowToday = weather.list[0].weather[0].icon.substring(0, 2);
         nowToday(weather.list[0].sys.pod, weatherForNowToday);

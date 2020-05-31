@@ -43,7 +43,7 @@ const App = () => {
   };
 
   const fetchWeatherAndMapbox = () => {
-    console.log('fetchWeather');
+    
   }
 
   if (localStorage.getItem('touched') === null) {

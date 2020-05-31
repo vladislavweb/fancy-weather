@@ -87,7 +87,7 @@ const SearchPanel = props => {
     recognition.onerror = function (event) {
       document.getElementsByClassName('SearchPanel')[0].classList.remove('speaked');
       changeMicrophone(true);
-      console.log('error');
+      console.log(event);
     };
 
     recognition.start();
