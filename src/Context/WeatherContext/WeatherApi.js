@@ -198,9 +198,7 @@ const WeatherApi = ({ children }) => {
 
         if (picture) {
           changeBackground(picture.urls.regular);
-        } else {
-          console.log('Запросы unsplash на этот час истекли!');
-        };
+        }
 
         setSpeakWeather(weather);
 
