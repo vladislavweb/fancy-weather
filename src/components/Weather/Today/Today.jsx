@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Today.css';
 import changeShowLang from '../../../scripts/changeShowLang';
 import changeShowScale from '../../../scripts/changeShowScale';
 import data from '../../../assets/data';
+import { WeatherContext } from '../../../Context/WeatherContext';
 
 const Today = props => {
+  const { city, country, weather, speed, feel, humidity, temp, imgNow, isRequestMap, changeIsRequestMap } = useContext(WeatherContext)
   const [enCity, setEnCity] = useState('');
   const [ruCity, setRuCity] = useState('');
   const [beCity, setBeCity] = useState('');
@@ -18,80 +20,74 @@ const Today = props => {
     seconds: new Date().getSeconds(),
   });
 
-  const [newTime, setNewTime] = useState({
-    hours: new Date().getHours() + new Date().getTimezoneOffset() / 60 + props.timeZone / 3600,
-    minutes: new Date().getMinutes(),
-    seconds: new Date().getSeconds(),
-  })
-
   useEffect(
     () => {
-      if (localStorage.getItem('isRequest') === 'true') {
-        setEnCity(props.city);
+      if (isRequestMap) {
+        setEnCity(city);
 
-        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-be`)
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${city}&lang=en-be`)
           .then((res) => res.json())
           .then((data) => {
             setBeCity(data.text[0]);
           });
 
-        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-ru`)
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${city}&lang=en-ru`)
           .then((res) => res.json())
           .then((data) => {
             setRuCity(data.text[0]);
           });
 
-          localStorage.setItem('isRequest', false)
+          changeIsRequestMap(false)
       } else {
-        setRuCity(props.city);
+        setRuCity(city);
 
-        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=ru-en`)
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${city}&lang=ru-en`)
           .then((res) => res.json())
           .then((data) => {
             setEnCity(data.text[0]);
           });
 
-        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=ru-be`)
+        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${city}&lang=ru-be`)
           .then((res) => res.json())
           .then((data) => {
             setBeCity(data.text[0]);
           });
       }
-    }, [props.city]
+    }, [city]
   );
 
   useEffect(
     () => {
-      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.country}&lang=en-ru`)
+      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${country}&lang=en-ru`)
         .then((res) => res.json())
         .then((data) => {
           setRuCountry(data.text[0]);
         });
 
-      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.country}&lang=en-be`)
+      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${country}&lang=en-be`)
         .then((res) => res.json())
         .then((data) => {
           setBeCountry(data.text[0]);
         });
     },
-    [props.country]
+    [country]
   );
 
   useEffect(
     () => {
-      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-ru`)
+      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${weather}&lang=en-ru`)
         .then((res) => res.json())
         .then((data) => {
           setRuWeather(data.text[0]);
         });
 
-      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-be`)
+      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${weather}&lang=en-be`)
         .then((res) => res.json())
         .then((data) => {
           setBeWeather(data.text[0]);
         });
     },
-    [props.weather]
+    [weather]
   );
 
   useEffect(
@@ -101,30 +97,6 @@ const Today = props => {
     },
     []
   );
-
-  useEffect(
-    () => {
-      setNewTime({
-        hours: 24 - (new Date().getUTCHours() - props.timeZone / 3600),
-        minutes: new Date().getMinutes(),
-        seconds: new Date().getSeconds(),
-      })
-    },
-    [props.timeZone]
-  )
-
-  // hours: new Date().getHours() + new Date().getTimezoneOffset() / 60 + props.timeZone / 3600,
-
-
-  // setTimeout(() => {
-  //   setTime(
-  //     {
-  //       hours: new Date().getHours(),
-  //       minutes: new Date().getMinutes(),
-  //       seconds: new Date().getSeconds(),
-  //     },
-  //   );
-  // }, 1000);
 
   useEffect(
     () => {
@@ -159,7 +131,7 @@ const Today = props => {
             {enCity}
           </p>
           <p className='country'>
-            {props.country}
+            {country}
           </p>
         </span>
         <span className='be'>
@@ -197,9 +169,6 @@ const Today = props => {
         <div className="old">
           {time.hours}:{time.minutes}:{time.seconds}
         </div>
-        <div className="new hidden">
-          {newTime.hours}:{newTime.minutes}:{time.seconds}
-        </div>
       </div>
 
       <div className='about'>
@@ -208,13 +177,13 @@ const Today = props => {
             {ruWeather}
           </span>
           <span className='en'>
-            {props.weather.toUpperCase()}
+            {weather?.toUpperCase()}
           </span>
           <span className='be'>
             {beWeather}
           </span>
         </div>
-        <div className={`aboutIcon ${props.imgNow}`}>
+        <div className={`aboutIcon ${imgNow}`}>
         </div>
       </div>
 
@@ -222,7 +191,7 @@ const Today = props => {
         <div className='temperature'>
           <div className='cel'>
             <span>
-              {(props.temp / 1).toFixed()}
+              {(temp / 1).toFixed()}
             </span>
             <span>
               °C
@@ -230,7 +199,7 @@ const Today = props => {
           </div>
           <div className='far'>
             <span>
-              {(props.temp * 1.8 + 32).toFixed().toString()}
+              {(temp * 1.8 + 32).toFixed().toString()}
             </span>
             <span>
               °F
@@ -241,52 +210,52 @@ const Today = props => {
         <div className='details'>
           <div className='speed'>
             <span className='ru'>
-              Скорость ветра: {props.speed}м/с
+              Скорость ветра: {speed}м/с
             </span>
             <span className='en'>
-              Wind speed: {props.speed}mph
+              Wind speed: {speed}mph
             </span>
             <span className='be'>
-              Хуткасць ветру: {props.speed}м/с
+              Хуткасць ветру: {speed}м/с
             </span>
           </div>
 
           <div className='feel'>
             <span className='ru'>
               <span className='cel'>
-                Ощущается как: {(props.feel / 1).toFixed()} °C
+                Ощущается как: {(feel / 1).toFixed()} °C
               </span>
               <span className='far'>
-                Ощущается как: {(props.feel / 1 * 1.8 + 32).toFixed()} °F
+                Ощущается как: {(feel / 1 * 1.8 + 32).toFixed()} °F
               </span>
             </span>
             <span className='en'>
               <span className='cel'>
-                Feels like: {(props.feel / 1).toFixed()} °C
+                Feels like: {(feel / 1).toFixed()} °C
               </span>
               <span className='far'>
-                Feels like: {(props.feel / 1 * 1.8 + 32).toFixed()} °F
+                Feels like: {(feel / 1 * 1.8 + 32).toFixed()} °F
               </span>
             </span>
             <span className='be'>
               <span className='cel'>
-                Адчуваецца як: {(props.feel / 1).toFixed()} °C
+                Адчуваецца як: {(feel / 1).toFixed()} °C
               </span>
               <span className='far'>
-                Адчуваецца як: {(props.feel / 1 * 1.8 + 32).toFixed()} °F
+                Адчуваецца як: {(feel / 1 * 1.8 + 32).toFixed()} °F
               </span>
             </span>
           </div>
 
           <div className='humidity'>
             <span className='ru'>
-              Влажность: {props.humidity}%
+              Влажность: {humidity}%
             </span>
             <span className='en'>
-              Humidity: {props.humidity}%
+              Humidity: {humidity}%
             </span>
             <span className='be'>
-              Вільготнасць: {props.humidity}%
+              Вільготнасць: {humidity}%
             </span>
           </div>
         </div>

@@ -3,6 +3,7 @@ import './Map.css';
 import ReactMapGL, { Marker } from "react-map-gl";
 import Mark from './assets/MyLocation.svg';
 import { MainContext } from '../../MainContext';
+import { WeatherContext } from '../../Context/WeatherContext';
 
 let isFound = true;
 const geoReverse = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=';
@@ -11,9 +12,8 @@ const tokenGeo = 'BtHcuGO81EUArGaV164zvKD5sTuERK2O'
 const urlGeo = 'https://www.mapquestapi.com/geocoding/v1/address?key='
 
 const Map = props => {
-  const { searchString, changeSearchString, changeGeo } = useContext(MainContext);
-
-  const { changeCity } = useContext(MainContext);
+  const { searchString, changeCity, changeGeo } = useContext(MainContext);
+  const { updateMap, changeUpdateMap } = useContext(WeatherContext);
 
   const [latCoord, setLatCoord] = useState({
     gradus: 0,
@@ -87,7 +87,9 @@ const Map = props => {
   });
 
   useEffect(() => {
-    if (searchString) {
+    console.log(updateMap);
+    
+    if (updateMap) {
       if (searchString.length > 1) {
         fetch(`${urlGeo}${tokenGeo}&location=${searchString}`)
           .then(data => data.json())
@@ -121,9 +123,10 @@ const Map = props => {
               }
             }
           })
+        changeUpdateMap(false)
       };
     };
-  }, [searchString]);
+  }, [updateMap]);
 
   return (
     <div className="Map-wrapper">

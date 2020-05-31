@@ -1,10 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './VirtualKeyboard.css';
 import keys from './keys';
 import { MainContext } from '../../MainContext';
+import { WeatherContext } from '../../Context/WeatherContext';
 
 const VirtualKeyboard = () => {
   const { changeSearchString } = useContext(MainContext);
+  const { getData } = useContext(WeatherContext);
   const [virtualText, setVirtualText] = useState('');
 
   const changeCaseCycle = () => {
@@ -53,6 +55,7 @@ const VirtualKeyboard = () => {
           input.focus();
           input.selectionStart = selectedSymbol - 1;
           input.selectionEnd = selectedSymbol - 1;
+          setVirtualText(input.value)
         } else {
           input.focus();
         }
@@ -64,6 +67,7 @@ const VirtualKeyboard = () => {
         input.focus();
         input.selectionStart = selectedSymbol + 4;
         input.selectionEnd = selectedSymbol + 4;
+        setVirtualText(input.value)
         break;
 
       case 'CapsLock':
@@ -71,6 +75,7 @@ const VirtualKeyboard = () => {
         break;
 
       case 'Enter':
+        getData();
         changeSearchString(virtualText);
         setVirtualText('');
         break;
@@ -81,6 +86,7 @@ const VirtualKeyboard = () => {
         input.focus();
         input.selectionStart = selectedSymbol;
         input.selectionEnd = selectedSymbol;
+        setVirtualText(input.value)
         break;
 
       case '__________':
@@ -89,6 +95,7 @@ const VirtualKeyboard = () => {
         input.focus();
         input.selectionStart = selectedSymbol + 1;
         input.selectionEnd = selectedSymbol + 1;
+        setVirtualText(input.value)
         break;
 
       case 'Language':
@@ -131,6 +138,10 @@ const VirtualKeyboard = () => {
     specKey(event);
     typeText(event);
   };
+
+  useEffect(() => {
+    changeSearchString(virtualText)
+  }, [virtualText])
 
   return (
     <div className='VirtualKeyboard hidden' onClick={(event) => handKeyboard(event)}>

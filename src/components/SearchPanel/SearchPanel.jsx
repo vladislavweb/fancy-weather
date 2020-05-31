@@ -4,9 +4,11 @@ import Input from '../UI/Input/Input';
 import Button from '../UI/Button/Button';
 import { MainContext } from '../../MainContext';
 import toggleKeyboard from '../../scripts/toggleKeyboard';
+import { WeatherContext } from '../../Context/WeatherContext';
 
 const SearchPanel = props => {
-  const { changeSearchString, changeMicrophone } = useContext(MainContext);
+  const { searchString, changeSearchString, changeMicrophone } = useContext(MainContext);
+  const { getData } = useContext(WeatherContext);
 
   useEffect(
     () => {
@@ -91,8 +93,6 @@ const SearchPanel = props => {
     recognition.start();
   };
 
-  const [field, setField] = useState('');
-
   const [buttons] = useState([
     {
       text: '',
@@ -116,13 +116,13 @@ const SearchPanel = props => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    changeSearchString(field);
+    getData()
   };
 
   return (
     <div className="SearchPanel">
       <form onSubmit={handleSubmit}>
-        <Input value={field} onChange={e => setField(e.target.value)} />
+        <Input value={searchString} onChange={e => changeSearchString(e.target.value)} />
         {
           buttons.map((item, index) => (
             <Button key={index} {...item} />
