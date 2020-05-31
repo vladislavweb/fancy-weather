@@ -2,14 +2,25 @@
   display: flex;
 }
 
-.changeBack {
+.ControlPanel .Speak-weather {
   width: 40px;
   margin-right: 10px;
+  background-image: url('./assets/sound.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 26px;
+  border-radius: 0 5px 5px 0;
+}
+
+.ControlPanel .Change-back {
+  width: 40px;
   background-image: url('./assets/refresh.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 22px;
-  border-radius: 5px;
+  border-right: 0;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 .lang-ru {
@@ -32,20 +43,20 @@
   border-radius: 0 5px 5px 0;
 }
 
-.ControlPanel button:nth-child(3) {
+.ControlPanel button:nth-child(4) {
   border-right: 0;
   border-left: 0;
 }
 
 .ControlPanel button:nth-child(5) {
-  border-right: 0;
-}
-
-.ControlPanel button:nth-child(4) {
   margin-right: 10px;
 }
 
-@media only screen and (max-width: 700px) {
+.ControlPanel button:nth-child(6) {
+  border-right: 0;
+}
+
+@media only screen and (max-width: 730px) {
   .ControlPanel {
     margin: 0 auto 20px;
   }

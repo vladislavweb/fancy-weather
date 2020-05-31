@@ -7,7 +7,12 @@ const ControlPanel = props => {
     {
       text: "",
       type: "button",
-      class: 'changeBack',
+      class: 'Change-back',
+    },
+    {
+      text: " ",
+      type: "button",
+      class: 'Speak-weather',
     },
     {
       text: "RU",

@@ -278,6 +278,9 @@ const Weather = props => {
                       })
                   };
 
+                  // document.getElementsByClassName('old')[0].classList.add('hidden')
+                  // document.getElementsByClassName('new')[0].classList.remove('hidden')
+
                   setTimeZone(res.city.timezone)
 
                   if (res.list[0].weather[0].icon.split('').includes('n')) {

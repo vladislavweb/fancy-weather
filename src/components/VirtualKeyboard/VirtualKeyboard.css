@@ -1,10 +1,10 @@
 .VirtualKeyboard {
-  max-width: 800px;
+  max-width: 1400px;
   width: 100%;
+  margin-top: 20px;
   box-sizing: border-box;
-  border: 3px solid black;
   border-radius: 5px;
-  background: #888888;
+  background: transparent;
 }
 
 .hiddenLang {
@@ -34,7 +34,7 @@
   line-height: 40px;
   font-weight: 900;
   color: white;
-  background: #444444;
+  background: gray;
   border-radius: 5px;
   user-select: none;
   cursor: pointer;
@@ -53,7 +53,7 @@
 }
 
 @media only screen and (max-width: 719px) {
-  .keyboard {
+  .VirtualKeyboard {
     display: none;
   }
 }

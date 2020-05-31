@@ -104,16 +104,17 @@ const Today = props => {
 
   useEffect(
     () => {
-      document.getElementsByClassName('old')[0].classList.add('hidden')
-      document.getElementsByClassName('new')[0].classList.remove('hidden')
       setNewTime({
-        hours: new Date().getHours() + new Date().getTimezoneOffset() / 60 + props.timeZone / 3600,
+        hours: 24 - (new Date().getUTCHours() - props.timeZone / 3600),
         minutes: new Date().getMinutes(),
         seconds: new Date().getSeconds(),
       })
     },
     [props.timeZone]
   )
+
+  // hours: new Date().getHours() + new Date().getTimezoneOffset() / 60 + props.timeZone / 3600,
+
 
   // setTimeout(() => {
   //   setTime(

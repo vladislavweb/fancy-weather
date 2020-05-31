@@ -50,7 +50,7 @@
   box-shadow: 0 0 10px 10px;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 730px) {
   .SearchPanel {
     margin: auto;
   }

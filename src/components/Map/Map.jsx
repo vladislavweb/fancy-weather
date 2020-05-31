@@ -94,6 +94,16 @@ const Map = props => {
           .then((data) => {
             if (data.results[0].locations.length > 0) {
               if (data.results[0].locations[0].adminArea5) {
+                setLatCoord({
+                  gradus: data.results[0].locations[0].latLng.lat.toFixed(),
+                  minutes: ((data.results[0].locations[0].latLng.lat - Math.floor(data.results[0].locations[0].latLng.lat)) * 60).toFixed(),
+                });
+
+                setLongCoord({
+                  gradus: data.results[0].locations[0].latLng.lng.toFixed(),
+                  minutes: ((data.results[0].locations[0].latLng.lng - Math.floor(data.results[0].locations[0].latLng.lng)) * 60).toFixed(),
+                });
+                
                 setMap({
                   viewport: {
                     width: "400px",
@@ -131,16 +141,16 @@ const Map = props => {
       </ReactMapGL>
       <div className='coordinates'>
         <span className='ru'>
-          <p className='long'>Долгота: {longCoord.gradus}° {longCoord.minutes}'</p>
-          <p className='lati'>Широта: {latCoord.gradus}° {latCoord.minutes}'</p>
+          <p className='long'>Долгота: {longCoord.gradus}° {longCoord.minutes}' {longCoord.gradus > 0 ? 'E' : 'W'}</p>
+          <p className='lati'>Широта: {latCoord.gradus}° {latCoord.minutes}' {latCoord.gradus > 0 ? 'N' : 'S'}</p>
         </span>
         <span className='en'>
-          <p className='long'>Longitude: {longCoord.gradus}° {longCoord.minutes}'</p>
-          <p className='lati'>Latitude: {latCoord.gradus}° {latCoord.minutes}'</p>
+          <p className='long'>Longitude: {longCoord.gradus}° {longCoord.minutes}' {longCoord.gradus > 0 ? 'E' : 'W'}</p>
+          <p className='lati'>Latitude: {latCoord.gradus}° {latCoord.minutes}' {latCoord.gradus > 0 ? 'N' : 'S'}</p>
         </span>
         <span className='be'>
-          <p className='long'>Шырата: {longCoord.gradus}° {longCoord.minutes}'</p>
-          <p className='lati'>Даўгата: {latCoord.gradus}° {latCoord.minutes}'</p>
+          <p className='long'>Шырата: {longCoord.gradus}° {longCoord.minutes}' {longCoord.gradus > 0 ? 'E' : 'W'}</p>
+          <p className='lati'>Даўгата: {latCoord.gradus}° {latCoord.minutes}' {latCoord.gradus > 0 ? 'N' : 'S'}</p>
         </span>
       </div>
     </div>

@@ -11,3 +11,8 @@
 .btn:hover {
   background:rgba(186,210,255,.6)
 }
+
+.active-btn {
+  background: gray;
+  color: cyan;
+}
