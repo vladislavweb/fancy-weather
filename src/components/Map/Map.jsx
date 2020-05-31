@@ -87,9 +87,8 @@ const Map = props => {
   });
 
   useEffect(() => {
-    console.log(updateMap);
-    
     if (updateMap) {
+      console.log(updateMap);
       if (searchString.length > 1) {
         fetch(`${urlGeo}${tokenGeo}&location=${searchString}`)
           .then(data => data.json())
