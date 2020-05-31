@@ -159,7 +159,11 @@ const WeatherApi = ({ children }) => {
   };
 
   const getData = async (useDefaultPosition = false, position) => {
-    setIsRequestMap(true);
+    if (useDefaultPosition) {
+      setIsRequestMap(false)
+    } else {
+      setIsRequestMap(true)
+    }
     const coords = useDefaultPosition ? position : await fetchCoordinates(searchString);
     if (useDefaultPosition || coords.results[0].locations.length > 0) {
       if (useDefaultPosition || coords.results[0].locations[0].adminArea5.length > 0) {

@@ -23,6 +23,8 @@ const Today = props => {
   useEffect(
     () => {
       if (isRequestMap) {
+        console.log(city, isRequestMap);
+        
         setEnCity(city);
 
         fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${city}&lang=en-be`)
@@ -38,7 +40,10 @@ const Today = props => {
           });
 
           changeIsRequestMap(false)
+          console.log(isRequestMap);
       } else {
+        console.log(city);
+        
         setRuCity(city);
 
         fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${city}&lang=ru-en`)
