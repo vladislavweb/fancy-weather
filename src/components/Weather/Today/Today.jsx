@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import  './Today.css';
+import './Today.css';
 import changeShowLang from '../../../scripts/changeShowLang';
 import changeShowScale from '../../../scripts/changeShowScale';
 import data from '../../../assets/data';
@@ -17,6 +17,12 @@ const Today = props => {
     minutes: new Date().getMinutes(),
     seconds: new Date().getSeconds(),
   });
+
+  const [newTime, setNewTime] = useState({
+    hours: new Date().getHours() + new Date().getTimezoneOffset() / 60 + props.timeZone / 3600,
+    minutes: new Date().getMinutes(),
+    seconds: new Date().getSeconds(),
+  })
 
   useEffect(
     () => {
@@ -56,31 +62,34 @@ const Today = props => {
 
   useEffect(
     () => {
-      if (props.country.length > 1) {
-        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.country}&lang=en-ru`)
-          .then((res) => res.json())
-          .then((data) => {
-            setRuCountry(data.text[0]);
-          });
+      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.country}&lang=en-ru`)
+        .then((res) => res.json())
+        .then((data) => {
+          setRuCountry(data.text[0]);
+        });
 
-        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.country}&lang=en-be`)
-          .then((res) => res.json())
-          .then((data) => {
-            setBeCountry(data.text[0]);
-          });
+      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.country}&lang=en-be`)
+        .then((res) => res.json())
+        .then((data) => {
+          setBeCountry(data.text[0]);
+        });
+    },
+    [props.country]
+  );
 
-        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-ru`)
-          .then((res) => res.json())
-          .then((data) => {
-            setRuWeather(data.text[0]);
-          });
+  useEffect(
+    () => {
+      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-ru`)
+        .then((res) => res.json())
+        .then((data) => {
+          setRuWeather(data.text[0]);
+        });
 
-        fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-be`)
-          .then((res) => res.json())
-          .then((data) => {
-            setBeWeather(data.text[0]);
-          });
-      }
+      fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-be`)
+        .then((res) => res.json())
+        .then((data) => {
+          setBeWeather(data.text[0]);
+        });
     },
     [props.weather]
   );
@@ -92,6 +101,19 @@ const Today = props => {
     },
     []
   );
+
+  useEffect(
+    () => {
+      document.getElementsByClassName('old')[0].classList.add('hidden')
+      document.getElementsByClassName('new')[0].classList.remove('hidden')
+      setNewTime({
+        hours: new Date().getHours() + new Date().getTimezoneOffset() / 60 + props.timeZone / 3600,
+        minutes: new Date().getMinutes(),
+        seconds: new Date().getSeconds(),
+      })
+    },
+    [props.timeZone]
+  )
 
   // setTimeout(() => {
   //   setTime(
@@ -171,7 +193,12 @@ const Today = props => {
       </div>
 
       <div className='time'>
-        {time.hours}:{time.minutes}:{time.seconds}
+        <div className="old">
+          {time.hours}:{time.minutes}:{time.seconds}
+        </div>
+        <div className="new hidden">
+          {newTime.hours}:{newTime.minutes}:{time.seconds}
+        </div>
       </div>
 
       <div className='about'>
@@ -268,34 +295,3 @@ const Today = props => {
 };
 
 export default Today;
-
-
-
-// useEffect(
-//   () => {
-//     fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-ru`)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         setRuCity(data.text[0]);
-//       });
-
-//     fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.city}&lang=en-be`)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         setBeCity(data.text[0]);
-//       });
-
-//     fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-ru`)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         setRuWeather(data.text[0]);
-//       });
-
-//     fetch(`https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T183210Z.a1be0af551638071.2c5c96f21e02eb3e9e57602385a8ec468ffcb181&text=${props.weather}&lang=en-be`)
-//       .then((res) => res.json())
-//       .then((data) => {
-//         setBeWeather(data.text[0]);
-//       });
-//   },
-//   [props.city, props.weather]
-// );

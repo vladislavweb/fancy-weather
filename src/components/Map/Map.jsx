@@ -92,21 +92,23 @@ const Map = props => {
         fetch(`${urlGeo}${tokenGeo}&location=${searchString}`)
           .then(data => data.json())
           .then((data) => {
-            if (data.results[0].locations[0].adminArea5) {
-              setMap({
-                viewport: {
-                  width: "400px",
-                  height: "400px",
+            if (data.results[0].locations.length > 0) {
+              if (data.results[0].locations[0].adminArea5) {
+                setMap({
+                  viewport: {
+                    width: "400px",
+                    height: "400px",
+                    latitude: data.results[0].locations[0].latLng.lat,
+                    longitude: data.results[0].locations[0].latLng.lng,
+                    zoom: 11,
+                  },
+                });
+
+                setPoint({
                   latitude: data.results[0].locations[0].latLng.lat,
                   longitude: data.results[0].locations[0].latLng.lng,
-                  zoom: 11,
-                },
-              });
-
-              setPoint({
-                latitude: data.results[0].locations[0].latLng.lat,
-                longitude: data.results[0].locations[0].latLng.lng,
-              });
+                });
+              }
             }
           })
       };

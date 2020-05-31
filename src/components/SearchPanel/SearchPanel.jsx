@@ -6,8 +6,7 @@ import { MainContext } from '../../MainContext';
 import toggleKeyboard from '../../scripts/toggleKeyboard';
 
 const SearchPanel = props => {
-  const { changeSearchString } = useContext(MainContext);
-  const { changeMicrophone } = useContext(MainContext);
+  const { changeSearchString, changeMicrophone } = useContext(MainContext);
 
   useEffect(
     () => {
@@ -17,6 +16,7 @@ const SearchPanel = props => {
   );
 
   const speak = () => {
+    document.getElementsByClassName('SearchPanel')[0].classList.add('speaked')
     changeMicrophone(false);
     let currentLang = localStorage.getItem('language');
     let SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList;
@@ -42,41 +42,54 @@ const SearchPanel = props => {
     };
 
     recognition.onresult = function (event) {
+      document.getElementsByClassName('SearchPanel')[0].classList.remove('speaked');
       let currentVolume = localStorage.getItem("volume");
       let last = event.results.length - 1;
       let command = event.results[last][0].transcript.toLowerCase();
       console.log("Произнесено: ", command);
-      if (command === "plus" || command === "плюс" || command === "плюс") {
+      if (command === "louder" || command === "громче" || command === "мацней") {
         if (currentVolume < 1) {
           localStorage.setItem("volume", (currentVolume / 1 + 0.1).toFixed(1));
         }
-      } else if (command === "minus" || command === "минус" || command === "мінус") {
+      } else if (command === "quieter" || command === "тише" || command === "ціхі") {
         if (currentVolume >= 0) {
           localStorage.setItem("volume", (currentVolume / 1 - 0.1).toFixed(1));
         }
-      } else if (command === "sky" || command === "небо" || command === "неба") {
+      } else if (command === "weather" || command === "погода" || command === "надвор'е") {
         let synth = window.speechSynthesis;
-        let utterThis = new SpeechSynthesisUtterance("sky");
+        let utterThis = new SpeechSynthesisUtterance(sessionStorage.getItem(`weather-${localStorage.getItem('language')}`));
         utterThis.volume = localStorage.getItem("volume");
+        switch (localStorage.getItem('language')) {
+          case 'ru':
+            utterThis.lang = `ru-US`;
+            break;
+          case 'en':
+            utterThis.lang = `en-US`;
+            break;
+          case 'be':
+            utterThis.lang = `be-US`;
+            break;
+          default:
+        };
         synth.speak(utterThis);
       } else {
         changeSearchString(command);
-      }
+      };
     };
 
     recognition.onspeechend = function () {
+      document.getElementsByClassName('SearchPanel')[0].classList.remove('speaked');
       recognition.stop();
     };
 
     recognition.onerror = function (event) {
+      document.getElementsByClassName('SearchPanel')[0].classList.remove('speaked');
       changeMicrophone(true);
       console.log('error');
     };
 
     recognition.start();
   };
-
-  const { changeTheme } = useContext(MainContext);
 
   const [field, setField] = useState('');
 
@@ -105,10 +118,6 @@ const SearchPanel = props => {
     event.preventDefault();
     changeSearchString(field);
   };
-
-  const changeThemeHandler = () => {
-    changeTheme()
-  }
 
   return (
     <div className="SearchPanel">

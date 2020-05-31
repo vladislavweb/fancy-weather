@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './VirtualKeyboard.css';
 import keys from './keys';
+import { MainContext } from '../../MainContext';
 
 const VirtualKeyboard = () => {
+  const { searchString, changeSearchString } = useContext(MainContext);
+
   const changeCaseCycle = () => {
     const up = document.getElementsByClassName('up');
     const down = document.getElementsByClassName('down');
@@ -101,21 +104,21 @@ const VirtualKeyboard = () => {
         break;
 
       default:
-        console.log('default');
     };
   };
 
   const typeText = (event) => {
-    let input = document.getElementsByClassName('search-input')[0];
-    let selectedSymbol = input.selectionStart;
+    // let input = document.getElementsByClassName('search-input')[0];
+    // let selectedSymbol = input.selectionStart;
     let clickedItem = event.target.classList[0];
     if (clickedItem === 'down' || clickedItem === 'up' || clickedItem === 'key') {
       let currentSymbol = event.target.innerText;
       if (currentSymbol.length === 1 && currentSymbol !== '◄' && currentSymbol !== '►') {
-        input.value = input.value.substring(0, input.selectionStart) + currentSymbol + input.value.substring(input.selectionStart);
-        input.focus();
-        input.selectionStart = selectedSymbol + 1;
-        input.selectionEnd = selectedSymbol + 1;
+        // input.value = input.value.substring(0, input.selectionStart) + currentSymbol + input.value.substring(input.selectionStart);
+        // input.focus();
+        // input.selectionStart = selectedSymbol + 1;
+        // input.selectionEnd = selectedSymbol + 1;
+        changeSearchString(searchString + currentSymbol);
       };
     };
   };

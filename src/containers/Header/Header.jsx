@@ -6,11 +6,26 @@ import changeShowLang from '../../scripts/changeShowLang';
 import changeShowScale from '../../scripts/changeShowScale';
 import VirtualKeyboard from '../../components/VirtualKeyboard/VirtualKeyboard';
 
+const changeBackground = () => {
+  const body = document.getElementsByTagName('body')[0];
+  const unsplashUrl = 'https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&&query=';
+  const unsplashKey = '&client_id=e_Ud2DTXMi01AovDee1hT-um5Qo2a7hdDmNmPxpk1W4';
+  let image = new Image();
+  fetch(`${unsplashUrl}${sessionStorage.getItem('photo')}${unsplashKey}`)
+    .then(res => res.json())
+    .then(res => {
+      image.src = res.urls.regular;
+      image.onload = () => {
+        body.setAttribute('style', `background-image: url(${res.urls.regular})`);
+      };
+    })
+};
+
 const ControlHandling = (event) => {
   const currentClick = event.target.textContent;
   switch (currentClick) {
     case '':
-      console.log('Смена картинки');
+      changeBackground();
       break;
     case 'RU':
       localStorage.setItem('language', 'ru');

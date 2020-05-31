@@ -20,7 +20,7 @@ const WeatherCard = props => {
           setImg('scn');
           break;
         case '04':
-          setImg('bc');
+          setImg('bcn');
           break;
         case '09':
           setImg('sr');
@@ -51,7 +51,7 @@ const WeatherCard = props => {
           setImg('scd');
           break;
         case '04':
-          setImg('bc');
+          setImg('bcd');
           break;
         case '09':
           setImg('sr');

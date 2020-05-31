@@ -63,3 +63,15 @@
 .today .feel, .speed, .humidity, .country {
   font-size: 30px;
 }
+
+@media only screen and (max-width: 500px) {
+  .today .about {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .today .about, .parameters {
+    flex-wrap: wrap;
+  }
+}

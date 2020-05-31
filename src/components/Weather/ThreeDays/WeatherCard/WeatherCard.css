@@ -37,3 +37,25 @@
   background-position: center;
   background-size: 75px;
 }
+
+@media only screen and (max-width: 760px) {
+  .weather-card .date {
+    font-size: 30px;
+  }
+
+  .weather-card .weather-info {
+    font-size: 25px;
+  }
+
+  .weather-card .temperature {
+    font-size: 60px;
+  }
+
+  .weather-card .weather-three-icon {
+    width: 175px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100px;
+  }
+}

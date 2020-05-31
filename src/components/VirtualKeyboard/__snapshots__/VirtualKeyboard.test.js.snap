@@ -1,0 +1,1822 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mathes snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="VirtualKeyboard hidden"
+  >
+    <div
+      class="row"
+    >
+      <div
+        class="key Backquote"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            ё
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Ё
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            \`
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            ~
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Digit1"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            1
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            !
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            1
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            !
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Digit2"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            2
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            "
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            2
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            @
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Digit3"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            3
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            №
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            3
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            #
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Digit4"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            4
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            ;
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            4
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            $
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Digit5"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            5
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            %
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            5
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            %
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Digit6"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            6
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            :
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            6
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            ^
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Digit7"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            7
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            ?
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            7
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            &
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Digit8"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            8
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            *
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            8
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            *
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Digit9"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            9
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            (
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            9
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            (
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Digit0"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            0
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            )
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            0
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            )
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Minus"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            -
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            _
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            -
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            _
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Equal"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            =
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            +
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            =
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            +
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Backspace"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            Backspace
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Backspace
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            Backspace
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Backspace
+          </span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="row"
+    >
+      <div
+        class="key Tab"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            Tab
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Tab
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            Tab
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Tab
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyQ"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            й
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Й
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            q
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Q
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyW"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            ц
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Ц
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            w
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            W
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyE"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            у
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            У
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            e
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            E
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyR"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            к
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            К
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            r
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            R
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyT"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            е
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Е
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            t
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            T
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyY"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            н
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Н
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            y
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Y
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyU"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            г
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Г
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            u
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            u
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyI"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            ш
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Ш
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            i
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            I
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyO"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            щ
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Щ
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            o
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            O
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyP"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            з
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            З
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            p
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            P
+          </span>
+        </span>
+      </div>
+      <div
+        class="key BracketLeft"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            х
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Х
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            [
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            {
+          </span>
+        </span>
+      </div>
+      <div
+        class="key BracketRight"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            ъ
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Ъ
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            ]
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            }
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Backslash"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            \\
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            /
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            \\
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            |
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Delete"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            Del
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Del
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            Del
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Del
+          </span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="row"
+    >
+      <div
+        class="key CapsLock"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            CapsLock
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            CapsLock
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            CapsLock
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            CapsLock
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyA"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            ф
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Ф
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            a
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            A
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyS"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            ы
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Ы
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            s
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            S
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyD"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            в
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            В
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            d
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            D
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyF"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            а
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            А
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            f
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            F
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyG"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            п
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            П
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            g
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            G
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyH"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            р
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Р
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            h
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            H
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyJ"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            о
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            О
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            j
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            J
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyK"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            л
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Л
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            k
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            K
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyL"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            д
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Д
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            l
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            L
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Semicolon"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            ж
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Ж
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            ;
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            :
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Quote"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            э
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Э
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            '
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            "
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Enter"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            Enter
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Enter
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            Enter
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Enter
+          </span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="row"
+    >
+      <div
+        class="key Language"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            Language
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Language
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            Language
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Language
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyZ"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            я
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Я
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            z
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Z
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyX"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            ч
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Ч
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            x
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            X
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyC"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            с
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            С
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            c
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            C
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyV"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            м
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            М
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            v
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            V
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyB"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            и
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            И
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            b
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            B
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyN"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            т
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Т
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            n
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            N
+          </span>
+        </span>
+      </div>
+      <div
+        class="key KeyM"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            ь
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Ь
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            m
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            M
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Comma"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            б
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Б
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            ,
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            &lt;
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Period"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            ю
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            Ю
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            .
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            &gt;
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Slash"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            .
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            ,
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            /
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            ?
+          </span>
+        </span>
+      </div>
+    </div>
+    <div
+      class="row"
+    >
+      <div
+        class="key ArrowLeft"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            ◄
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            ◄
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            ◄
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            ◄
+          </span>
+        </span>
+      </div>
+      <div
+        class="key Space"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            __________
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            __________
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            __________
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            __________
+          </span>
+        </span>
+      </div>
+      <div
+        class="key ArrowRight"
+      >
+        <span
+          class="rus hiddenLang"
+        >
+          <span
+            class="down"
+          >
+            ►
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            ►
+          </span>
+        </span>
+        <span
+          class="eng"
+        >
+          <span
+            class="down"
+          >
+            ►
+          </span>
+          <span
+            class="up hiddenCase"
+          >
+            ►
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

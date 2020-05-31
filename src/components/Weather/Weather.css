@@ -53,3 +53,21 @@
 .thunder {
   background-image: url('./assets/thunderstorm.svg');
 }
+
+.bcn {
+  background-image: url('./assets/scattered-clouds-night.svg');
+}
+
+.bcd {
+  background-image: url('./assets/scattered-clouds-day.svg');
+}
+
+.mist {
+  background-image: url('./assets/scattered-clouds-night.svg');
+}
+
+@media only screen and (max-width: 960px) {
+  .Weather {
+    width: 100%;
+  }
+}

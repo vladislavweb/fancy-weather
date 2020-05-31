@@ -44,3 +44,9 @@
 .ControlPanel button:nth-child(4) {
   margin-right: 10px;
 }
+
+@media only screen and (max-width: 700px) {
+  .ControlPanel {
+    margin: 0 auto 20px;
+  }
+}

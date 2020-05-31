@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mathes snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="bad-geo"
+  >
+    <span
+      class="ru"
+    >
+      Пожалуйста, предоставьте сайту информацию о вашей геолокации!
+    </span>
+    <span
+      class="en"
+    >
+      Please, provide the site with information about your location!
+    </span>
+    <span
+      class="be"
+    >
+      Калі ласка, падайце сайту інфармацыю аб вашай геолокации!
+    </span>
+  </div>
+</DocumentFragment>
+`;

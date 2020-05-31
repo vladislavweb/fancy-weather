@@ -6,7 +6,7 @@ import Main from './containers/Main/Main';
 import { MainContext } from './MainContext';
 
 const App = () => {
-  const [city, setCity] = useState();
+  const [city, setCity] = useState('Loading...');
   const [searchString, setSearchString] = useState();
   const [theme, setTheme] = useState('black');
   const [isGeo, setIsGeo] = useState(true);
