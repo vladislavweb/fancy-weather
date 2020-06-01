@@ -188,9 +188,11 @@ const WeatherApi = ({ children }) => {
         switch (weather.list[0].sys.pod) {
           case 'n':
             picture = await fetchPicture('night', weather.list[0].weather[0].main);
+            sessionStorage.setItem('photo', `night ${weather.list[0].weather[0].main}`)
             break;
           case 'd':
             picture = await fetchPicture('day', weather.list[0].weather[0].main);
+            sessionStorage.setItem('photo', `day ${weather.list[0].weather[0].main}`)
             break;
           default:
             throw Error('Ожидается n или d');

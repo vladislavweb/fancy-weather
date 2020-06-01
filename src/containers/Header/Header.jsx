@@ -1,5 +1,5 @@
 import React from 'react';
-import  './Header.css';
+import './Header.css';
 import ControlPanel from '../../components/ControlPanel/ControlPanel';
 import SearchPanel from '../../components/SearchPanel/SearchPanel'
 import changeShowLang from '../../scripts/changeShowLang';
