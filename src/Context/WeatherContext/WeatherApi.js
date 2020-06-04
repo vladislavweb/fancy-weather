@@ -211,6 +211,8 @@ const WeatherApi = ({ children }) => {
         if (!useDefaultPosition) {
           setUpdateMap(true);
         }
+      } else {
+        changeRequest(true);
       }
     }
   }
