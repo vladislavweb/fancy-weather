@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from './hoc/Layout/Layout';
 import Header from './containers/Header/Header'
 import Footer from './containers/Footer/Footer';
@@ -13,6 +13,13 @@ const App = () => {
   const [isGeo, setIsGeo] = useState(true);
   const [isMicrophone, setIsMicrophone] = useState(true);
   const [request, setRequest] = useState(false);
+
+  useEffect(() => {
+    console.log('Голосовое управления происходит на языке отображения страницы:');
+    console.log('погода || weather || надворe');
+    console.log('громче || louder || мацней');
+    console.log('тише || quieter || ціхі');
+  }, [])
 
   const changeTheme = () => {
     if (theme === 'light') {
