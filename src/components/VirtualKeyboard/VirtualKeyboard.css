@@ -7,14 +7,6 @@
   background: transparent;
 }
 
-.hiddenLang {
-  display: none;
-}
-
-.hiddenCase {
-  display: none;
-}
-
 .row .active {
   border-radius: 20px;
   background: #2e3340;

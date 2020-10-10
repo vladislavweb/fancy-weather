@@ -13,16 +13,16 @@ const Main = props => {
   return (
     <main className='Main'>
       {
-        request ? <BadRequest/> : null
+        request ? <BadRequest /> : null
       }
       {
-        isMicrophone ? <BadMicrophone/> : null
+        isMicrophone ? <BadMicrophone /> : null
       }
       {
-        isGeo ? <BadGeo/> : null
+        isGeo ? <BadGeo /> : null
       }
-      <Weather/>
-      <Map/>
+      <Weather />
+      <Map />
     </main>
   );
 };

@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import './Weather.css';
 import ThreeDays from './ThreeDays/ThreeDays';
-import { MainContext } from '../../MainContext';
 import Today from './Today/Today';
 import Loader from '../UI/Loader/Loader';
 import { WeatherContext } from '../../Context/WeatherContext';
+import './Weather.css';
 
 const Weather = props => {
-
   const { getData } = useContext(WeatherContext)
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
@@ -24,12 +22,7 @@ const Weather = props => {
 
   return (
     <div className='Weather'>
-      {
-        isDataLoaded && <Today/>
-      }
-      {
-        !isDataLoaded ? <Loader/> : null
-      }
+      {isDataLoaded ? <Today/> : <Loader />}
       <ThreeDays/>
     </div>
   );

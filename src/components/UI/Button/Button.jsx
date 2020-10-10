@@ -1,14 +1,17 @@
 import React from 'react';
 import './Button.css';
 
-const Button = props => {
+const Button = (props) => {
+  const { className, text, type, ...restProps } = props;
+  const classComponent = `btn ${className}`;
+
   return (
     <button
-      className={`btn ${props.class}`}
-      type={props.type}
-      onClick={props.click}
-      >
-      {props.text}
+      className={classComponent}
+      type={type ? type : 'button'}
+      {...restProps}
+    >
+      {text}
     </button>
   );
 };

@@ -1,9 +1,24 @@
 import React, { useState, useContext, useEffect } from 'react';
-import './Map.css';
 import ReactMapGL, { Marker } from "react-map-gl";
 import Mark from './assets/MyLocation.svg';
 import { MainContext } from '../../MainContext';
 import { WeatherContext } from '../../Context/WeatherContext';
+import './Map.css';
+
+const mapDescription = {
+  ru: {
+    lati: 'Широта',
+    long: 'Долгота',
+  },
+  en: {
+    lati: 'Latitude',
+    long: 'Longitude',
+  },
+  ua: {
+    lati: 'Широта',
+    long: 'Довгота',
+  },
+};
 
 let isFound = true;
 const geoReverse = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=';
@@ -13,7 +28,7 @@ const urlGeo = 'https://www.mapquestapi.com/geocoding/v1/address?key='
 
 const Map = props => {
   const { searchString, changeCity, changeGeo } = useContext(MainContext);
-  const { updateMap, changeUpdateMap } = useContext(WeatherContext);
+  const { updateMap, changeUpdateMap, currentLang } = useContext(WeatherContext);
 
   const [latCoord, setLatCoord] = useState({
     gradus: 0,
@@ -141,18 +156,8 @@ const Map = props => {
         </Marker>
       </ReactMapGL>
       <div className='coordinates'>
-        <span className='ru'>
-          <p className='long'>Долгота: {longCoord.gradus}° {longCoord.minutes}' {longCoord.gradus > 0 ? 'E' : 'W'}</p>
-          <p className='lati'>Широта: {latCoord.gradus}° {latCoord.minutes}' {latCoord.gradus > 0 ? 'N' : 'S'}</p>
-        </span>
-        <span className='en'>
-          <p className='long'>Longitude: {longCoord.gradus}° {longCoord.minutes}' {longCoord.gradus > 0 ? 'E' : 'W'}</p>
-          <p className='lati'>Latitude: {latCoord.gradus}° {latCoord.minutes}' {latCoord.gradus > 0 ? 'N' : 'S'}</p>
-        </span>
-        <span className='be'>
-          <p className='long'>Шырата: {longCoord.gradus}° {longCoord.minutes}' {longCoord.gradus > 0 ? 'E' : 'W'}</p>
-          <p className='lati'>Даўгата: {latCoord.gradus}° {latCoord.minutes}' {latCoord.gradus > 0 ? 'N' : 'S'}</p>
-        </span>
+        <p className='long'>{`${mapDescription[currentLang].long}: ${longCoord.gradus}° ${longCoord.minutes}' ${longCoord.gradus > 0 ? 'E' : 'W'}`}</p>
+        <p className='lati'>{`${mapDescription[currentLang].lati}: ${latCoord.gradus}° ${latCoord.minutes}' ${latCoord.gradus > 0 ? 'N' : 'S'}`}</p>
       </div>
     </div>
   );

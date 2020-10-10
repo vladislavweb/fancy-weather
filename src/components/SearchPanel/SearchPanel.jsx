@@ -1,14 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
-import './SearchPanel.css';
 import Input from '../UI/Input/Input';
 import Button from '../UI/Button/Button';
 import { MainContext } from '../../MainContext';
-import toggleKeyboard from '../../scripts/toggleKeyboard';
 import { WeatherContext } from '../../Context/WeatherContext';
+import './SearchPanel.css';
 
-const SearchPanel = props => {
-  const { searchString, changeSearchString, changeMicrophone } = useContext(MainContext);
-  const { getData } = useContext(WeatherContext);
+const SearchPanel = () => {
+  const { searchString,changeSearchString,changeMicrophone } = useContext(MainContext);
+  const { getData, changeShowVirtualKeyboard } = useContext(WeatherContext);
   const [str, setStr] = useState('');
 
   useEffect(
@@ -39,8 +38,8 @@ const SearchPanel = props => {
       case 'en':
         recognition.lang = "en-US";
         break;
-      case 'be':
-        recognition.lang = "be-US";
+      case 'ua':
+        recognition.lang = "ua-US";
         break;
       default:
     };
@@ -70,8 +69,8 @@ const SearchPanel = props => {
           case 'en':
             utterThis.lang = `en-US`;
             break;
-          case 'be':
-            utterThis.lang = `be-US`;
+          case 'ua':
+            utterThis.lang = `ua-US`;
             break;
           default:
         };
@@ -96,36 +95,15 @@ const SearchPanel = props => {
     recognition.start();
   };
 
-  const [buttons] = useState([
-    {
-      text: '',
-      type: 'button',
-      click: speak,
-      class: 'speak',
-    },
-    {
-      text: '',
-      type: 'button',
-      click: toggleKeyboard,
-      class: 'toggle-keyboard',
-    },
-    {
-      text: '',
-      type: 'submit',
-      click: () => console.log('submit'),
-      class: 'submit-form',
-    },
-  ]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    getData()
+    getData();
   };
 
   useEffect(
     () => {
-      changeSearchString(str)
-      getData()
+      changeSearchString(str);
+      getData();
     },
     [str]
   )
@@ -134,11 +112,24 @@ const SearchPanel = props => {
     <div className="SearchPanel">
       <form onSubmit={handleSubmit}>
         <Input value={searchString} onChange={e => changeSearchString(e.target.value)} />
-        {
-          buttons.map((item, index) => (
-            <Button key={index} {...item} />
-          ))
-        }
+        <Button
+          text=''
+          onClick={speak}
+          className='speak'
+        />
+
+        <Button
+          text=''
+          onClick={changeShowVirtualKeyboard}
+          className='toggle-keyboard'
+        />
+
+        <Button
+          text=''
+          type='submit'
+          onClick={() => console.log('submit')}
+          className='submit-form'
+        />
       </form>
     </div>
   );

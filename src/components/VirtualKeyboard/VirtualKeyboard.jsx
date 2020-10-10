@@ -1,33 +1,18 @@
 import React, { useContext, useState, useEffect } from 'react';
-import './VirtualKeyboard.css';
-import keys from './keys';
 import { MainContext } from '../../MainContext';
 import { WeatherContext } from '../../Context/WeatherContext';
+import keys from './keys';
+import './VirtualKeyboard.css';
 
 const VirtualKeyboard = () => {
   const { changeSearchString } = useContext(MainContext);
   const { getData } = useContext(WeatherContext);
+  const [layout, setLayout] = useState('down');
+  const [langKeyboard, setLangKeoboard] = useState('en');
   const [virtualText, setVirtualText] = useState('');
 
-  const changeCaseCycle = () => {
-    const up = document.getElementsByClassName('up');
-    const down = document.getElementsByClassName('down');
-    for (let index = 0; index < up.length; index += 1) {
-      up[index].classList.toggle('hiddenCase');
-      down[index].classList.toggle('hiddenCase');
-    };
-  };
-
-  const changeLang = () => {
-    const rus = document.getElementsByClassName('rus');
-    const eng = document.getElementsByClassName('eng');
-    for (let index = 0; index < rus.length; index += 1) {
-      rus[index].classList.toggle('hiddenLang');
-      eng[index].classList.toggle('hiddenLang');
-      rus[index].classList.toggle('show');
-      eng[index].classList.toggle('show');
-    };
-  };
+  const changeCaseCycle = () => layout === 'down' ? setLayout('up') : setLayout('down');
+  const changeLang = () => langKeyboard === 'en' ? setLangKeoboard('ru') : setLangKeoboard('en');
 
   const activeClick = (event) => {
     let currentClick = '';
@@ -55,7 +40,7 @@ const VirtualKeyboard = () => {
           input.focus();
           input.selectionStart = selectedSymbol - 1;
           input.selectionEnd = selectedSymbol - 1;
-          setVirtualText(input.value)
+          setVirtualText(input.value);
         } else {
           input.focus();
         }
@@ -67,7 +52,7 @@ const VirtualKeyboard = () => {
         input.focus();
         input.selectionStart = selectedSymbol + 4;
         input.selectionEnd = selectedSymbol + 4;
-        setVirtualText(input.value)
+        setVirtualText(input.value);
         break;
 
       case 'CapsLock':
@@ -86,7 +71,7 @@ const VirtualKeyboard = () => {
         input.focus();
         input.selectionStart = selectedSymbol;
         input.selectionEnd = selectedSymbol;
-        setVirtualText(input.value)
+        setVirtualText(input.value);
         break;
 
       case '__________':
@@ -95,7 +80,7 @@ const VirtualKeyboard = () => {
         input.focus();
         input.selectionStart = selectedSymbol + 1;
         input.selectionEnd = selectedSymbol + 1;
-        setVirtualText(input.value)
+        setVirtualText(input.value);
         break;
 
       case 'Language':
@@ -125,7 +110,7 @@ const VirtualKeyboard = () => {
       let currentSymbol = event.target.innerText;
       if (currentSymbol.length === 1 && currentSymbol !== '◄' && currentSymbol !== '►') {
         input.value = input.value.substring(0, input.selectionStart) + currentSymbol + input.value.substring(input.selectionStart);
-        setVirtualText(virtualText + currentSymbol)
+        setVirtualText(virtualText + currentSymbol);
         input.focus();
         input.selectionStart = selectedSymbol + 1;
         input.selectionEnd = selectedSymbol + 1;
@@ -140,43 +125,41 @@ const VirtualKeyboard = () => {
   };
 
   useEffect(() => {
-    changeSearchString(virtualText)
+    changeSearchString(virtualText);
   }, [virtualText])
 
   return (
-    <div className='VirtualKeyboard hidden' onClick={(event) => handKeyboard(event)}>
-      {
-        Object.keys(keys).map((key, index) => {
-          return (
-            <div className='row' key={index}>
-              {
-                keys[key].map((item, index) => {
-                  return (
-                    <div className={'key ' + item.name} key={index}>
-                      <span className={item.content[0].lang + ' hiddenLang'}>
-                        <span className='down'>
-                          {item.content[0].down}
-                        </span>
-                        <span className='up hiddenCase'>
-                          {item.content[0].up}
-                        </span>
-                      </span>
-                      <span className={item.content[1].lang}>
-                        <span className='down'>
-                          {item.content[1].down}
-                        </span>
-                        <span className='up hiddenCase'>
-                          {item.content[1].up}
-                        </span>
-                      </span>
-                    </div>
-                  )
-                })
-              }
-            </div>
-          )
-        })
-      }
+    <div className='VirtualKeyboard' onClick={(event) => handKeyboard(event)}>
+      {Object.keys(keys).map((key, index) => {
+        return (
+          <div className='row' key={index}>
+            {keys[key].map((item, index) => {
+              return (
+                <div className={'key ' + item.name} key={index}>
+                  {langKeyboard === 'en' && (
+                    <span className={item.content[1].lang}>
+                      {layout === 'down'
+                        ? (item.content[1].down)
+                        : (item.content[1].up)
+                      }
+                    </span>
+                  )}
+
+                  {langKeyboard === 'ru' && (
+                    <span className={item.content[0].lang}>
+                      {layout === 'down'
+                        ? (item.content[0].down)
+                        : (item.content[0].up)
+                      }
+                    </span>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        )
+      })
+    }
     </div>
   );
 };

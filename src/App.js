@@ -9,7 +9,6 @@ import WeatherApi from './Context/WeatherContext/WeatherApi';
 const App = () => {
   const [city, setCity] = useState('Loading...');
   const [searchString, setSearchString] = useState('');
-  const [theme, setTheme] = useState('black');
   const [isGeo, setIsGeo] = useState(true);
   const [isMicrophone, setIsMicrophone] = useState(true);
   const [request, setRequest] = useState(false);
@@ -21,49 +20,23 @@ const App = () => {
     console.log('тише || quieter || ціхі');
   }, [])
 
-  const changeTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark')
-    } else {
-      setTheme('light')
-    }
-  };
+  const changeRequest = value => setRequest(value);
+  const changeGeo = value => setIsGeo(value);
+  const changeMicrophone = value => setIsMicrophone(value);
+  const changeSearchString = value => setSearchString(value);
+  const changeCity = value => setCity(value);
 
-  const changeRequest = value => {
-    setRequest(value);
-  };
-
-  const changeGeo = value => {
-    setIsGeo(value);
-  };
-
-  const changeMicrophone = value => {
-    setIsMicrophone(value);
-  };
-
-  const changeSearchString = (value) => {
-    setSearchString(value);
-  };
-
-  const changeCity = (value) => {
-    setCity(value);
-  };
-
-  const fetchWeatherAndMapbox = () => {
-    
-  }
-
-  if (localStorage.getItem('touched') === null) {
-    localStorage.setItem('volume', 1)
+  if (!localStorage.getItem('touched')) {
+    localStorage.setItem('volume', 1);
     localStorage.setItem('language', 'en');
     localStorage.setItem('scale', 'cel');
-    localStorage.setItem('touched', true)
+    localStorage.setItem('touched', true);
   }
 
   return (
-    <MainContext.Provider value={{ searchString, changeSearchString, theme, changeTheme, city, changeCity, isGeo, changeGeo, isMicrophone, changeMicrophone, request, changeRequest, fetchWeatherAndMapbox }}>
+    <MainContext.Provider value={{ searchString, changeSearchString, city, changeCity, isGeo, changeGeo, isMicrophone, changeMicrophone, request, changeRequest }}>
       <WeatherApi>
-          <Layout data-theme={theme}>
+          <Layout>
             <Header />
             <Main />
             <Footer />
