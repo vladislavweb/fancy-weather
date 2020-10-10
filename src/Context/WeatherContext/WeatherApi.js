@@ -238,7 +238,7 @@ const WeatherApi = ({ children }) => {
         };
 
         if (picture) {
-          // changeBackground(picture.urls.regular);
+          changeBackground(picture.urls.regular);
         }
 
         setSpeakWeather(weathers);
