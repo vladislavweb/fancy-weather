@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import changeShowLang from '../../../scripts/changeShowLang';
-import changeShowScale from '../../../scripts/changeShowScale';
 import data from '../../../assets/data';
 import { WeatherContext } from '../../../Context/WeatherContext';
 import './Today.css';
