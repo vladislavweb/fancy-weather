@@ -31,14 +31,6 @@ const Today = () => {
 
   useEffect(
     () => {
-      changeShowScale(localStorage.getItem('scale'));
-      changeShowLang(localStorage.getItem('language'));
-    },
-    []
-  );
-
-  useEffect(
-    () => {
       const timeout = setTimeout(() => {
         setTime(
           {
