@@ -7,10 +7,10 @@ import { WeatherContext } from '../../Context/WeatherContext';
 import './Header.css';
 
 const Header = () => {
-  const { showVirtualKeyboard } = useContext(WeatherContext)
+  const { showVirtualKeyboard } = useContext(WeatherContext);
 
   return (
-    <header className='Header'>
+    <header>
       <ControlPanel />
       <SearchPanel />
       {showVirtualKeyboard && <VirtualKeyboard />}
