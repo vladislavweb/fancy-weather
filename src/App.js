@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './hoc/Layout/Layout';
 import Header from './containers/Header/Header'
-import Footer from './containers/Footer/Footer';
 import Main from './containers/Main/Main';
 import { MainContext } from './MainContext';
 import WeatherApi from './Context/WeatherContext/WeatherApi';
@@ -39,7 +38,6 @@ const App = () => {
           <Layout>
             <Header />
             <Main />
-            <Footer />
           </Layout>
       </WeatherApi>
     </MainContext.Provider>
