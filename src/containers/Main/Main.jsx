@@ -10,7 +10,8 @@ import "./Main.css";
 
 const Main = () => {
   const { request, isMicrophone, isGeo } = useContext(MainContext);
-  const { currentLang } = useContext(WeatherContext);
+  const { settings } = useContext(WeatherContext);
+  const { currentLang } = settings;
 
   return (
     <main className='Main'>

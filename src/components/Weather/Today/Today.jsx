@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import data from '../../../assets/data';
-import { WeatherContext } from '../../../Context/WeatherContext';
 import './Today.css';
 
 const speedDescription = {
@@ -9,19 +8,18 @@ const speedDescription = {
   ua: 'Відчувається як ',
 };
 
-const Today = () => {
+const Today = ({ weatherData, location, settings }) => {
   const {
-    city,
-    country,
-    weather,
+    description,
     speed,
     feel,
     humidity,
     temp,
-    imgNow,
-    currentLang,
-    currentScale
-  } = useContext(WeatherContext);
+    img,
+  } = weatherData;
+
+  const { city, country } = location;
+  const { currentLang, currentScale } = settings;
 
   const [time, setTime] = useState({
     hours: new Date().getHours(),
@@ -79,10 +77,10 @@ const Today = () => {
       <div className='about'>
         <div className='about-weather'>
           <span>
-            {weather[currentLang]}
+            {description[currentLang]}
           </span>
         </div>
-        <div className={`aboutIcon ${imgNow}`}>
+        <div className={`aboutIcon ${img}`}>
         </div>
       </div>
 

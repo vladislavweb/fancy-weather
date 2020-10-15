@@ -1,20 +1,24 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import WeatherCard from './WeatherCard/WeatherCard';
-import { WeatherContext } from '../../../Context/WeatherContext';
 import './ThreeDays.css';
 
-const ThreeDays = () => {
-  const { weatherThree, currentLang, currentScale } = useContext(WeatherContext);
+const ThreeDays = ({ weatherData, settings }) => {
+  const { currentLang, currentScale } = settings;
+  console.log('Three days');
 
   return (
     <div className='ThreeDays'>
-      {
-        weatherThree[currentLang].map((info, index) => {
-          return (
-            <WeatherCard info={info} key={index} next={index + 1} lang={currentLang} scale={currentScale} />
-          )
-        })
-      }
+      {weatherData[currentLang].map((weather, index) => {
+        return (
+          <WeatherCard
+            weather={weather}
+            key={index}
+            next={index + 1}
+            scale={currentScale}
+            lang={currentLang}
+          />
+        )
+      })}
     </div>
   );
 };

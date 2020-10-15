@@ -28,7 +28,8 @@ const urlGeo = 'https://www.mapquestapi.com/geocoding/v1/address?key='
 
 const Map = props => {
   const { searchString, changeCity, changeGeo } = useContext(MainContext);
-  const { updateMap, changeUpdateMap, currentLang } = useContext(WeatherContext);
+  const { updateMap, changeUpdateMap, settings } = useContext(WeatherContext);
+  const currentLang = settings.currentLang;
 
   const [latCoord, setLatCoord] = useState({
     gradus: 0,

@@ -4,7 +4,8 @@ import Button from '../UI/Button/Button';
 import './ControlPanel.css'
 
 const ControlPanel = () => {
-  const { changeCurrentLang, changeCurrentScale, currentLang, currentScale } = useContext(WeatherContext);
+  const { settings, changeSettings } = useContext(WeatherContext);
+  const { currentLang, currentScale } = settings;
 
   const changeBackground = () => {
     const body = document.getElementsByTagName('body')[0];
@@ -60,7 +61,10 @@ const ControlPanel = () => {
         text = "RU"
         className={currentLang === 'ru' ? 'lang-ru control-current' : 'lang-ru'}
         onClick={() => {
-          changeCurrentLang('ru');
+          changeSettings({
+            ...settings,
+            currentLang: 'ru',
+          });
           localStorage.setItem('language', 'ru');
         }}
       />
@@ -69,7 +73,10 @@ const ControlPanel = () => {
         text = "EN"
         className={currentLang === 'en' ? 'lang-en control-current' : 'lang-en'}
         onClick={() => {
-          changeCurrentLang('en');
+          changeSettings({
+            ...settings,
+            currentLang: 'en',
+          });
           localStorage.setItem('language', 'en');
         }}
       />
@@ -78,7 +85,10 @@ const ControlPanel = () => {
         text = "UA"
         className={currentLang === 'ua' ? 'lang-ua control-current' : 'lang-ua'}
         onClick={() => {
-          changeCurrentLang('ua');
+          changeSettings({
+            ...settings,
+            currentLang: 'ua',
+          });
           localStorage.setItem('language', 'ua');
         }}
       />
@@ -87,7 +97,10 @@ const ControlPanel = () => {
         text = "°F"
         className={currentScale === 'far' ? 'scale-far control-current' : 'scale-far'}
         onClick={() => {
-          changeCurrentScale('far');
+          changeSettings({
+            ...settings,
+            currentScale: 'far',
+          });
           localStorage.setItem('scale', 'far')
         }}
       />
@@ -96,7 +109,10 @@ const ControlPanel = () => {
         text = "°C"
         className={currentScale === 'cel' ? 'scale-cel control-current' : 'scale-cel'}
         onClick={() => {
-          changeCurrentScale('cel');
+          changeSettings({
+            ...settings,
+            currentScale: 'cel',
+          });
           localStorage.setItem('scale', 'cel');
         }}
       />
