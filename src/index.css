@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  font-family: 'Jura-Light','Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: white;
+  background-image: url('./assets/images/back5.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hidden {
+  display: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+  font-family: "Jura-Light";
+
+  src: url("./assets/fonts/Jura-VariableFontwght.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}

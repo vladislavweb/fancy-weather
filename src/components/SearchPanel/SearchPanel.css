@@ -1,0 +1,66 @@
+.SearchPanel {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+}
+
+.SearchPanel form {
+  display: flex;
+}
+
+.SearchPanel input {
+  font-size: 20px;
+}
+
+.SearchPanel button:nth-child(2) {
+  border-left: 0;
+  border-right: 0;
+}
+
+.SearchPanel button[type='button']:nth-child(2) {
+  background-image: url('./assets/microphone2.png');
+  background-repeat: no-repeat;
+  background-size: 30px;
+  width: 40px;
+  background-position: center;
+}
+
+.SearchPanel button[type='button']:nth-child(3) {
+  background-image: url('./assets/keyboard1.png');
+  background-repeat: no-repeat;
+  background-size: 30px;
+  width: 40px;
+  background-position: center;
+}
+
+.SearchPanel button:nth-child(3) {
+  border-left: 0;
+  border-right: 0;
+}
+
+.SearchPanel button[type='submit'] {
+  background-image: url('./assets/search.svg');
+  background-repeat: no-repeat;
+  background-size: 30px;
+  width: 40px;
+  background-position: center;
+}
+
+.speaked {
+  box-shadow: 0 0 10px 10px;
+}
+
+@media only screen and (max-width: 730px) {
+  .SearchPanel {
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .SearchPanel {
+    width: 300px;
+  }
+  .SearchPanel .search-input{
+    width: 175px;
+  }
+}
