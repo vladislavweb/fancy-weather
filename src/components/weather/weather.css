@@ -1,0 +1,73 @@
+.weather {
+  width: calc(100% - 400px)
+}
+
+.three-days {
+  display: flex;
+}
+
+.csd {
+  background-image: url('./assets/clear-sky-day.svg');
+}
+
+.csn {
+  background-image: url('./assets/clear-sky-night.svg');
+}
+
+.fcd {
+  background-image: url('./assets/few-clouds-day.svg');
+}
+
+.fcn {
+  background-image: url('./assets/few-clouds-night.svg');
+}
+
+.rd {
+  background-image: url('./assets/rain-day.svg');
+}
+
+.rn {
+  background-image: url('./assets/rain-night-test.svg');
+}
+
+.scd {
+  background-image: url('./assets/scattered-clouds-day.svg');
+}
+
+.scn {
+  background-image: url('./assets/scattered-clouds-night.svg');
+}
+
+.sr {
+  background-image: url('./assets/shower-rain.svg');
+}
+
+.sd {
+  background-image: url('./assets/snow-day.svg');
+}
+
+.sn {
+  background-image: url('./assets/snow-night.svg');
+}
+
+.thunder {
+  background-image: url('./assets/thunderstorm.svg');
+}
+
+.bcn {
+  background-image: url('./assets/scattered-clouds-night.svg');
+}
+
+.bcd {
+  background-image: url('./assets/scattered-clouds-day.svg');
+}
+
+.mist {
+  background-image: url('./assets/scattered-clouds-night.svg');
+}
+
+@media only screen and (max-width: 960px) {
+  .weather {
+    width: 100%;
+  }
+}
