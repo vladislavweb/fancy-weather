@@ -1,1 +1,1 @@
-export { default } from "./searchPanel"
+export { default } from "./searchPanel";

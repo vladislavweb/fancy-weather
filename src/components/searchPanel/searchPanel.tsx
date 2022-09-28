@@ -1,27 +1,24 @@
-import React, { useState, useContext, useEffect } from 'react';
-import Input from '../input';
-import Button from '../button';
-import { MainContext } from '../../mainContext';
-import { WeatherContext } from '../../providers/weather';
-import './searchPanel.css';
+import React, { useState, useContext, useEffect } from "react";
+import Input from "../input";
+import Button from "../button";
+import { MainContext } from "../../mainContext";
+import { WeatherContext } from "../../providers/weather";
+import "./searchPanel.css";
 
 const SearchPanel = () => {
-  const { searchString,changeSearchString,changeMicrophone } = useContext(MainContext);
+  const { searchString, changeSearchString, changeMicrophone } = useContext(MainContext);
   const { getData, changeShowVirtualKeyboard } = useContext(WeatherContext);
-  const [str, setStr] = useState('');
+  const [str, setStr] = useState("");
 
-  useEffect(
-    () => {
-      changeMicrophone(false);
-    },
-    [changeMicrophone]
-  );
+  useEffect(() => {
+    changeMicrophone(false);
+  }, [changeMicrophone]);
 
   const speak = () => {
-    let input = document.getElementsByClassName('search-input')[0] as any;
-    document.getElementsByClassName('SearchPanel')[0].classList.add('speaked')
+    let input = document.getElementsByClassName("search-input")[0] as any;
+    document.getElementsByClassName("SearchPanel")[0].classList.add("speaked");
     changeMicrophone(false);
-    let currentLang = localStorage.getItem('language');
+    let currentLang = localStorage.getItem("language");
     let SpeechGrammarList = (window as any).SpeechGrammarList || (window as any).webkitSpeechGrammarList;
     let SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     let speechRecognitionList = new SpeechGrammarList();
@@ -32,20 +29,20 @@ const SearchPanel = () => {
     recognition.interimResults = false;
 
     switch (currentLang) {
-      case 'ru':
+      case "ru":
         recognition.lang = "ru-US";
         break;
-      case 'en':
+      case "en":
         recognition.lang = "en-US";
         break;
-      case 'ua':
+      case "ua":
         recognition.lang = "ua-US";
         break;
       default:
-    };
+    }
 
     recognition.onresult = function (event: any) {
-      document.getElementsByClassName('SearchPanel')[0].classList.remove('speaked');
+      document.getElementsByClassName("SearchPanel")[0].classList.remove("speaked");
       let currentVolume = localStorage.getItem("volume") as any;
       let last = event.results.length - 1;
       let command = event.results[last][0].transcript.toLowerCase();
@@ -60,34 +57,36 @@ const SearchPanel = () => {
         }
       } else if (command === "weather" || command === "погода" || command === "надвор'е") {
         let synth = window.speechSynthesis;
-        let utterThis = new SpeechSynthesisUtterance(sessionStorage.getItem(`weather-${localStorage.getItem('language') || ""} || "`) || "") as any;
+        let utterThis = new SpeechSynthesisUtterance(
+          sessionStorage.getItem(`weather-${localStorage.getItem("language") || ""} || "`) || "",
+        ) as any;
         utterThis.volume = localStorage.getItem("volume");
-        switch (localStorage.getItem('language')) {
-          case 'ru':
+        switch (localStorage.getItem("language")) {
+          case "ru":
             utterThis.lang = `ru-US`;
             break;
-          case 'en':
+          case "en":
             utterThis.lang = `en-US`;
             break;
-          case 'ua':
+          case "ua":
             utterThis.lang = `ua-US`;
             break;
           default:
-        };
+        }
         synth.speak(utterThis);
       } else {
         changeSearchString(command);
         setStr(input.value);
-      };
+      }
     };
 
     recognition.onspeechend = function () {
-      document.getElementsByClassName('SearchPanel')[0].classList.remove('speaked');
+      document.getElementsByClassName("SearchPanel")[0].classList.remove("speaked");
       recognition.stop();
     };
 
     recognition.onerror = function (event: any) {
-      document.getElementsByClassName('SearchPanel')[0].classList.remove('speaked');
+      document.getElementsByClassName("SearchPanel")[0].classList.remove("speaked");
       changeMicrophone(true);
       console.log(event);
     };
@@ -100,33 +99,20 @@ const SearchPanel = () => {
     getData();
   };
 
-  useEffect(
-    () => {
-      changeSearchString(str);
-      getData();
-    },
-    [str]
-  )
+  useEffect(() => {
+    changeSearchString(str);
+    getData();
+  }, [str]);
 
   return (
     <div className="search-panel">
       <form onSubmit={handleSubmit}>
-        <Input value={searchString} onChange={e => changeSearchString(e.target.value)} />
-        <Button
-          onClick={speak}
-          className='speak'
-        />
+        <Input value={searchString} onChange={(e) => changeSearchString(e.target.value)} />
+        <Button onClick={speak} className="speak" />
 
-        <Button
-          onClick={changeShowVirtualKeyboard}
-          className='toggle-keyboard'
-        />
+        <Button onClick={changeShowVirtualKeyboard} className="toggle-keyboard" />
 
-        <Button
-          type='submit'
-          onClick={() => console.log('submit')}
-          className='submit-form'
-        />
+        <Button type="submit" onClick={() => console.log("submit")} className="submit-form" />
       </form>
     </div>
   );

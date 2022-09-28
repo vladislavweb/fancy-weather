@@ -33,7 +33,7 @@
     width: 300px;
   }
 
-  .map-wrapper [tabindex='0'] {
+  .map-wrapper [tabindex="0"] {
     width: 300px !important;
     margin: auto;
   }

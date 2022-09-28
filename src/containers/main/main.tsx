@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import Map from '../../components/map';
-import Weather from '../../components/weather';
+import Map from "../../components/map";
+import Weather from "../../components/weather";
 import { MainContext } from "../../mainContext";
 import { WeatherContext } from "../../providers/weather";
 import "./main.css";
@@ -11,7 +11,7 @@ const Main = () => {
   const { currentLang } = settings;
 
   return (
-    <main className='main'>
+    <main className="main">
       <Weather />
       <Map />
     </main>

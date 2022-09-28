@@ -1,1 +1,1 @@
-export { default } from "./threeDays"
+export { default } from "./threeDays";

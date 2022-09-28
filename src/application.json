@@ -1,24 +1,21 @@
 {
-    "openweaweathermap": {
-        "url": "https://api.openweathermap.org/data/2.5/forecast?",
-        "key": "eac54b3672659f3dd10f71d884f30279"
+  "openWeatherMap": {
+    "url": "https://api.openweathermap.org/data/2.5/forecast?",
+    "key": "eac54b3672659f3dd10f71d884f30279"
+  },
+  "mapQuestApi": {
+    "url": {
+      "geocoding": "https://www.mapquestapi.com/geocoding/v1/address?key=",
+      "reverse": "https://open.mapquestapi.com/geocoding/v1/reverse?key="
     },
-    "mapQuestApi": {
-        "url": {
-            "geocoding": {
-                "url": "https://www.mapquestapi.com/geocoding/v1/address?key="
-            },
-            "reverse": {
-                "url": "https://open.mapquestapi.com/geocoding/v1/reverse?key="
-            }
-        },
-        "token": "BtHcuGO81EUArGaV164zvKD5sTuERK2O"
-    },
-    "mapBox": {
-        "token": "pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ"
-    },
-    "unsplash": {
-        "url": "https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&&query=",
-        "key": "&client_id=e_Ud2DTXMi01AovDee1hT-um5Qo2a7hdDmNmPxpk1W4"
-    }
+    "token": "BtHcuGO81EUArGaV164zvKD5sTuERK2O"
+  },
+  "mapBox": {
+    "url": "https://api.mapbox.com/geocoding/v5/mapbox.places",
+    "token": "pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ"
+  },
+  "unsplash": {
+    "url": "https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&&query=",
+    "key": "&client_id=e_Ud2DTXMi01AovDee1hT-um5Qo2a7hdDmNmPxpk1W4"
+  }
 }

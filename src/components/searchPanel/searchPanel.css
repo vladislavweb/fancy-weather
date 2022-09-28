@@ -17,16 +17,16 @@
   border-right: 0;
 }
 
-.search-panel button[type='button']:nth-child(2) {
-  background-image: url('./assets/microphone2.png');
+.search-panel button[type="button"]:nth-child(2) {
+  background-image: url("./assets/microphone2.png");
   background-repeat: no-repeat;
   background-size: 30px;
   width: 40px;
   background-position: center;
 }
 
-.search-panel button[type='button']:nth-child(3) {
-  background-image: url('./assets/keyboard1.png');
+.search-panel button[type="button"]:nth-child(3) {
+  background-image: url("./assets/keyboard1.png");
   background-repeat: no-repeat;
   background-size: 30px;
   width: 40px;
@@ -38,8 +38,8 @@
   border-right: 0;
 }
 
-.search-panel button[type='submit'] {
-  background-image: url('./assets/search.svg');
+.search-panel button[type="submit"] {
+  background-image: url("./assets/search.svg");
   background-repeat: no-repeat;
   background-size: 30px;
   width: 40px;
@@ -60,7 +60,7 @@
   .search-panel {
     width: 300px;
   }
-  .search-panel .search-input{
+  .search-panel .search-input {
     width: 175px;
   }
 }
