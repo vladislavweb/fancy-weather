@@ -21,9 +21,9 @@ const mapDescription = {
 };
 
 let isFound = true;
-const geoReverse = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=';
+const geoReverse = 'https://www.mapquestapi.com/geocoding/v1/reverse?key=';
 const tokenMap = 'pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ';
-const tokenGeo = 'BtHcuGO81EUArGaV164zvKD5sTuERK2O'
+const tokenGeo = 'tDxkGsGDv0GgHNALVXgfVQJvhzBbN5n1'
 const urlGeo = 'https://www.mapquestapi.com/geocoding/v1/address?key='
 
 const Map = props => {

@@ -1,9 +1,9 @@
 const link = 'https://api.openweathermap.org/data/2.5/forecast?';
 const keyWeather = 'eac54b3672659f3dd10f71d884f30279';
 const tokenMap = 'pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ';
-const tokenGeo = 'BtHcuGO81EUArGaV164zvKD5sTuERK2O';
+const tokenGeo = 'tDxkGsGDv0GgHNALVXgfVQJvhzBbN5n1';
 const urlGeo = 'https://www.mapquestapi.com/geocoding/v1/address?key=';
-const geoReverse = 'https://open.mapquestapi.com/geocoding/v1/reverse?key=';
+const geoReverse = 'https://www.mapquestapi.com/geocoding/v1/reverse?key=';
 const unsplashUrl = 'https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&&query=';
 const unsplashKey = '&client_id=e_Ud2DTXMi01AovDee1hT-um5Qo2a7hdDmNmPxpk1W4';
 
