@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Layout, Header, Main } from "./containers";
-import { MainContext } from "./mainContext";
 import { ConfigProvider } from "./providers";
-import WeatherApi from "./providers/weather/weatherApi";
+import { BackgroundProvider } from "./providers/background";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const App = () => {
   const [city, setCity] = useState("Loading...");
@@ -25,29 +27,16 @@ const App = () => {
   }
 
   return (
-    <ConfigProvider>
-      <MainContext.Provider
-        value={{
-          searchString,
-          changeSearchString,
-          city,
-          changeCity,
-          isGeo,
-          changeGeo,
-          isMicrophone,
-          changeMicrophone,
-          request,
-          changeRequest,
-        }}
-      >
-        <WeatherApi>
+    <QueryClientProvider client={queryClient}>
+      <ConfigProvider>
+        <BackgroundProvider>
           <Layout>
             <Header />
             <Main />
           </Layout>
-        </WeatherApi>
-      </MainContext.Provider>
-    </ConfigProvider>
+        </BackgroundProvider>
+      </ConfigProvider>
+    </QueryClientProvider>
   );
 };
 
