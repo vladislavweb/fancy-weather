@@ -4,10 +4,7 @@ export interface ApplicationConfig {
     key: string;
   };
   mapQuestApi: {
-    url: {
-      geocoding: string;
-      reverse: string;
-    };
+    url: string;
     token: string;
   };
   mapBox: {
