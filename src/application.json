@@ -4,11 +4,8 @@
     "key": "eac54b3672659f3dd10f71d884f30279"
   },
   "mapQuestApi": {
-    "url": {
-      "geocoding": "https://www.mapquestapi.com/geocoding/v1/address?key=",
-      "reverse": "https://open.mapquestapi.com/geocoding/v1/reverse?key="
-    },
-    "token": "BtHcuGO81EUArGaV164zvKD5sTuERK2O"
+    "url": "https://www.mapquestapi.com/geocoding/v1/",
+    "token": "tDxkGsGDv0GgHNALVXgfVQJvhzBbN5n1"
   },
   "mapBox": {
     "url": "https://api.mapbox.com/geocoding/v5/mapbox.places",
