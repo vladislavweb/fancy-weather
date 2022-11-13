@@ -19,8 +19,10 @@ const SearchPanel = () => {
     document.getElementsByClassName("SearchPanel")[0].classList.add("speaked");
     changeMicrophone(false);
     let currentLang = localStorage.getItem("language");
-    let SpeechGrammarList = (window as any).SpeechGrammarList || (window as any).webkitSpeechGrammarList;
-    let SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    let SpeechGrammarList =
+      (window as any).SpeechGrammarList || (window as any).webkitSpeechGrammarList;
+    let SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     let speechRecognitionList = new SpeechGrammarList();
     let recognition = new SpeechRecognition();
     let grammar = "#JSGF V1.0;";

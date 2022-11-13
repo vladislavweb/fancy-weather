@@ -33,7 +33,11 @@ const Weather = () => {
     <div className="weather">
       {isDataLoaded ? (
         <React.Fragment>
-          <Today weatherData={fetchDataWeather.weatherNow} location={location} settings={settings} />
+          <Today
+            weatherData={fetchDataWeather.weatherNow}
+            location={location}
+            settings={settings}
+          />
 
           <ThreeDays settings={settings} weatherData={fetchDataWeather.weatherThreeDays} />
         </React.Fragment>

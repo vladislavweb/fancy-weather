@@ -91,7 +91,10 @@ const Today = ({ weatherData, location, settings }: any) => {
 
           <div className="feel">
             {currentScale === "far" ? (
-              <span>{`${(speedDescription as any)[currentLang]} ${((feel / 1) * 1.8 + 32).toFixed()} °F`}</span>
+              <span>{`${(speedDescription as any)[currentLang]} ${(
+                (feel / 1) * 1.8 +
+                32
+              ).toFixed()} °F`}</span>
             ) : (
               <span>{`${(speedDescription as any)[currentLang]} ${(feel / 1).toFixed()} °C`}</span>
             )}

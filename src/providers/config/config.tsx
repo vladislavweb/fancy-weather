@@ -6,4 +6,6 @@ type Props = FC<{ children?: ReactNode }>;
 
 export const Context = createContext<ApplicationConfig>(config);
 
-export const ConfigProvider: Props = ({ children }) => <Context.Provider value={config}>{children}</Context.Provider>;
+export const ConfigProvider: Props = ({ children }) => (
+  <Context.Provider value={config}>{children}</Context.Provider>
+);

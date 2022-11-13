@@ -43,27 +43,27 @@ const WeatherProvider: FC<WeatherProvider> = ({ children }) => {
   const setSpeakWeather = (res: any) => {
     sessionStorage.setItem(
       "weather-en",
-      `Weather today: ${res.en.list[0].weather[0].description}, wind speed ${res.en.list[0].wind.speed.toFixed(
-        1,
-      )} meter per second, humidity ${
+      `Weather today: ${
+        res.en.list[0].weather[0].description
+      }, wind speed ${res.en.list[0].wind.speed.toFixed(1)} meter per second, humidity ${
         res.en.list[0].main.humidity
       } percent, the temperature feels like ${res.en.list[0].main.feels_like.toFixed()} degrees.`,
     );
 
     sessionStorage.setItem(
       "weather-ru",
-      `Погода сегодня: ${res.ru.list[0].weather[0].description}, скорость ветра ${res.ru.list[0].wind.speed.toFixed(
-        1,
-      )} метров в секунду, влажность ${
+      `Погода сегодня: ${
+        res.ru.list[0].weather[0].description
+      }, скорость ветра ${res.ru.list[0].wind.speed.toFixed(1)} метров в секунду, влажность ${
         res.ru.list[0].main.humidity
       } процентов, температура ощущается как ${res.ru.list[0].main.feels_like.toFixed()} градусов.`,
     );
 
     sessionStorage.setItem(
       "weather-ua",
-      `Погода сьогодні: ${res.ua.list[0].weather[0].description}, швидкість вітру ${res.ua.list[0].wind.speed.toFixed(
-        1,
-      )} метрів в секунду, вологість ${
+      `Погода сьогодні: ${
+        res.ua.list[0].weather[0].description
+      }, швидкість вітру ${res.ua.list[0].wind.speed.toFixed(1)} метрів в секунду, вологість ${
         res.ua.list[0].main.humidity
       } відсоток, температура відчувається як ${res.ua.list[0].main.feels_like.toFixed()} градус.`,
     );
@@ -81,11 +81,17 @@ const WeatherProvider: FC<WeatherProvider> = ({ children }) => {
       if (useDefaultPosition || coords.results[0].locations[0].adminArea5.length > 0) {
         changeRequest(false);
 
-        const lat = useDefaultPosition ? position.coords.latitude : coords.results[0].locations[0].latLng.lat;
-        const long = useDefaultPosition ? position.coords.longitude : coords.results[0].locations[0].latLng.lng;
+        const lat = useDefaultPosition
+          ? position.coords.latitude
+          : coords.results[0].locations[0].latLng.lat;
+        const long = useDefaultPosition
+          ? position.coords.longitude
+          : coords.results[0].locations[0].latLng.lng;
 
         const country = await fetchCountry(long, lat);
-        const city = useDefaultPosition ? await fetchCityByDefaultPosition(lat, long) : await fetchCity(searchString);
+        const city = useDefaultPosition
+          ? await fetchCityByDefaultPosition(lat, long)
+          : await fetchCity(searchString);
 
         changeCity(city.results[0].locations[0].adminArea5);
 
@@ -122,17 +128,25 @@ const WeatherProvider: FC<WeatherProvider> = ({ children }) => {
             humidity: weathers.en.list[0].main.humidity,
             feel: weathers.en.list[0].main.feels_like,
             temp: weathers.en.list[0].main.temp,
-            img: getWeatherImage(weathers.en.list[0].sys.pod, weathers.en.list[0].weather[0].icon.substring(0, 2)),
+            img: getWeatherImage(
+              weathers.en.list[0].sys.pod,
+              weathers.en.list[0].weather[0].icon.substring(0, 2),
+            ),
           },
           weatherThreeDays: {
             ru: [
               {
-                avgTemp: (weathers.ru.list[8].main.temp_max + weathers.ru.list[8].main.temp_min) / 2,
+                avgTemp:
+                  (weathers.ru.list[8].main.temp_max + weathers.ru.list[8].main.temp_min) / 2,
                 description: weathers.ru.list[8].weather[0].description,
-                img: getWeatherImage(weathers.ru.list[8].sys.pod, weathers.ru.list[8].weather[0].icon.substring(0, 2)),
+                img: getWeatherImage(
+                  weathers.ru.list[8].sys.pod,
+                  weathers.ru.list[8].weather[0].icon.substring(0, 2),
+                ),
               },
               {
-                avgTemp: (weathers.ru.list[16].main.temp_max + weathers.ru.list[16].main.temp_min) / 2,
+                avgTemp:
+                  (weathers.ru.list[16].main.temp_max + weathers.ru.list[16].main.temp_min) / 2,
                 description: weathers.ru.list[16].weather[0].description,
                 img: getWeatherImage(
                   weathers.ru.list[16].sys.pod,
@@ -140,7 +154,8 @@ const WeatherProvider: FC<WeatherProvider> = ({ children }) => {
                 ),
               },
               {
-                avgTemp: (weathers.ru.list[24].main.temp_max + weathers.ru.list[24].main.temp_min) / 2,
+                avgTemp:
+                  (weathers.ru.list[24].main.temp_max + weathers.ru.list[24].main.temp_min) / 2,
                 description: weathers.ru.list[24].weather[0].description,
                 img: getWeatherImage(
                   weathers.ru.list[24].sys.pod,
@@ -150,12 +165,17 @@ const WeatherProvider: FC<WeatherProvider> = ({ children }) => {
             ],
             en: [
               {
-                avgTemp: (weathers.en.list[8].main.temp_max + weathers.en.list[8].main.temp_min) / 2,
+                avgTemp:
+                  (weathers.en.list[8].main.temp_max + weathers.en.list[8].main.temp_min) / 2,
                 description: weathers.en.list[8].weather[0].description,
-                img: getWeatherImage(weathers.en.list[8].sys.pod, weathers.en.list[8].weather[0].icon.substring(0, 2)),
+                img: getWeatherImage(
+                  weathers.en.list[8].sys.pod,
+                  weathers.en.list[8].weather[0].icon.substring(0, 2),
+                ),
               },
               {
-                avgTemp: (weathers.en.list[16].main.temp_max + weathers.en.list[16].main.temp_min) / 2,
+                avgTemp:
+                  (weathers.en.list[16].main.temp_max + weathers.en.list[16].main.temp_min) / 2,
                 description: weathers.en.list[16].weather[0].description,
                 img: getWeatherImage(
                   weathers.en.list[16].sys.pod,
@@ -163,7 +183,8 @@ const WeatherProvider: FC<WeatherProvider> = ({ children }) => {
                 ),
               },
               {
-                avgTemp: (weathers.en.list[24].main.temp_max + weathers.en.list[24].main.temp_min) / 2,
+                avgTemp:
+                  (weathers.en.list[24].main.temp_max + weathers.en.list[24].main.temp_min) / 2,
                 description: weathers.en.list[24].weather[0].description,
                 img: getWeatherImage(
                   weathers.en.list[24].sys.pod,
@@ -173,12 +194,17 @@ const WeatherProvider: FC<WeatherProvider> = ({ children }) => {
             ],
             ua: [
               {
-                avgTemp: (weathers.ua.list[8].main.temp_max + weathers.ua.list[8].main.temp_min) / 2,
+                avgTemp:
+                  (weathers.ua.list[8].main.temp_max + weathers.ua.list[8].main.temp_min) / 2,
                 description: weathers.ua.list[8].weather[0].description,
-                img: getWeatherImage(weathers.ua.list[8].sys.pod, weathers.ua.list[8].weather[0].icon.substring(0, 2)),
+                img: getWeatherImage(
+                  weathers.ua.list[8].sys.pod,
+                  weathers.ua.list[8].weather[0].icon.substring(0, 2),
+                ),
               },
               {
-                avgTemp: (weathers.ua.list[16].main.temp_max + weathers.ua.list[16].main.temp_min) / 2,
+                avgTemp:
+                  (weathers.ua.list[16].main.temp_max + weathers.ua.list[16].main.temp_min) / 2,
                 description: weathers.ua.list[16].weather[0].description,
                 img: getWeatherImage(
                   weathers.ua.list[16].sys.pod,
@@ -186,7 +212,8 @@ const WeatherProvider: FC<WeatherProvider> = ({ children }) => {
                 ),
               },
               {
-                avgTemp: (weathers.ua.list[24].main.temp_max + weathers.ua.list[24].main.temp_min) / 2,
+                avgTemp:
+                  (weathers.ua.list[24].main.temp_max + weathers.ua.list[24].main.temp_min) / 2,
                 description: weathers.ua.list[24].weather[0].description,
                 img: getWeatherImage(
                   weathers.ua.list[24].sys.pod,

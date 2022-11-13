@@ -22,7 +22,8 @@ const mapDescription = {
 
 let isFound = true;
 const geoReverse = "https://open.mapquestapi.com/geocoding/v1/reverse?key=";
-const tokenMap = "pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ";
+const tokenMap =
+  "pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ";
 const tokenGeo = "BtHcuGO81EUArGaV164zvKD5sTuERK2O";
 const urlGeo = "https://www.mapquestapi.com/geocoding/v1/address?key=";
 
@@ -60,7 +61,9 @@ const Map = (props: any) => {
     if (isFound) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          fetch(`${geoReverse}${tokenGeo}&location=${position.coords.latitude},${position.coords.longitude}`)
+          fetch(
+            `${geoReverse}${tokenGeo}&location=${position.coords.latitude},${position.coords.longitude}`,
+          )
             .then((data) => data.json())
             .then((data) => {
               changeCity(data.results[0].locations[0].adminArea5);
@@ -85,12 +88,18 @@ const Map = (props: any) => {
 
           setLatCoord({
             gradus: position.coords.latitude.toFixed(),
-            minutes: ((position.coords.latitude - Math.floor(position.coords.latitude)) * 60).toFixed(),
+            minutes: (
+              (position.coords.latitude - Math.floor(position.coords.latitude)) *
+              60
+            ).toFixed(),
           });
 
           setLongCoord({
             gradus: position.coords.longitude.toFixed(),
-            minutes: ((position.coords.longitude - Math.floor(position.coords.longitude)) * 60).toFixed(),
+            minutes: (
+              (position.coords.longitude - Math.floor(position.coords.longitude)) *
+              60
+            ).toFixed(),
           });
         },
         (error) => {
@@ -115,7 +124,8 @@ const Map = (props: any) => {
                 setLatCoord({
                   gradus: data.results[0].locations[0].latLng.lat.toFixed(),
                   minutes: (
-                    (data.results[0].locations[0].latLng.lat - Math.floor(data.results[0].locations[0].latLng.lat)) *
+                    (data.results[0].locations[0].latLng.lat -
+                      Math.floor(data.results[0].locations[0].latLng.lat)) *
                     60
                   ).toFixed(),
                 });
@@ -123,7 +133,8 @@ const Map = (props: any) => {
                 setLongCoord({
                   gradus: data.results[0].locations[0].latLng.lng.toFixed(),
                   minutes: (
-                    (data.results[0].locations[0].latLng.lng - Math.floor(data.results[0].locations[0].latLng.lng)) *
+                    (data.results[0].locations[0].latLng.lng -
+                      Math.floor(data.results[0].locations[0].latLng.lng)) *
                     60
                   ).toFixed(),
                 });
@@ -171,9 +182,9 @@ const Map = (props: any) => {
         <p className="long">{`${(mapDescription as any)[currentLang].long}: ${longCoord.gradus}° ${
           longCoord.minutes
         }' ${longCoord.gradus > 0 ? "E" : "W"}`}</p>
-        <p className="lati">{`${(mapDescription as any)[currentLang].lati}: ${latCoord.gradus}° ${latCoord.minutes}' ${
-          latCoord.gradus > 0 ? "N" : "S"
-        }`}</p>
+        <p className="lati">{`${(mapDescription as any)[currentLang].lati}: ${latCoord.gradus}° ${
+          latCoord.minutes
+        }' ${latCoord.gradus > 0 ? "N" : "S"}`}</p>
       </div>
     </div>
   );

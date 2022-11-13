@@ -9,7 +9,8 @@ const ControlPanel = () => {
 
   const changeBackground = () => {
     const body = document.getElementsByTagName("body")[0];
-    const unsplashUrl = "https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&&query=";
+    const unsplashUrl =
+      "https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&&query=";
     const unsplashKey = "&client_id=e_Ud2DTXMi01AovDee1hT-um5Qo2a7hdDmNmPxpk1W4";
     let image = new Image();
 
@@ -25,7 +26,9 @@ const ControlPanel = () => {
 
   const speakWeather = () => {
     let synth = window.speechSynthesis;
-    let utterThis = new SpeechSynthesisUtterance(sessionStorage.getItem(`weather-${currentLang}`) || "");
+    let utterThis = new SpeechSynthesisUtterance(
+      sessionStorage.getItem(`weather-${currentLang}`) || "",
+    );
 
     switch (currentLang) {
       case "ru":

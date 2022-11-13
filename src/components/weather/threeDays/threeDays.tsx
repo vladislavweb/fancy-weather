@@ -8,7 +8,15 @@ const ThreeDays = ({ weatherData, settings }: any) => {
   return (
     <div className="three-days">
       {weatherData[currentLang].map((weather: any, index: any) => {
-        return <WeatherCard weather={weather} key={index} next={index + 1} scale={currentScale} lang={currentLang} />;
+        return (
+          <WeatherCard
+            weather={weather}
+            key={index}
+            next={index + 1}
+            scale={currentScale}
+            lang={currentLang}
+          />
+        );
       })}
     </div>
   );
