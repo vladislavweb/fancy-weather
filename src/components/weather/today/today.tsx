@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import data from "../../../assets/data";
+import { SettingsContext } from "../../../providers";
 import "./today.css";
 
 const speedDescription = {
@@ -8,11 +9,10 @@ const speedDescription = {
   ua: "Відчувається як ",
 };
 
-const Today = ({ weatherData, location, settings }: any) => {
+const Today = ({ weatherData, location }: any) => {
   const { description, speed, feel, humidity, temp, img } = weatherData;
-
+  const { scale, language } = useContext(SettingsContext);
   const { city, country } = location;
-  const { currentLang, currentScale } = settings;
 
   const [time, setTime] = useState({
     hours: new Date().getHours(),
@@ -41,8 +41,8 @@ const Today = ({ weatherData, location, settings }: any) => {
 
       <div className="date">
         <span>
-          {(data.days as any)[currentLang][new Date().getDay()]} &nbsp;
-          {(data.months as any)[currentLang][new Date().getMonth()]} &nbsp;
+          {(data.days as any)[language][new Date().getDay()]} &nbsp;
+          {(data.months as any)[language][new Date().getMonth()]} &nbsp;
           {new Date().getDate()} &nbsp;
           {new Date().getFullYear()}
         </span>
@@ -58,14 +58,14 @@ const Today = ({ weatherData, location, settings }: any) => {
 
       <div className="about">
         <div className="about-weather">
-          <span>{description[currentLang]}</span>
+          <span>{description[language]}</span>
         </div>
         <div className={`aboutIcon ${img}`}></div>
       </div>
 
       <div className="parameters">
         <div className="temperature">
-          {currentScale === "far" ? (
+          {scale === "far" ? (
             <div>
               <span>{(temp * 1.8 + 32).toFixed().toString()}</span>
               <span>°F</span>
@@ -80,9 +80,9 @@ const Today = ({ weatherData, location, settings }: any) => {
 
         <div className="details">
           <div className="speed">
-            {currentLang === "ru" ? (
+            {language === "ru" ? (
               <span>Скорость ветра: {speed}м/с</span>
-            ) : currentLang === "en" ? (
+            ) : language === "en" ? (
               <span>Wind speed: {speed}mph</span>
             ) : (
               <span>Хуткасць ветру: {speed}м/с</span>
@@ -90,21 +90,21 @@ const Today = ({ weatherData, location, settings }: any) => {
           </div>
 
           <div className="feel">
-            {currentScale === "far" ? (
-              <span>{`${(speedDescription as any)[currentLang]} ${(
+            {scale === "far" ? (
+              <span>{`${(speedDescription as any)[language]} ${(
                 (feel / 1) * 1.8 +
                 32
               ).toFixed()} °F`}</span>
             ) : (
-              <span>{`${(speedDescription as any)[currentLang]} ${(feel / 1).toFixed()} °C`}</span>
+              <span>{`${(speedDescription as any)[language]} ${(feel / 1).toFixed()} °C`}</span>
             )}
           </div>
 
           <div className="humidity">
             <span>
-              {currentLang === "ru"
+              {language === "ru"
                 ? `Влажность: ${humidity}%`
-                : currentLang === "en"
+                : language === "en"
                 ? `Humidity: ${humidity}%`
                 : `Вільготнасць: ${humidity}%`}
             </span>

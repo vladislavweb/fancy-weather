@@ -10,9 +10,3 @@ export enum Language {
 }
 
 export type LanguageKeys = keyof typeof Language;
-
-export interface Weather {
-  img: string;
-  description: string;
-  avgTemp: number;
-}

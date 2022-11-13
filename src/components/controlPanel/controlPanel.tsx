@@ -1,36 +1,20 @@
-import React, { useContext } from "react";
-import { WeatherContext } from "../../providers/weather";
+import { useContext } from "react";
+import { BackgroundContext, SettingsContext } from "../../providers";
+import { Language, Scale } from "../../types";
 import Button from "../button";
 import "./controlPanel.css";
 
 const ControlPanel = () => {
-  const { settings, changeSettings } = useContext(WeatherContext);
-  const { currentLang, currentScale } = settings;
-
-  const changeBackground = () => {
-    const body = document.getElementsByTagName("body")[0];
-    const unsplashUrl =
-      "https://api.unsplash.com/photos/random?orientation=landscape&per_page=1&&query=";
-    const unsplashKey = "&client_id=e_Ud2DTXMi01AovDee1hT-um5Qo2a7hdDmNmPxpk1W4";
-    let image = new Image();
-
-    fetch(`${unsplashUrl}${sessionStorage.getItem("photo")}${unsplashKey}`)
-      .then((res) => res.json())
-      .then((res) => {
-        image.src = res.urls.regular;
-        image.onload = () => {
-          body.setAttribute("style", `background-image: url(${res.urls.regular})`);
-        };
-      });
-  };
+  const { updateBackgroundImage } = useContext(BackgroundContext);
+  const { scale, language, changeScale, changeLanguage } = useContext(SettingsContext);
 
   const speakWeather = () => {
     let synth = window.speechSynthesis;
     let utterThis = new SpeechSynthesisUtterance(
-      sessionStorage.getItem(`weather-${currentLang}`) || "",
+      sessionStorage.getItem(`weather-${language}`) || "",
     );
 
-    switch (currentLang) {
+    switch (language) {
       case "ru":
         utterThis.lang = `ru-US`;
         break;
@@ -48,19 +32,16 @@ const ControlPanel = () => {
 
   return (
     <div className="control-panel">
-      <Button className="Change-back" onClick={changeBackground} />
+      <Button className="Change-back" onClick={updateBackgroundImage} />
 
       <Button className="Speak-weather" onClick={speakWeather}>
         " "
       </Button>
 
       <Button
-        className={currentLang === "ru" ? "lang-ru control-current" : "lang-ru"}
+        className={language === Language.RU ? "lang-ru control-current" : "lang-ru"}
         onClick={() => {
-          changeSettings({
-            ...settings,
-            currentLang: "ru",
-          });
+          changeLanguage(Language.RU);
           localStorage.setItem("language", "ru");
         }}
       >
@@ -68,12 +49,9 @@ const ControlPanel = () => {
       </Button>
 
       <Button
-        className={currentLang === "en" ? "lang-en control-current" : "lang-en"}
+        className={language === Language.EN ? "lang-en control-current" : "lang-en"}
         onClick={() => {
-          changeSettings({
-            ...settings,
-            currentLang: "en",
-          });
+          changeLanguage(Language.EN);
           localStorage.setItem("language", "en");
         }}
       >
@@ -81,12 +59,9 @@ const ControlPanel = () => {
       </Button>
 
       <Button
-        className={currentLang === "ua" ? "lang-ua control-current" : "lang-ua"}
+        className={language === Language.UA ? "lang-ua control-current" : "lang-ua"}
         onClick={() => {
-          changeSettings({
-            ...settings,
-            currentLang: "ua",
-          });
+          changeLanguage(Language.UA);
           localStorage.setItem("language", "ua");
         }}
       >
@@ -94,26 +69,20 @@ const ControlPanel = () => {
       </Button>
 
       <Button
-        className={currentScale === "far" ? "scale-far control-current" : "scale-far"}
+        className={scale === Scale.FAR ? "scale-far control-current" : "scale-far"}
         onClick={() => {
-          changeSettings({
-            ...settings,
-            currentScale: "far",
-          });
-          localStorage.setItem("scale", "far");
+          changeScale(Scale.FAR);
+          localStorage.setItem("scale", Scale.FAR);
         }}
       >
         °F
       </Button>
 
       <Button
-        className={currentScale === "cel" ? "scale-cel control-current" : "scale-cel"}
+        className={scale === Scale.CEL ? "scale-cel control-current" : "scale-cel"}
         onClick={() => {
-          changeSettings({
-            ...settings,
-            currentScale: "cel",
-          });
-          localStorage.setItem("scale", "cel");
+          changeScale(Scale.CEL);
+          localStorage.setItem("scale", Scale.CEL);
         }}
       >
         °C

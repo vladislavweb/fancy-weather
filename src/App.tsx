@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Layout, Header, Main } from "./containers";
-import { ConfigProvider } from "./providers";
+import { ConfigProvider, SettingsProvider } from "./providers";
 import { BackgroundProvider } from "./providers/background";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
@@ -29,12 +29,14 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ConfigProvider>
-        <BackgroundProvider>
-          <Layout>
-            <Header />
-            <Main />
-          </Layout>
-        </BackgroundProvider>
+        <SettingsProvider>
+          <BackgroundProvider>
+            <Layout>
+              <Header />
+              <Main />
+            </Layout>
+          </BackgroundProvider>
+        </SettingsProvider>
       </ConfigProvider>
     </QueryClientProvider>
   );

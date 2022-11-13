@@ -4,6 +4,7 @@ import Mark from "./assets/MyLocation.svg";
 import { MainContext } from "../../mainContext";
 import { WeatherContext } from "../../providers/weather";
 import "./map.css";
+import { SettingsContext } from "../../providers";
 
 const mapDescription = {
   ru: {
@@ -29,8 +30,8 @@ const urlGeo = "https://www.mapquestapi.com/geocoding/v1/address?key=";
 
 const Map = (props: any) => {
   const { searchString, changeCity, changeGeo } = useContext(MainContext);
+  const { language } = useContext(SettingsContext);
   const { updateMap, changeUpdateMap, settings } = useContext(WeatherContext);
-  const currentLang = settings.currentLang;
 
   const [latCoord, setLatCoord] = useState<any>({
     gradus: 0,
@@ -179,10 +180,10 @@ const Map = (props: any) => {
         </Marker>
       </ReactMapGL>
       <div className="coordinates">
-        <p className="long">{`${(mapDescription as any)[currentLang].long}: ${longCoord.gradus}° ${
+        <p className="long">{`${(mapDescription as any)[language].long}: ${longCoord.gradus}° ${
           longCoord.minutes
         }' ${longCoord.gradus > 0 ? "E" : "W"}`}</p>
-        <p className="lati">{`${(mapDescription as any)[currentLang].lati}: ${latCoord.gradus}° ${
+        <p className="lati">{`${(mapDescription as any)[language].lati}: ${latCoord.gradus}° ${
           latCoord.minutes
         }' ${latCoord.gradus > 0 ? "N" : "S"}`}</p>
       </div>

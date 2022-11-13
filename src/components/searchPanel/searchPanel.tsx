@@ -1,11 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import Input from "../input";
 import Button from "../button";
 import { MainContext } from "../../mainContext";
 import { WeatherContext } from "../../providers/weather";
+import { SettingsContext } from "../../providers";
+import { Language } from "../../types";
 import "./searchPanel.css";
 
 const SearchPanel = () => {
+  const { language } = useContext(SettingsContext);
   const { searchString, changeSearchString, changeMicrophone } = useContext(MainContext);
   const { getData, changeShowVirtualKeyboard } = useContext(WeatherContext);
   const [str, setStr] = useState("");
@@ -18,7 +21,6 @@ const SearchPanel = () => {
     let input = document.getElementsByClassName("search-input")[0] as any;
     document.getElementsByClassName("SearchPanel")[0].classList.add("speaked");
     changeMicrophone(false);
-    let currentLang = localStorage.getItem("language");
     let SpeechGrammarList =
       (window as any).SpeechGrammarList || (window as any).webkitSpeechGrammarList;
     let SpeechRecognition =
@@ -30,14 +32,14 @@ const SearchPanel = () => {
     recognition.grammars = speechRecognitionList;
     recognition.interimResults = false;
 
-    switch (currentLang) {
-      case "ru":
+    switch (language) {
+      case Language.RU:
         recognition.lang = "ru-US";
         break;
-      case "en":
+      case Language.EN:
         recognition.lang = "en-US";
         break;
-      case "ua":
+      case Language.UA:
         recognition.lang = "ua-US";
         break;
       default:
@@ -101,10 +103,10 @@ const SearchPanel = () => {
     getData();
   };
 
-  useEffect(() => {
-    changeSearchString(str);
-    getData();
-  }, [str]);
+  // useEffect(() => {
+  //   changeSearchString(str);
+  //   getData();
+  // }, [str]);
 
   return (
     <div className="search-panel">

@@ -15,18 +15,31 @@ interface ImageInformation {
 interface BackgroundInterface {
   isLoading: boolean;
   changeImageInformation: (info: ImageInformation) => void;
+  updateBackgroundImage: () => void;
 }
 
 const body = document.querySelector("body");
 
 export const Context = createContext<BackgroundInterface>({
-  changeImageInformation: () => undefined,
   isLoading: false,
+  changeImageInformation: () => undefined,
+  updateBackgroundImage: () => undefined,
 });
 
 export const BackgroundProvider: Props = ({ children }) => {
   const [imageInformation, setImageInformation] = useState<ImageInformation>();
   const { unsplash } = useContext(ConfigContext);
+
+  const setBackgroundImage = (imageData?: BackgroundResponse) => {
+    if (body && imageData) {
+      const image = new Image();
+      image.src = imageData.urls.regular;
+
+      image.onload = () => {
+        body.setAttribute("style", `background-image: url(${imageData.urls.regular})`);
+      };
+    }
+  };
 
   const fetchBackgroundPicture = useCallback(
     async () =>
@@ -42,19 +55,16 @@ export const BackgroundProvider: Props = ({ children }) => {
     queryKey: [],
     queryFn: fetchBackgroundPicture,
     onSuccess: useCallback(() => {
-      if (body && data) {
-        const image = new Image();
-        image.src = data.urls.regular;
-
-        image.onload = () => {
-          body.setAttribute("style", `background-image: url(${data.urls.regular})`);
-        };
-      }
+      setBackgroundImage(data);
     }, [body, imageInformation]),
     enabled: false,
   });
 
   const changeImageInformation = (info: ImageInformation) => setImageInformation(info);
+
+  const updateBackgroundImage = useCallback(() => {
+    setBackgroundImage(data);
+  }, [imageInformation, data]);
 
   useEffect(() => {
     if (imageInformation) {
@@ -63,6 +73,8 @@ export const BackgroundProvider: Props = ({ children }) => {
   }, [imageInformation]);
 
   return (
-    <Context.Provider value={{ isLoading, changeImageInformation }}>{children}</Context.Provider>
+    <Context.Provider value={{ isLoading, changeImageInformation, updateBackgroundImage }}>
+      {children}
+    </Context.Provider>
   );
 };

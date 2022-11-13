@@ -1,22 +1,22 @@
-import React, { FC } from "react";
+import { FC, useContext } from "react";
 import data from "../../../../assets/data";
-import { Language, Scale, Weather } from "../../../../types/props";
+import { SettingsContext } from "../../../../providers";
 import "./weatherCard.css";
 
 interface Props {
-  weather: Weather;
-  scale: Scale;
-  lang: Language;
+  weather: any;
   next: number;
 }
 
-const WeatherCard: FC<Props> = ({ weather, scale, lang, next }) => {
+const WeatherCard: FC<Props> = ({ weather, next }) => {
+  const { scale, language } = useContext(SettingsContext);
+
   return (
     <div className="weather-card">
       <div className="date">
         <span>
-          {data.days[lang][new Date().getDay() + next]} &nbsp;
-          {data.months[lang][new Date().getMonth()]} &nbsp;
+          {data.days[language][new Date().getDay() + next]} &nbsp;
+          {data.months[language][new Date().getMonth()]} &nbsp;
           {new Date().getDate() + next} &nbsp;
           {new Date().getFullYear()}
         </span>
