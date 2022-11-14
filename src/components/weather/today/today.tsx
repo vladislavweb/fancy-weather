@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import data from "../../../assets/data";
 import { SettingsContext } from "../../../providers";
+import { Scale } from "../../../types";
 import "./today.css";
 
 const speedDescription = {
@@ -12,7 +13,7 @@ const speedDescription = {
 const Today = ({ weatherData, location }: any) => {
   const { description, speed, feel, humidity, temp, img } = weatherData;
   const { scale, language } = useContext(SettingsContext);
-  const { city, country } = location;
+  // const { city, country } = location;
 
   const [time, setTime] = useState({
     hours: new Date().getHours(),
@@ -35,8 +36,8 @@ const Today = ({ weatherData, location }: any) => {
   return (
     <div className="today">
       <div className="location">
-        <p className="city">{city}</p>
-        <p className="country">{country}</p>
+        {/* <p className="city">{city}</p> */}
+        {/* <p className="country">{country}</p> */}
       </div>
 
       <div className="date">
@@ -65,7 +66,7 @@ const Today = ({ weatherData, location }: any) => {
 
       <div className="parameters">
         <div className="temperature">
-          {scale === "far" ? (
+          {scale === Scale.FAR ? (
             <div>
               <span>{(temp * 1.8 + 32).toFixed().toString()}</span>
               <span>°F</span>

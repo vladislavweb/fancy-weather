@@ -1,10 +1,12 @@
 import { FC, useContext } from "react";
 import data from "../../../../assets/data";
 import { SettingsContext } from "../../../../providers";
+import { Scale } from "../../../../types";
+import { WeatherThreeDays } from "../../../../utils";
 import "./weatherCard.css";
 
 interface Props {
-  weather: any;
+  weather: WeatherThreeDays;
   next: number;
 }
 
@@ -31,7 +33,7 @@ const WeatherCard: FC<Props> = ({ weather, next }) => {
 
       <div className="temperature">
         <span>
-          {scale === "far"
+          {scale === Scale.FAR
             ? `${(weather.avgTemp * 1.8 + 32).toFixed().toString()} °F`
             : `${weather.avgTemp.toFixed().toString()} °C`}
         </span>

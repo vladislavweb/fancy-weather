@@ -1,45 +1,33 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { WeatherContext } from "../../providers/weather";
 import ThreeDays from "./threeDays";
 import Today from "./today";
 import Loader from "../loader";
+import { MapQuestContext } from "../../providers/mapQuest";
 import "./weather.css";
 
 const Weather = () => {
-  const { getData, fetchDataWeather, location, settings } = useContext(WeatherContext);
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
-
-  const getDataWeather = async (position: any) => {
-    try {
-      await getData(true, position);
-    } catch (error) {
-      throw error;
-    }
-  };
+  const { weather, isLoading, changeCoordinates } = useContext(WeatherContext);
+  const { coordinates } = useContext(MapQuestContext);
 
   useEffect(() => {
-    if (fetchDataWeather) {
-      setIsDataLoaded(true);
+    if (coordinates) {
+      changeCoordinates(coordinates);
     }
-  }, [fetchDataWeather, location, settings]);
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      getDataWeather(position);
-    });
-  }, []);
+  }, [coordinates]);
 
   return (
     <div className="weather">
-      {isDataLoaded ? (
+      {!isLoading ? (
         <React.Fragment>
-          <Today
-            weatherData={fetchDataWeather.weatherNow}
-            location={location}
-            settings={settings}
-          />
+          {weather?.weatherNow && (
+            <Today
+              weatherData={weather?.weatherNow}
+              // location={location}
+            />
+          )}
 
-          <ThreeDays settings={settings} weatherData={fetchDataWeather.weatherThreeDays} />
+          {weather?.weatherThreeDays && <ThreeDays weatherData={weather?.weatherThreeDays} />}
         </React.Fragment>
       ) : (
         <Loader />
