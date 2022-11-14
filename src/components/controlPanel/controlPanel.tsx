@@ -1,12 +1,12 @@
-import { useContext } from "react";
+import { FC, useContext } from "react";
 import classNames from "classnames";
 import { BackgroundContext, SettingsContext } from "../../providers";
 import { Language, Scale } from "../../types";
 import Button from "../button";
 import "./controlPanel.css";
 
-const ControlPanel = () => {
-  const { updateBackgroundImage } = useContext(BackgroundContext);
+const ControlPanel: FC = () => {
+  const { updateBackgroundImage, isLoading: backgroundIsLoading } = useContext(BackgroundContext);
   const { scale, language, changeScale, changeLanguage } = useContext(SettingsContext);
 
   const speakWeather = () => {
@@ -33,7 +33,11 @@ const ControlPanel = () => {
 
   return (
     <div className="control-panel">
-      <Button className="update-background" onClick={updateBackgroundImage} />
+      <Button
+        disabled={backgroundIsLoading}
+        className="update-background"
+        onClick={updateBackgroundImage}
+      />
 
       <Button className="speak-weather" onClick={speakWeather} />
 
@@ -51,7 +55,7 @@ const ControlPanel = () => {
 
       <Button
         className={classNames("lang-en", {
-          "current-control": language === Language.RU,
+          "current-control": language === Language.EN,
         })}
         onClick={() => {
           changeLanguage(Language.EN);
@@ -63,7 +67,7 @@ const ControlPanel = () => {
 
       <Button
         className={classNames("lang-ua", {
-          "current-control": language === Language.RU,
+          "current-control": language === Language.UA,
         })}
         onClick={() => {
           changeLanguage(Language.UA);

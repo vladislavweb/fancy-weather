@@ -6,8 +6,9 @@
   margin: 1%;
   padding: 1%;
   border: 2px solid white;
-  border-radius: 5%;
+  border-radius: 10px;
   text-align: center;
+  backdrop-filter: blur(4px);
 }
 
 .weather-card .date {

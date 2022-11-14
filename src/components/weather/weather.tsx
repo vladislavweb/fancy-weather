@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, FC } from "react";
 import { WeatherContext } from "../../providers/weather";
 import ThreeDays from "./threeDays";
 import Today from "./today";
@@ -6,7 +6,7 @@ import Loader from "../loader";
 import { MapQuestContext } from "../../providers/mapQuest";
 import "./weather.css";
 
-const Weather = () => {
+const Weather: FC = () => {
   const { weather, isLoading, changeCoordinates } = useContext(WeatherContext);
   const { coordinates } = useContext(MapQuestContext);
 
@@ -18,7 +18,7 @@ const Weather = () => {
 
   return (
     <div className="weather">
-      {!isLoading ? (
+      {!isLoading && (
         <React.Fragment>
           {weather?.weatherNow && (
             <Today
@@ -29,9 +29,9 @@ const Weather = () => {
 
           {weather?.weatherThreeDays && <ThreeDays weatherData={weather?.weatherThreeDays} />}
         </React.Fragment>
-      ) : (
-        <Loader />
       )}
+
+      {isLoading && <Loader />}
     </div>
   );
 };

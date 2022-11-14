@@ -1,26 +1,18 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, FC } from "react";
 import Input from "../input";
 import Button from "../button";
-import { MainContext } from "../../mainContext";
-import { WeatherContext } from "../../providers/weather";
 import { SettingsContext } from "../../providers";
 import { Language } from "../../types";
-import "./searchPanel.css";
+import "./searchPanel.scss";
 
-const SearchPanel = () => {
+const SearchPanel: FC = () => {
   const { language } = useContext(SettingsContext);
-  const { searchString, changeSearchString, changeMicrophone } = useContext(MainContext);
-  const { getData, changeShowVirtualKeyboard } = useContext(WeatherContext);
-  const [str, setStr] = useState("");
-
-  useEffect(() => {
-    changeMicrophone(false);
-  }, [changeMicrophone]);
+  // const [str, setStr] = useState("");
 
   const speak = () => {
     let input = document.getElementsByClassName("search-input")[0] as any;
     document.getElementsByClassName("SearchPanel")[0].classList.add("speaked");
-    changeMicrophone(false);
+    // changeMicrophone(false);
     let SpeechGrammarList =
       (window as any).SpeechGrammarList || (window as any).webkitSpeechGrammarList;
     let SpeechRecognition =
@@ -79,8 +71,8 @@ const SearchPanel = () => {
         }
         synth.speak(utterThis);
       } else {
-        changeSearchString(command);
-        setStr(input.value);
+        // changeSearchString(command);
+        // setStr(input.value);
       }
     };
 
@@ -91,7 +83,7 @@ const SearchPanel = () => {
 
     recognition.onerror = function (event: any) {
       document.getElementsByClassName("SearchPanel")[0].classList.remove("speaked");
-      changeMicrophone(true);
+      // changeMicrophone(true);
       console.log(event);
     };
 
@@ -100,23 +92,16 @@ const SearchPanel = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    getData();
   };
-
-  // useEffect(() => {
-  //   changeSearchString(str);
-  //   getData();
-  // }, [str]);
 
   return (
     <div className="search-panel">
-      <form onSubmit={handleSubmit}>
-        <Input value={searchString} onChange={(e) => changeSearchString(e.target.value)} />
-        <Button onClick={speak} className="speak" />
+      <form className="search-form" onSubmit={handleSubmit}>
+        <Input className="search-input" />
 
-        <Button onClick={changeShowVirtualKeyboard} className="toggle-keyboard" />
+        <Button className="speak-button" onClick={speak} />
 
-        <Button type="submit" onClick={() => console.log("submit")} className="submit-form" />
+        <Button className="search-button" type="submit" />
       </form>
     </div>
   );

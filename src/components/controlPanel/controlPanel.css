@@ -27,7 +27,7 @@
   border-radius: 5px 0 0 5px;
 }
 
-.lang-be {
+.lang-ua {
   border-radius: 0 5px 5px 0;
 }
 
@@ -63,6 +63,5 @@
 }
 
 .current-control {
-  background-color: gray;
   color: cyan;
 }
