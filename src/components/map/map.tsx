@@ -7,7 +7,7 @@ import { TypeRequest } from "../../types";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
 
-import Mark from "./assets/MyLocation.svg";
+import Mark from "./assets/my-location.svg";
 
 const mapDescription = {
   ru: {
