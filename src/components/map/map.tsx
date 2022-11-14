@@ -1,10 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, FC } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
-import Mark from "./assets/MyLocation.svg";
-import { MainContext } from "../../mainContext";
-import { WeatherContext } from "../../providers/weather";
+import { ConfigContext, SettingsContext } from "../../providers";
+import { MapQuestContext } from "../../providers/mapQuest";
+import { TypeRequest } from "../../types";
+
+import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
-import { SettingsContext } from "../../providers";
+
+import Mark from "./assets/MyLocation.svg";
 
 const mapDescription = {
   ru: {
@@ -21,24 +24,17 @@ const mapDescription = {
   },
 };
 
-let isFound = true;
-const geoReverse = "https://open.mapquestapi.com/geocoding/v1/reverse?key=";
-const tokenMap =
-  "pk.eyJ1IjoiaGltaW1ldHN1IiwiYSI6ImNrYWNtZ3VheDBuc3gyc284djVrOW50MnUifQ.CKQQ3zFcMaaQWHB-vZ8KLQ";
-const tokenGeo = "BtHcuGO81EUArGaV164zvKD5sTuERK2O";
-const urlGeo = "https://www.mapquestapi.com/geocoding/v1/address?key=";
-
-const Map = (props: any) => {
-  const { searchString, changeCity, changeGeo } = useContext(MainContext);
+const Map: FC = () => {
+  const { mapBox } = useContext(ConfigContext);
+  const { changeMapQuestData } = useContext(MapQuestContext);
   const { language } = useContext(SettingsContext);
-  const { updateMap, changeUpdateMap, settings } = useContext(WeatherContext);
 
-  const [latCoord, setLatCoord] = useState<any>({
+  const [latCoord, setLatCoord] = useState({
     gradus: 0,
     minutes: 0,
   });
 
-  const [longCoord, setLongCoord] = useState<any>({
+  const [longCoord, setLongCoord] = useState({
     gradus: 0,
     minutes: 0,
   });
@@ -53,136 +49,66 @@ const Map = (props: any) => {
     },
   });
 
-  const [point, setPoint] = useState({
-    longitude: 0,
-    latitude: 0,
-  });
-
   useEffect(() => {
-    if (isFound) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          fetch(
-            `${geoReverse}${tokenGeo}&location=${position.coords.latitude},${position.coords.longitude}`,
-          )
-            .then((data) => data.json())
-            .then((data) => {
-              changeCity(data.results[0].locations[0].adminArea5);
-            });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        changeMapQuestData({
+          typeRequest: TypeRequest.reverse,
+          address: "",
+          searchString: `${position.coords.latitude},${position.coords.longitude}`,
+        });
 
-          changeGeo(false);
-
-          setMap({
-            viewport: {
-              width: "400px",
-              height: "400px",
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              zoom: 11,
-            },
-          });
-
-          setPoint({
+        setMap({
+          viewport: {
+            width: "400px",
+            height: "400px",
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-          });
+            zoom: 11,
+          },
+        });
 
-          setLatCoord({
-            gradus: position.coords.latitude.toFixed(),
-            minutes: (
-              (position.coords.latitude - Math.floor(position.coords.latitude)) *
-              60
-            ).toFixed(),
-          });
+        setLatCoord({
+          gradus: Number(position.coords.latitude.toFixed()),
+          minutes: Number(
+            ((position.coords.latitude - Math.floor(position.coords.latitude)) * 60).toFixed(),
+          ),
+        });
 
-          setLongCoord({
-            gradus: position.coords.longitude.toFixed(),
-            minutes: (
-              (position.coords.longitude - Math.floor(position.coords.longitude)) *
-              60
-            ).toFixed(),
-          });
-        },
-        (error) => {
-          console.log(error);
-        },
-        {
-          enableHighAccuracy: true,
-        },
-      );
-      isFound = false;
-    }
-  });
-
-  useEffect(() => {
-    if (updateMap) {
-      if (searchString.length > 1) {
-        fetch(`${urlGeo}${tokenGeo}&location=${searchString}`)
-          .then((data) => data.json())
-          .then((data) => {
-            if (data.results[0].locations.length > 0) {
-              if (data.results[0].locations[0].adminArea5) {
-                setLatCoord({
-                  gradus: data.results[0].locations[0].latLng.lat.toFixed(),
-                  minutes: (
-                    (data.results[0].locations[0].latLng.lat -
-                      Math.floor(data.results[0].locations[0].latLng.lat)) *
-                    60
-                  ).toFixed(),
-                });
-
-                setLongCoord({
-                  gradus: data.results[0].locations[0].latLng.lng.toFixed(),
-                  minutes: (
-                    (data.results[0].locations[0].latLng.lng -
-                      Math.floor(data.results[0].locations[0].latLng.lng)) *
-                    60
-                  ).toFixed(),
-                });
-
-                setMap({
-                  viewport: {
-                    width: "400px",
-                    height: "400px",
-                    latitude: data.results[0].locations[0].latLng.lat,
-                    longitude: data.results[0].locations[0].latLng.lng,
-                    zoom: 11,
-                  },
-                });
-
-                setPoint({
-                  latitude: data.results[0].locations[0].latLng.lat,
-                  longitude: data.results[0].locations[0].latLng.lng,
-                });
-              }
-            }
-          });
-        changeUpdateMap(false);
-      }
-    }
-  }, [updateMap]);
+        setLongCoord({
+          gradus: Number(position.coords.longitude.toFixed()),
+          minutes: Number(
+            ((position.coords.longitude - Math.floor(position.coords.longitude)) * 60).toFixed(),
+          ),
+        });
+      },
+      (error) => {
+        console.error(`Navigation Geolocation: ${error.code}, ${error.message}`);
+      },
+      {
+        enableHighAccuracy: true,
+      },
+    );
+  }, []);
 
   return (
     <div className="Map-wrapper">
       <ReactMapGL
         {...map.viewport}
-        // onViewportChange={(viewport: any) => setMap({ viewport })}
-        // mapboxApiAccessToken={tokenMap}
-        mapboxAccessToken={tokenMap}
+        mapboxAccessToken={mapBox.token}
         mapStyle="mapbox://styles/mapbox/streets-v11"
+        style={{ height: "400px", width: "400px" }}
       >
-        <Marker
-          // mapboxApiAccessToken={tokenMap}
-          longitude={point.longitude}
-          latitude={point.latitude}
-        >
+        <Marker longitude={map.viewport.longitude} latitude={map.viewport.latitude}>
           <img src={Mark} alt="Marker" height="40px" width="40px" />
         </Marker>
       </ReactMapGL>
+
       <div className="coordinates">
         <p className="long">{`${(mapDescription as any)[language].long}: ${longCoord.gradus}° ${
           longCoord.minutes
         }' ${longCoord.gradus > 0 ? "E" : "W"}`}</p>
+
         <p className="lati">{`${(mapDescription as any)[language].lati}: ${latCoord.gradus}° ${
           latCoord.minutes
         }' ${latCoord.gradus > 0 ? "N" : "S"}`}</p>
