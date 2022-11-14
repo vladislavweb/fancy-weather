@@ -1,0 +1,93 @@
+import { createContext, FC, ReactNode, useCallback, useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { MapQuestResponse, TypeRequest } from "../../types";
+import { ConfigContext } from "../config";
+import { useQuery } from "@tanstack/react-query";
+
+type Props = FC<{ children?: ReactNode }>;
+
+type Coordinates = {
+  lat: number;
+  long: number;
+};
+
+interface MapQuestData {
+  typeRequest: TypeRequest;
+  address: string;
+  searchString: string;
+}
+
+interface MapQuestProviderInterface {
+  isLoading: boolean;
+  mapQuestData?: MapQuestData;
+  places?: MapQuestResponse;
+  coordinates?: Coordinates;
+  changeMapQuestData: (data: MapQuestData) => void;
+}
+
+export const Context = createContext<MapQuestProviderInterface>({
+  isLoading: false,
+  changeMapQuestData: () => undefined,
+});
+
+export const MapQuestProvider: Props = ({ children }) => {
+  const { mapQuestApi } = useContext(ConfigContext);
+  const [mapQuestData, setMapQuestData] = useState<MapQuestData>();
+  const [places, setPlaces] = useState<MapQuestResponse>();
+  const [coordinates, setCoordinates] = useState<Coordinates>();
+
+  const fetchMapQuestData = useCallback(async () => {
+    const type =
+      mapQuestData?.typeRequest === TypeRequest.geocoding
+        ? TypeRequest.geocoding
+        : TypeRequest.reverse;
+
+    const location = mapQuestData
+      ? mapQuestData.typeRequest === TypeRequest.geocoding
+        ? mapQuestData.address
+        : mapQuestData.searchString
+      : "";
+
+    const url = `${mapQuestApi.url}${type}?key=${mapQuestApi.token}&location=${location}`;
+
+    return await axios.get<MapQuestResponse>(url).then((res) => res.data);
+  }, [mapQuestData]);
+
+  const { refetch, isLoading, data } = useQuery({
+    queryKey: [],
+    queryFn: fetchMapQuestData,
+    onSuccess: useCallback(() => {
+      if (data?.results.length) {
+        if (data.results[0].locations.length) {
+          setCoordinates({
+            lat: data.results[0].locations[0].latLng.lat,
+            long: data.results[0].locations[0].latLng.lng,
+          });
+        }
+
+        setPlaces(data);
+      }
+    }, [mapQuestData]),
+    enabled: false,
+  });
+
+  const changeMapQuestData = (data: MapQuestData) => setMapQuestData(data);
+
+  useEffect(() => {
+    refetch();
+  }, [mapQuestData]);
+
+  return (
+    <Context.Provider
+      value={{
+        isLoading,
+        mapQuestData,
+        places,
+        coordinates,
+        changeMapQuestData,
+      }}
+    >
+      {children}
+    </Context.Provider>
+  );
+};

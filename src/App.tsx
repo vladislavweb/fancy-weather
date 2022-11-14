@@ -3,6 +3,7 @@ import { Layout, Header, Main } from "./containers";
 import { ConfigProvider, SettingsProvider } from "./providers";
 import { BackgroundProvider } from "./providers/background";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { MapQuestProvider } from "./providers/mapQuest";
 
 const queryClient = new QueryClient();
 
@@ -30,12 +31,14 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <ConfigProvider>
         <SettingsProvider>
-          <BackgroundProvider>
-            <Layout>
-              <Header />
-              <Main />
-            </Layout>
-          </BackgroundProvider>
+          <MapQuestProvider>
+            <BackgroundProvider>
+              <Layout>
+                <Header />
+                <Main />
+              </Layout>
+            </BackgroundProvider>
+          </MapQuestProvider>
         </SettingsProvider>
       </ConfigProvider>
     </QueryClientProvider>

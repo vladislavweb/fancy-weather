@@ -1,4 +1,5 @@
 import Weather from "../../components/weather";
+import Map from "../../components/map";
 import "./main.css";
 
 const Main = () => {
