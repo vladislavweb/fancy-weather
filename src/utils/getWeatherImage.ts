@@ -1,4 +1,4 @@
-export const getWeatherImage = (day: "n" | "d", weather: string) => {
+export const getWeatherImage = (day: string, weather: string) => {
   if (day === "n") {
     switch (weather) {
       case "01":
