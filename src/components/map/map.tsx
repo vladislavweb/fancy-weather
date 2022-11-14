@@ -26,7 +26,7 @@ const mapDescription = {
 
 const Map: FC = () => {
   const { mapBox } = useContext(ConfigContext);
-  const { changeMapQuestData } = useContext(MapQuestContext);
+  const { changeMapQuestData, changeCoordinates } = useContext(MapQuestContext);
   const { language } = useContext(SettingsContext);
 
   const [latCoord, setLatCoord] = useState({
@@ -57,6 +57,8 @@ const Map: FC = () => {
           address: "",
           searchString: `${position.coords.latitude},${position.coords.longitude}`,
         });
+
+        changeCoordinates({ lat: position.coords.latitude, long: position.coords.longitude });
 
         setMap({
           viewport: {

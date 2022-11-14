@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 
 type Props = FC<{ children?: ReactNode }>;
 
-type Coordinates = {
+export type Coordinates = {
   lat: number;
   long: number;
 };
@@ -23,11 +23,13 @@ interface MapQuestProviderInterface {
   places?: MapQuestResponse;
   coordinates?: Coordinates;
   changeMapQuestData: (data: MapQuestData) => void;
+  changeCoordinates: (coordinates: Coordinates) => void;
 }
 
 export const Context = createContext<MapQuestProviderInterface>({
   isLoading: false,
   changeMapQuestData: () => undefined,
+  changeCoordinates: () => undefined,
 });
 
 export const MapQuestProvider: Props = ({ children }) => {
@@ -57,7 +59,7 @@ export const MapQuestProvider: Props = ({ children }) => {
     queryKey: [],
     queryFn: fetchMapQuestData,
     onSuccess: useCallback(() => {
-      if (data?.results.length) {
+      if (data?.results && data.results.length) {
         if (data.results[0].locations.length) {
           setCoordinates({
             lat: data.results[0].locations[0].latLng.lat,
@@ -72,9 +74,12 @@ export const MapQuestProvider: Props = ({ children }) => {
   });
 
   const changeMapQuestData = (data: MapQuestData) => setMapQuestData(data);
+  const changeCoordinates = (coordinates: Coordinates) => setCoordinates(coordinates);
 
   useEffect(() => {
-    refetch();
+    if (mapQuestData) {
+      refetch();
+    }
   }, [mapQuestData]);
 
   return (
@@ -85,6 +90,7 @@ export const MapQuestProvider: Props = ({ children }) => {
         places,
         coordinates,
         changeMapQuestData,
+        changeCoordinates,
       }}
     >
       {children}
