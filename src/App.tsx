@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Layout, Header, Main } from "./containers";
-import { ConfigProvider, SettingsProvider } from "./providers";
+import { ConfigProvider, SettingsProvider, WeatherProvider } from "./providers";
 import { BackgroundProvider } from "./providers/background";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { MapQuestProvider } from "./providers/mapQuest";
@@ -32,12 +32,14 @@ const App = () => {
       <ConfigProvider>
         <SettingsProvider>
           <MapQuestProvider>
-            <BackgroundProvider>
-              <Layout>
-                <Header />
-                <Main />
-              </Layout>
-            </BackgroundProvider>
+            <WeatherProvider>
+              <BackgroundProvider>
+                <Layout>
+                  <Header />
+                  <Main />
+                </Layout>
+              </BackgroundProvider>
+            </WeatherProvider>
           </MapQuestProvider>
         </SettingsProvider>
       </ConfigProvider>

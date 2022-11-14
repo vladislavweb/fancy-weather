@@ -1,3 +1,1 @@
-import React from "react";
-
-export const WeatherContext = React.createContext<any>({});
+export { WeatherProvider, Context as WeatherContext } from "./weather";
