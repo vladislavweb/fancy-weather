@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import classNames from "classnames";
 import { BackgroundContext, SettingsContext } from "../../providers";
 import { Language, Scale } from "../../types";
 import Button from "../button";
@@ -32,14 +33,14 @@ const ControlPanel = () => {
 
   return (
     <div className="control-panel">
-      <Button className="Change-back" onClick={updateBackgroundImage} />
+      <Button className="update-background" onClick={updateBackgroundImage} />
 
-      <Button className="Speak-weather" onClick={speakWeather}>
-        " "
-      </Button>
+      <Button className="speak-weather" onClick={speakWeather} />
 
       <Button
-        className={language === Language.RU ? "lang-ru control-current" : "lang-ru"}
+        className={classNames("lang-ru", {
+          "current-control": language === Language.RU,
+        })}
         onClick={() => {
           changeLanguage(Language.RU);
           localStorage.setItem("language", "ru");
@@ -49,7 +50,9 @@ const ControlPanel = () => {
       </Button>
 
       <Button
-        className={language === Language.EN ? "lang-en control-current" : "lang-en"}
+        className={classNames("lang-en", {
+          "current-control": language === Language.RU,
+        })}
         onClick={() => {
           changeLanguage(Language.EN);
           localStorage.setItem("language", "en");
@@ -59,7 +62,9 @@ const ControlPanel = () => {
       </Button>
 
       <Button
-        className={language === Language.UA ? "lang-ua control-current" : "lang-ua"}
+        className={classNames("lang-ua", {
+          "current-control": language === Language.RU,
+        })}
         onClick={() => {
           changeLanguage(Language.UA);
           localStorage.setItem("language", "ua");
@@ -69,7 +74,9 @@ const ControlPanel = () => {
       </Button>
 
       <Button
-        className={scale === Scale.FAR ? "scale-far control-current" : "scale-far"}
+        className={classNames("scale-far", {
+          "current-control": scale === Scale.FAR,
+        })}
         onClick={() => {
           changeScale(Scale.FAR);
           localStorage.setItem("scale", Scale.FAR);
@@ -79,7 +86,9 @@ const ControlPanel = () => {
       </Button>
 
       <Button
-        className={scale === Scale.CEL ? "scale-cel control-current" : "scale-cel"}
+        className={classNames("scale-cel", {
+          "current-control": scale === Scale.CEL,
+        })}
         onClick={() => {
           changeScale(Scale.CEL);
           localStorage.setItem("scale", Scale.CEL);
