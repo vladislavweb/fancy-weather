@@ -51,20 +51,20 @@ export const BackgroundProvider: Props = ({ children }) => {
     [imageInformation],
   );
 
-  const { refetch, isLoading, data } = useQuery({
-    queryKey: [],
+  const { refetch, isFetching } = useQuery({
+    queryKey: ["fetchBackgroundPicture"],
     queryFn: fetchBackgroundPicture,
-    onSuccess: useCallback(() => {
-      setBackgroundImage(data);
-    }, [body, imageInformation]),
+    onSuccess: (res) => {
+      setBackgroundImage(res);
+    },
     enabled: false,
   });
 
   const changeImageInformation = (info: ImageInformation) => setImageInformation(info);
 
-  const updateBackgroundImage = useCallback(() => {
-    setBackgroundImage(data);
-  }, [imageInformation, data]);
+  const updateBackgroundImage = useCallback(async () => {
+    await refetch();
+  }, [imageInformation]);
 
   useEffect(() => {
     if (imageInformation) {
@@ -73,7 +73,9 @@ export const BackgroundProvider: Props = ({ children }) => {
   }, [imageInformation]);
 
   return (
-    <Context.Provider value={{ isLoading, changeImageInformation, updateBackgroundImage }}>
+    <Context.Provider
+      value={{ isLoading: isFetching, changeImageInformation, updateBackgroundImage }}
+    >
       {children}
     </Context.Provider>
   );

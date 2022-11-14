@@ -29,19 +29,19 @@ export const WeatherProvider: Props = ({ children }) => {
   const fetchWeather = useCallback(async () => {
     const { url, key } = openWeatherMap;
 
-    const URL = `${url}lat=${coordinates?.lat}&lon=${coordinates?.long}&appid=${key}&lang=${language}&cnt=32&units=metric`;
+    const weatherUrl = `${url}lat=${coordinates?.lat}&lon=${coordinates?.long}&appid=${key}&lang=${language}&cnt=32&units=metric`;
 
-    return await axios.get<WeatherResponse>(URL).then((res) => res.data);
+    return await axios.get<WeatherResponse>(weatherUrl).then((res) => res.data);
   }, [coordinates]);
 
-  const { refetch, isLoading, data } = useQuery({
-    queryKey: [],
+  const { refetch, isFetching } = useQuery({
+    queryKey: ["fetchWeather"],
+    staleTime: 0,
+    cacheTime: 0,
     queryFn: fetchWeather,
-    onSuccess: useCallback(() => {
-      if (data) {
-        setWeather(weatherMapper(data));
-      }
-    }, [coordinates]),
+    onSuccess: (res) => {
+      setWeather(weatherMapper(res));
+    },
     enabled: false,
   });
 
@@ -54,7 +54,7 @@ export const WeatherProvider: Props = ({ children }) => {
   }, [coordinates]);
 
   return (
-    <Context.Provider value={{ isLoading, weather, changeCoordinates }}>
+    <Context.Provider value={{ isLoading: isFetching, weather, changeCoordinates }}>
       {children}
     </Context.Provider>
   );

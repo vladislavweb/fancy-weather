@@ -55,21 +55,19 @@ export const MapQuestProvider: Props = ({ children }) => {
     return await axios.get<MapQuestResponse>(url).then((res) => res.data);
   }, [mapQuestData]);
 
-  const { refetch, isLoading, data } = useQuery({
-    queryKey: [],
+  const { refetch, isFetching } = useQuery({
+    queryKey: ["fetchMapQuestData"],
     queryFn: fetchMapQuestData,
-    onSuccess: useCallback(() => {
-      if (data?.results && data.results.length) {
-        if (data.results[0].locations.length) {
-          setCoordinates({
-            lat: data.results[0].locations[0].latLng.lat,
-            long: data.results[0].locations[0].latLng.lng,
-          });
-        }
-
-        setPlaces(data);
+    onSuccess: (res) => {
+      if (res.results[0].locations.length) {
+        setCoordinates({
+          lat: res.results[0].locations[0].latLng.lat,
+          long: res.results[0].locations[0].latLng.lng,
+        });
       }
-    }, [mapQuestData]),
+
+      setPlaces(res);
+    },
     enabled: false,
   });
 
@@ -85,7 +83,7 @@ export const MapQuestProvider: Props = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        isLoading,
+        isLoading: isFetching,
         mapQuestData,
         places,
         coordinates,
