@@ -56,7 +56,8 @@ export const MapQuestProvider: Props = ({ children }) => {
   }, [mapQuestData]);
 
   const { refetch, isFetching } = useQuery({
-    queryKey: ["fetchMapQuestData"],
+    queryKey: ["fetchMapQuestData", ...Object.values(mapQuestData || {})],
+    staleTime: Infinity,
     queryFn: fetchMapQuestData,
     onSuccess: (res) => {
       if (res.results[0].locations.length) {
