@@ -1,20 +1,12 @@
-import React, { useEffect, useContext, FC } from "react";
+import React, { useContext, FC } from "react";
 import { WeatherContext } from "../../providers/weather";
 import ThreeDays from "./threeDays";
 import Today from "./today";
 import Loader from "../loader";
-import { MapQuestContext } from "../../providers/mapQuest";
 import "./weather.css";
 
 const Weather: FC = () => {
-  const { weather, isLoading, changeCoordinates } = useContext(WeatherContext);
-  const { coordinates } = useContext(MapQuestContext);
-
-  useEffect(() => {
-    if (coordinates) {
-      changeCoordinates(coordinates);
-    }
-  }, [coordinates]);
+  const { weather, isLoading } = useContext(WeatherContext);
 
   return (
     <div className="weather">

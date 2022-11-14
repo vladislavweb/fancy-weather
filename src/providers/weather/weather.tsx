@@ -3,7 +3,7 @@ import axios from "axios";
 import { ConfigContext } from "../config";
 import { WeatherResponse } from "../../types";
 import { useQuery } from "@tanstack/react-query";
-import { Coordinates } from "../mapQuest";
+import { MapQuestContext } from "../mapQuest";
 import { SettingsContext } from "../settings";
 import { WeatherMap, weatherMapper } from "../../utils";
 
@@ -12,19 +12,17 @@ type Props = FC<{ children?: ReactNode }>;
 interface WeatherApiProvider {
   isLoading: boolean;
   weather?: WeatherMap;
-  changeCoordinates: (coordinates: Coordinates) => void;
 }
 
 export const Context = createContext<WeatherApiProvider>({
   isLoading: false,
-  changeCoordinates: () => undefined,
 });
 
 export const WeatherProvider: Props = ({ children }) => {
   const { openWeatherMap } = useContext(ConfigContext);
   const { language } = useContext(SettingsContext);
+  const { coordinates } = useContext(MapQuestContext);
   const [weather, setWeather] = useState<WeatherMap>();
-  const [coordinates, setCoordinates] = useState<Coordinates>();
 
   const fetchWeather = useCallback(async () => {
     const { url, key } = openWeatherMap;
@@ -45,17 +43,11 @@ export const WeatherProvider: Props = ({ children }) => {
     enabled: false,
   });
 
-  const changeCoordinates = (coordinates: Coordinates) => setCoordinates(coordinates);
-
   useEffect(() => {
     if (coordinates) {
       refetch();
     }
   }, [coordinates]);
 
-  return (
-    <Context.Provider value={{ isLoading: isFetching, weather, changeCoordinates }}>
-      {children}
-    </Context.Provider>
-  );
+  return <Context.Provider value={{ isLoading: isFetching, weather }}>{children}</Context.Provider>;
 };

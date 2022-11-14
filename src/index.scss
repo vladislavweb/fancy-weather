@@ -6,6 +6,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url("./assets/images/default-background.jpg");
   background-size: cover;
+  backdrop-filter: blur(3px);
 }
 
 code {
