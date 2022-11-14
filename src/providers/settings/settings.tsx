@@ -1,4 +1,5 @@
 import { createContext, FC, ReactNode, useState } from "react";
+import { Store } from "../../service";
 import { Language, Scale } from "../../types";
 
 type Props = FC<{ children?: ReactNode }>;
@@ -18,13 +19,21 @@ export const Context = createContext<SettingsProviderInterface>({
 });
 
 export const SettingsProvider: Props = ({ children }) => {
-  const [scale, setScale] = useState((localStorage.getItem("scale") as Scale) || Scale.FAR);
-  const [language, setLanguage] = useState(
-    (localStorage.getItem("language") as Language) || Language.EN,
-  );
+  const localScale = new Store<Scale>("scale");
+  const localLanguage = new Store<Language>("language");
 
-  const changeScale = (scale: Scale) => setScale(scale);
-  const changeLanguage = (language: Language) => setLanguage(language);
+  const [scale, setScale] = useState(localScale.read() || Scale.FAR);
+  const [language, setLanguage] = useState(localLanguage.read() || Language.EN);
+
+  const changeScale = (scale: Scale) => {
+    localScale.write(scale);
+    setScale(scale);
+  };
+
+  const changeLanguage = (language: Language) => {
+    localLanguage.write(language);
+    setLanguage(language);
+  };
 
   return (
     <Context.Provider value={{ scale, language, changeScale, changeLanguage }}>

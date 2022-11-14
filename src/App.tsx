@@ -1,30 +1,26 @@
-import { useState } from "react";
-import { Layout, Header, Main } from "./containers";
-import { ConfigProvider, SettingsProvider, WeatherProvider } from "./providers";
-import { BackgroundProvider } from "./providers/background";
+import { FC } from "react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { MapQuestProvider } from "./providers/mapQuest";
+import { Layout, Header, Main } from "./containers";
+import {
+  BackgroundProvider,
+  ConfigProvider,
+  MapQuestProvider,
+  SettingsProvider,
+  WeatherProvider,
+} from "./providers";
+import { Store } from "./service";
+import { Language, Scale } from "./types";
 
 const queryClient = new QueryClient();
 
-const App = () => {
-  const [city, setCity] = useState("Loading...");
-  const [searchString, setSearchString] = useState("");
-  const [isGeo, setIsGeo] = useState(true);
-  const [isMicrophone, setIsMicrophone] = useState(true);
-  const [request, setRequest] = useState(false);
+const App: FC = () => {
+  const localTouched = new Store<boolean>("touched");
 
-  const changeRequest = (value: any) => setRequest(value);
-  const changeGeo = (value: any) => setIsGeo(value);
-  const changeMicrophone = (value: any) => setIsMicrophone(value);
-  const changeSearchString = (value: any) => setSearchString(value);
-  const changeCity = (value: any) => setCity(value);
-
-  if (!localStorage.getItem("touched")) {
-    localStorage.setItem("volume", "1");
-    localStorage.setItem("language", "en");
-    localStorage.setItem("scale", "cel");
-    localStorage.setItem("touched", "true");
+  if (!localTouched.read()) {
+    localTouched.write(true);
+    new Store<Language>("language").write(Language.EN);
+    new Store<Scale>("scale").write(Scale.CEL);
+    new Store<number>("volume").write(1);
   }
 
   return (

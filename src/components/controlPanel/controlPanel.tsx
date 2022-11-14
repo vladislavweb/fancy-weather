@@ -47,7 +47,6 @@ const ControlPanel: FC = () => {
         })}
         onClick={() => {
           changeLanguage(Language.RU);
-          localStorage.setItem("language", "ru");
         }}
       >
         RU
@@ -59,7 +58,6 @@ const ControlPanel: FC = () => {
         })}
         onClick={() => {
           changeLanguage(Language.EN);
-          localStorage.setItem("language", "en");
         }}
       >
         EN
@@ -71,7 +69,6 @@ const ControlPanel: FC = () => {
         })}
         onClick={() => {
           changeLanguage(Language.UA);
-          localStorage.setItem("language", "ua");
         }}
       >
         UA
@@ -83,7 +80,6 @@ const ControlPanel: FC = () => {
         })}
         onClick={() => {
           changeScale(Scale.FAR);
-          localStorage.setItem("scale", Scale.FAR);
         }}
       >
         °F
@@ -95,7 +91,6 @@ const ControlPanel: FC = () => {
         })}
         onClick={() => {
           changeScale(Scale.CEL);
-          localStorage.setItem("scale", Scale.CEL);
         }}
       >
         °C
