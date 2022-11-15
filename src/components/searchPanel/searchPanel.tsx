@@ -33,16 +33,21 @@ const SearchPanel: FC = () => {
     recognition.interimResults = false;
 
     switch (language) {
-      case Language.RU:
+      case Language.RU: {
         recognition.lang = "ru-US";
+
         break;
-      case Language.EN:
-        recognition.lang = "en-US";
-        break;
-      case Language.UA:
+      }
+      case Language.UA: {
         recognition.lang = "ua-US";
+
         break;
-      default:
+      }
+      default: {
+        recognition.lang = "en-US";
+
+        break;
+      }
     }
 
     recognition.onresult = function (event) {
@@ -50,41 +55,65 @@ const SearchPanel: FC = () => {
       const last = event.results.length - 1;
       const command = event.results[last][0].transcript.toLowerCase();
 
-      if (command === "louder" || command === "громче" || command === "мацней") {
-        if (currentVolume < 1) {
-          localVolume.write(Number((currentVolume / 1 + 0.1).toFixed(1)));
-        }
-      } else if (command === "quieter" || command === "тише" || command === "ціхі") {
-        if (currentVolume >= 0) {
-          localVolume.write(Number((currentVolume / 1 - 0.1).toFixed(1)));
-        }
-      } else if (command === "weather" || command === "погода" || command === "надвор'е") {
-        const synth = window.speechSynthesis;
-        const utterThis = new SpeechSynthesisUtterance(localWeather.read() || "");
-        utterThis.volume = localVolume.read() || 1;
+      switch (command) {
+        case "louder":
+        case "громче":
+        case "мацней": {
+          if (currentVolume < 1) {
+            localVolume.write(Number((currentVolume / 1 + 0.1).toFixed(1)));
+          }
 
-        switch (language) {
-          case "ru":
-            utterThis.lang = `ru-US`;
-            break;
-          case "en":
-            utterThis.lang = `en-US`;
-            break;
-          case "ua":
-            utterThis.lang = `ua-US`;
-            break;
-          default:
+          break;
         }
+        case "quieter":
+        case "тише":
+        case "ціхі": {
+          if (currentVolume >= 0) {
+            localVolume.write(Number((currentVolume / 1 - 0.1).toFixed(1)));
+          }
 
-        synth.speak(utterThis);
-      } else {
-        if (command) {
-          setSearchString(command);
+          break;
+        }
+        case "weather":
+        case "погода":
+        case "надвор'е": {
+          const synth = window.speechSynthesis;
+          const utterThis = new SpeechSynthesisUtterance(localWeather.read() || "");
+          utterThis.volume = localVolume.read() || 1;
 
-          changeMapQuestData({
-            typeRequest: TypeRequest.geocoding,
-            searchString: command,
-          });
+          switch (language) {
+            case "ru": {
+              utterThis.lang = `ru-US`;
+
+              break;
+            }
+            case "ua": {
+              utterThis.lang = `ua-US`;
+
+              break;
+            }
+            default: {
+              utterThis.lang = `en-US`;
+
+              break;
+            }
+          }
+
+          synth.speak(utterThis);
+
+          break;
+        }
+        default: {
+          if (command) {
+            setSearchString(command);
+
+            changeMapQuestData({
+              typeRequest: TypeRequest.geocoding,
+              searchString: command,
+            });
+          }
+
+          break;
         }
       }
     };
