@@ -3,17 +3,17 @@ import classNames from "classnames";
 import { BackgroundContext, SettingsContext } from "../../providers";
 import { Language, Scale } from "../../types";
 import Button from "../button";
+import { Store } from "../../service";
 import "./controlPanel.css";
 
 const ControlPanel: FC = () => {
   const { updateBackgroundImage, isLoading: backgroundIsLoading } = useContext(BackgroundContext);
   const { scale, language, changeScale, changeLanguage } = useContext(SettingsContext);
+  const localWeather = new Store<string>("weather");
 
   const speakWeather = () => {
-    let synth = window.speechSynthesis;
-    let utterThis = new SpeechSynthesisUtterance(
-      sessionStorage.getItem(`weather-${language}`) || "",
-    );
+    const synth = window.speechSynthesis;
+    const utterThis = new SpeechSynthesisUtterance(localWeather.read() || "");
 
     switch (language) {
       case "ru":
@@ -34,8 +34,8 @@ const ControlPanel: FC = () => {
   return (
     <div className="control-panel">
       <Button
-        disabled={backgroundIsLoading}
         className="update-background"
+        disabled={backgroundIsLoading}
         onClick={updateBackgroundImage}
       />
 
