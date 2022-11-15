@@ -26,7 +26,7 @@ const mapDescription = {
 
 const Map: FC = () => {
   const { mapBox } = useContext(ConfigContext);
-  const { changeMapQuestData, changeCoordinates } = useContext(MapQuestContext);
+  const { coordinates, changeMapQuestData, changeCoordinates } = useContext(MapQuestContext);
   const { language } = useContext(SettingsContext);
 
   const [latCoord, setLatCoord] = useState({
@@ -39,36 +39,15 @@ const Map: FC = () => {
     minutes: 0,
   });
 
-  const [map, setMap] = useState({
-    viewport: {
-      width: "400px",
-      height: "400px",
-      latitude: 0,
-      longitude: 0,
-      zoom: 11,
-    },
-  });
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         changeMapQuestData({
           typeRequest: TypeRequest.reverse,
-          address: "",
           searchString: `${position.coords.latitude},${position.coords.longitude}`,
         });
 
         changeCoordinates({ lat: position.coords.latitude, long: position.coords.longitude });
-
-        setMap({
-          viewport: {
-            width: "400px",
-            height: "400px",
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            zoom: 11,
-          },
-        });
 
         setLatCoord({
           gradus: Number(position.coords.latitude.toFixed()),
@@ -94,16 +73,20 @@ const Map: FC = () => {
   }, []);
 
   return (
-    <div className="Map-wrapper">
+    <div className="map-wrapper">
       <ReactMapGL
-        {...map.viewport}
+        zoom={11}
+        longitude={coordinates?.long}
+        latitude={coordinates?.lat}
         mapboxAccessToken={mapBox.token}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         style={{ height: "400px", width: "400px" }}
       >
-        <Marker longitude={map.viewport.longitude} latitude={map.viewport.latitude}>
-          <img src={Mark} alt="Marker" height="40px" width="40px" />
-        </Marker>
+        {coordinates && (
+          <Marker longitude={coordinates?.long} latitude={coordinates?.lat}>
+            <img src={Mark} alt="Marker" height="40px" width="40px" />
+          </Marker>
+        )}
       </ReactMapGL>
 
       <div className="coordinates">
