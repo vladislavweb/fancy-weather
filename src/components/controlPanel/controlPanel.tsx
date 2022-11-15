@@ -16,16 +16,21 @@ const ControlPanel: FC = () => {
     const utterThis = new SpeechSynthesisUtterance(localWeather.read() || "");
 
     switch (language) {
-      case "ru":
+      case "ru": {
         utterThis.lang = `ru-US`;
+
         break;
-      case "en":
-        utterThis.lang = `en-US`;
-        break;
-      case "ua":
+      }
+      case "ua": {
         utterThis.lang = `ua-US`;
+
         break;
-      default:
+      }
+      default: {
+        utterThis.lang = `en-US`;
+
+        break;
+      }
     }
 
     synth.speak(utterThis);
