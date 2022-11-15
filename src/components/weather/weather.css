@@ -1,5 +1,6 @@
 .weather {
   width: calc(100% - 400px);
+  font-weight: bold;
 }
 
 .three-days {
