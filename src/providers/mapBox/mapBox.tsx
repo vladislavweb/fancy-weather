@@ -24,7 +24,7 @@ export const MapBoxProvider: Props = ({ children }) => {
   const fetchMapBoxData = useCallback(async () => {
     const { url, token } = mapBox;
     const searchText = `${coordinates?.long},${coordinates?.lat}`;
-    const URL = `${url}/${searchText}.json?language=${language}&types=country&access_token=${token}`;
+    const URL = `${url}/${searchText}.json?language=${language}&types=country,place&access_token=${token}`;
 
     return await axios.get<MapBoxResponse>(URL).then((res) => res.data);
   }, [coordinates]);

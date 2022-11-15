@@ -7,3 +7,4 @@ export type { LanguageKeys } from "./settings";
 
 export { TypeRequest } from "./mapQuest";
 export { Scale, Language } from "./settings";
+export { MapBoxRequestTypes } from "./mapBox";
