@@ -76,8 +76,8 @@ const Map: FC = () => {
     <div className="map-wrapper">
       <ReactMapGL
         zoom={11}
-        longitude={coordinates?.long}
-        latitude={coordinates?.lat}
+        longitude={coordinates?.long || 0}
+        latitude={coordinates?.lat || 0}
         mapboxAccessToken={mapBox.token}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         style={{ height: "400px", width: "400px" }}
