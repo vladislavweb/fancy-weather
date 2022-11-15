@@ -1,25 +1,33 @@
-import { useState, useContext, FC } from "react";
+import React, { useState, useContext, FC, useCallback } from "react";
+import classNames from "classnames";
 import Input from "../input";
 import Button from "../button";
-import { SettingsContext } from "../../providers";
-import { Language } from "../../types";
+import { MapQuestContext, SettingsContext } from "../../providers";
+import { Language, TypeRequest } from "../../types";
+import { Store } from "../../service";
 import "./searchPanel.scss";
 
 const SearchPanel: FC = () => {
   const { language } = useContext(SettingsContext);
-  // const [str, setStr] = useState("");
+  const { changeMapQuestData } = useContext(MapQuestContext);
+  const [searchString, setSearchString] = useState("");
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const localVolume = new Store<number>("volume");
+  const localWeather = new Store<string>("weather");
+
+  const onChangeSearchString: React.ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      setSearchString(e.target.value);
+    },
+    [searchString],
+  );
 
   const speak = () => {
-    let input = document.getElementsByClassName("search-input")[0] as any;
-    document.getElementsByClassName("SearchPanel")[0].classList.add("speaked");
-    // changeMicrophone(false);
-    let SpeechGrammarList =
-      (window as any).SpeechGrammarList || (window as any).webkitSpeechGrammarList;
-    let SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    let speechRecognitionList = new SpeechGrammarList();
-    let recognition = new SpeechRecognition();
-    let grammar = "#JSGF V1.0;";
+    setIsSpeaking(true);
+
+    const speechRecognitionList = new SpeechGrammarList();
+    const recognition = new SpeechRecognition();
+    const grammar = "#JSGF V1.0;";
     speechRecognitionList.addFromString(grammar, 1);
     recognition.grammars = speechRecognitionList;
     recognition.interimResults = false;
@@ -37,27 +45,25 @@ const SearchPanel: FC = () => {
       default:
     }
 
-    recognition.onresult = function (event: any) {
-      document.getElementsByClassName("SearchPanel")[0].classList.remove("speaked");
-      let currentVolume = localStorage.getItem("volume") as any;
-      let last = event.results.length - 1;
-      let command = event.results[last][0].transcript.toLowerCase();
-      console.log("Произнесено: ", command);
+    recognition.onresult = function (event) {
+      const currentVolume = localVolume.read() || 1;
+      const last = event.results.length - 1;
+      const command = event.results[last][0].transcript.toLowerCase();
+
       if (command === "louder" || command === "громче" || command === "мацней") {
         if (currentVolume < 1) {
-          localStorage.setItem("volume", (currentVolume / 1 + 0.1).toFixed(1));
+          localVolume.write(Number((currentVolume / 1 + 0.1).toFixed(1)));
         }
       } else if (command === "quieter" || command === "тише" || command === "ціхі") {
         if (currentVolume >= 0) {
-          localStorage.setItem("volume", (currentVolume / 1 - 0.1).toFixed(1));
+          localVolume.write(Number((currentVolume / 1 - 0.1).toFixed(1)));
         }
       } else if (command === "weather" || command === "погода" || command === "надвор'е") {
-        let synth = window.speechSynthesis;
-        let utterThis = new SpeechSynthesisUtterance(
-          sessionStorage.getItem(`weather-${localStorage.getItem("language") || ""} || "`) || "",
-        ) as any;
-        utterThis.volume = localStorage.getItem("volume");
-        switch (localStorage.getItem("language")) {
+        const synth = window.speechSynthesis;
+        const utterThis = new SpeechSynthesisUtterance(localWeather.read() || "");
+        utterThis.volume = localVolume.read() || 1;
+
+        switch (language) {
           case "ru":
             utterThis.lang = `ru-US`;
             break;
@@ -69,39 +75,59 @@ const SearchPanel: FC = () => {
             break;
           default:
         }
+
         synth.speak(utterThis);
       } else {
-        // changeSearchString(command);
-        // setStr(input.value);
+        if (command) {
+          setSearchString(command);
+
+          changeMapQuestData({
+            typeRequest: TypeRequest.geocoding,
+            searchString: command,
+          });
+        }
       }
     };
 
     recognition.onspeechend = function () {
-      document.getElementsByClassName("SearchPanel")[0].classList.remove("speaked");
       recognition.stop();
-    };
-
-    recognition.onerror = function (event: any) {
-      document.getElementsByClassName("SearchPanel")[0].classList.remove("speaked");
-      // changeMicrophone(true);
-      console.log(event);
     };
 
     recognition.start();
   };
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-  };
+  const handleSubmit: React.ChangeEventHandler<HTMLFormElement> = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      if (searchString) {
+        changeMapQuestData({
+          typeRequest: TypeRequest.geocoding,
+          searchString,
+        });
+      }
+    },
+    [searchString],
+  );
 
   return (
-    <div className="search-panel">
+    <div
+      className={classNames("search-panel", {
+        "search-panel--speaking": isSpeaking,
+      })}
+    >
       <form className="search-form" onSubmit={handleSubmit}>
-        <Input className="search-input" />
+        <Input
+          className="search-input"
+          value={searchString}
+          onChange={onChangeSearchString}
+          required={true}
+          readOnly={isSpeaking}
+        />
 
         <Button className="speak-button" onClick={speak} />
 
-        <Button className="search-button" type="submit" />
+        <Button className="search-button" type="submit" disabled={isSpeaking} />
       </form>
     </div>
   );
