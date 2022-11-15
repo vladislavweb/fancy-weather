@@ -2,10 +2,7 @@
   text-align: center;
 }
 
-.today .location {
-}
-
-.today .city {
+.today .place {
   margin: 0;
   font-size: 60px;
   font-weight: bold;

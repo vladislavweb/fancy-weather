@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, FC, useMemo } from "react";
 import data from "../../../assets/data";
-import { SettingsContext } from "../../../providers";
+import { MapBoxContext, SettingsContext } from "../../../providers";
 import { Scale } from "../../../types";
+import { mapBoxMapper, WeatherNow } from "../../../utils";
 import "./today.css";
 
 const speedDescription = {
@@ -10,10 +11,15 @@ const speedDescription = {
   ua: "Відчувається як ",
 };
 
-const Today = ({ weatherData, location }: any) => {
+interface Props {
+  weatherData: WeatherNow;
+}
+
+const Today: FC<Props> = ({ weatherData }) => {
   const { description, speed, feel, humidity, temp, img } = weatherData;
   const { scale, language } = useContext(SettingsContext);
-  // const { city, country } = location;
+  const { mapBoxData } = useContext(MapBoxContext);
+  const location = useMemo(() => mapBoxMapper(mapBoxData), [mapBoxData]);
 
   const [time, setTime] = useState({
     hours: new Date().getHours(),
@@ -36,8 +42,8 @@ const Today = ({ weatherData, location }: any) => {
   return (
     <div className="today">
       <div className="location">
-        {/* <p className="city">{city}</p> */}
-        {/* <p className="country">{country}</p> */}
+        <p className="country">{location.country}</p>
+        <p className="place">{location.place}</p>
       </div>
 
       <div className="date">
@@ -59,7 +65,7 @@ const Today = ({ weatherData, location }: any) => {
 
       <div className="about">
         <div className="about-weather">
-          <span>{description[language]}</span>
+          <span>{description}</span>
         </div>
         <div className={`aboutIcon ${img}`}></div>
       </div>

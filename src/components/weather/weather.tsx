@@ -12,14 +12,9 @@ const Weather: FC = () => {
     <div className="weather">
       {!isLoading && (
         <React.Fragment>
-          {weather?.weatherNow && (
-            <Today
-              weatherData={weather?.weatherNow}
-              // location={location}
-            />
-          )}
+          {weather?.weatherNow && <Today weatherData={weather.weatherNow} />}
 
-          {weather?.weatherThreeDays && <ThreeDays weatherData={weather?.weatherThreeDays} />}
+          {weather?.weatherThreeDays && <ThreeDays weatherData={weather.weatherThreeDays} />}
         </React.Fragment>
       )}
 
