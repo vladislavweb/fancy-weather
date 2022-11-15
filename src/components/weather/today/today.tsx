@@ -1,24 +1,35 @@
-import React, { useState, useEffect, useContext, FC, useMemo } from "react";
+import { useState, useEffect, useContext, FC, useMemo } from "react";
+import { defineMessages, useIntl } from "react-intl";
 import data from "../../../assets/data";
 import { MapBoxContext, SettingsContext } from "../../../providers";
 import { Scale } from "../../../types";
 import { mapBoxMapper, WeatherNow } from "../../../utils";
 import "./today.css";
 
-const speedDescription = {
-  ru: "Ощущается как: ",
-  en: "Feels like: ",
-  ua: "Відчувається як ",
-};
-
 interface Props {
   weatherData: WeatherNow;
 }
+
+const messages = defineMessages({
+  componentsWeatherTodayWindSpeed: {
+    id: "componentsWeatherTodayWindSpeed",
+    defaultMessage: "Wind speed: {speed} mph",
+  },
+  componentsWeatherTodayFeelsLike: {
+    id: "componentsWeatherTodayFeelsLike",
+    defaultMessage: "Feels like: {temperature}",
+  },
+  componentsWeatherTodayHumidity: {
+    id: "componentsWeatherTodayHumidity",
+    defaultMessage: "Humidity: {humidity}",
+  },
+});
 
 const Today: FC<Props> = ({ weatherData }) => {
   const { description, speed, feel, humidity, temp, img } = weatherData;
   const { scale, language } = useContext(SettingsContext);
   const { mapBoxData } = useContext(MapBoxContext);
+  const intl = useIntl();
   const location = useMemo(() => mapBoxMapper(mapBoxData), [mapBoxData]);
 
   const [time, setTime] = useState({
@@ -48,8 +59,8 @@ const Today: FC<Props> = ({ weatherData }) => {
 
       <div className="date">
         <span>
-          {(data.days as any)[language][new Date().getDay()]} &nbsp;
-          {(data.months as any)[language][new Date().getMonth()]} &nbsp;
+          {data.days[language][new Date().getDay()]} &nbsp;
+          {data.months[language][new Date().getMonth()]} &nbsp;
           {new Date().getDate()} &nbsp;
           {new Date().getFullYear()}
         </span>
@@ -74,7 +85,7 @@ const Today: FC<Props> = ({ weatherData }) => {
         <div className="temperature">
           {scale === Scale.FAR ? (
             <div>
-              <span>{(temp * 1.8 + 32).toFixed().toString()}</span>
+              <span>{(temp * 1.8 + 32).toFixed()}</span>
               <span>°F</span>
             </div>
           ) : (
@@ -87,34 +98,22 @@ const Today: FC<Props> = ({ weatherData }) => {
 
         <div className="details">
           <div className="speed">
-            {language === "ru" ? (
-              <span>Скорость ветра: {speed}м/с</span>
-            ) : language === "en" ? (
-              <span>Wind speed: {speed}mph</span>
-            ) : (
-              <span>Хуткасць ветру: {speed}м/с</span>
-            )}
+            {intl.formatMessage(messages.componentsWeatherTodayWindSpeed, {
+              speed,
+            })}
           </div>
 
           <div className="feel">
-            {scale === "far" ? (
-              <span>{`${(speedDescription as any)[language]} ${(
-                (feel / 1) * 1.8 +
-                32
-              ).toFixed()} °F`}</span>
-            ) : (
-              <span>{`${(speedDescription as any)[language]} ${(feel / 1).toFixed()} °C`}</span>
-            )}
+            {intl.formatMessage(messages.componentsWeatherTodayFeelsLike, {
+              temperature:
+                scale === Scale.CEL
+                  ? `${(feel / 1).toFixed()} °C`
+                  : `${((feel / 1) * 1.8 + 32).toFixed()} °F`,
+            })}
           </div>
 
           <div className="humidity">
-            <span>
-              {language === "ru"
-                ? `Влажность: ${humidity}%`
-                : language === "en"
-                ? `Humidity: ${humidity}%`
-                : `Вільготнасць: ${humidity}%`}
-            </span>
+            <span>{intl.formatMessage(messages.componentsWeatherTodayHumidity, { humidity })}</span>
           </div>
         </div>
       </div>

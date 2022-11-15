@@ -1,0 +1,17 @@
+{
+  "componentsMapLatitude": {
+    "defaultMessage": "Широта: {gradus}° {minutes} {type}"
+  },
+  "componentsMapLongitude": {
+    "defaultMessage": "Долгота: {gradus}° {minutes} {type}"
+  },
+  "componentsWeatherTodayFeelsLike": {
+    "defaultMessage": "Ощущается как: {temperature}"
+  },
+  "componentsWeatherTodayHumidity": {
+    "defaultMessage": "Влажность: {humidity}"
+  },
+  "componentsWeatherTodayWindSpeed": {
+    "defaultMessage": "Скорость ветра: {speed} м/с"
+  }
+}

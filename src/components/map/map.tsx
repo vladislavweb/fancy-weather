@@ -1,33 +1,30 @@
 import { useState, useContext, useEffect, FC } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
-import { ConfigContext, SettingsContext } from "../../providers";
+import { ConfigContext } from "../../providers";
 import { MapQuestContext } from "../../providers/mapQuest";
 import { TypeRequest } from "../../types";
+import { useIntl, defineMessages } from "react-intl";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.css";
 
 import Mark from "./assets/my-location.svg";
 
-const mapDescription = {
-  ru: {
-    lati: "Широта",
-    long: "Долгота",
+const messages = defineMessages({
+  componentsMapLongitude: {
+    id: "componentsMapLongitude",
+    defaultMessage: "Longitude: {gradus}° {minutes} {type}",
   },
-  en: {
-    lati: "Latitude",
-    long: "Longitude",
+  componentsMapLatitude: {
+    id: "componentsMapLatitude",
+    defaultMessage: "Latitude: {gradus}° {minutes} {type}",
   },
-  ua: {
-    lati: "Широта",
-    long: "Довгота",
-  },
-};
+});
 
 const Map: FC = () => {
   const { mapBox } = useContext(ConfigContext);
   const { coordinates, changeMapQuestData, changeCoordinates } = useContext(MapQuestContext);
-  const { language } = useContext(SettingsContext);
+  const intl = useIntl();
 
   const [latCoord, setLatCoord] = useState({
     gradus: 0,
@@ -90,13 +87,21 @@ const Map: FC = () => {
       </ReactMapGL>
 
       <div className="coordinates">
-        <p className="long">{`${(mapDescription as any)[language].long}: ${longCoord.gradus}° ${
-          longCoord.minutes
-        }' ${longCoord.gradus > 0 ? "E" : "W"}`}</p>
+        <p className="long">
+          {intl.formatMessage(messages.componentsMapLongitude, {
+            gradus: longCoord.gradus,
+            minutes: longCoord.minutes,
+            type: longCoord.gradus > 0 ? "E" : "W",
+          })}
+        </p>
 
-        <p className="lati">{`${(mapDescription as any)[language].lati}: ${latCoord.gradus}° ${
-          latCoord.minutes
-        }' ${latCoord.gradus > 0 ? "N" : "S"}`}</p>
+        <p className="lat">
+          {intl.formatMessage(messages.componentsMapLatitude, {
+            gradus: latCoord.gradus,
+            minutes: latCoord.minutes,
+            type: latCoord.gradus > 0 ? "N" : "S",
+          })}
+        </p>
       </div>
     </div>
   );

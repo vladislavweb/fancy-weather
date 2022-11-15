@@ -4,6 +4,7 @@ import { Layout, Header, Main } from "./containers";
 import {
   BackgroundProvider,
   ConfigProvider,
+  LocalizationProvider,
   MapBoxProvider,
   MapQuestProvider,
   SettingsProvider,
@@ -32,10 +33,12 @@ const App: FC = () => {
             <MapBoxProvider>
               <WeatherProvider>
                 <BackgroundProvider>
-                  <Layout>
-                    <Header />
-                    <Main />
-                  </Layout>
+                  <LocalizationProvider>
+                    <Layout>
+                      <Header />
+                      <Main />
+                    </Layout>
+                  </LocalizationProvider>
                 </BackgroundProvider>
               </WeatherProvider>
             </MapBoxProvider>

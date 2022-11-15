@@ -1,0 +1,88 @@
+{
+  "componentsMapLatitude": [
+    {
+      "type": 0,
+      "value": "Latitude: "
+    },
+    {
+      "type": 1,
+      "value": "gradus"
+    },
+    {
+      "type": 0,
+      "value": "° "
+    },
+    {
+      "type": 1,
+      "value": "minutes"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "type"
+    }
+  ],
+  "componentsMapLongitude": [
+    {
+      "type": 0,
+      "value": "Longitude: "
+    },
+    {
+      "type": 1,
+      "value": "gradus"
+    },
+    {
+      "type": 0,
+      "value": "° "
+    },
+    {
+      "type": 1,
+      "value": "minutes"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "type"
+    }
+  ],
+  "componentsWeatherTodayFeelsLike": [
+    {
+      "type": 0,
+      "value": "Feels like: "
+    },
+    {
+      "type": 1,
+      "value": "temperature"
+    }
+  ],
+  "componentsWeatherTodayHumidity": [
+    {
+      "type": 0,
+      "value": "Humidity: "
+    },
+    {
+      "type": 1,
+      "value": "humidity"
+    }
+  ],
+  "componentsWeatherTodayWindSpeed": [
+    {
+      "type": 0,
+      "value": "Wind speed: "
+    },
+    {
+      "type": 1,
+      "value": "speed"
+    },
+    {
+      "type": 0,
+      "value": " mph"
+    }
+  ]
+}

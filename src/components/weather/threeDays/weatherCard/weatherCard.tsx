@@ -34,8 +34,8 @@ const WeatherCard: FC<Props> = ({ weather, next }) => {
       <div className="temperature">
         <span>
           {scale === Scale.FAR
-            ? `${(weather.avgTemp * 1.8 + 32).toFixed().toString()} °F`
-            : `${weather.avgTemp.toFixed().toString()} °C`}
+            ? `${(weather.avgTemp * 1.8 + 32).toFixed()} °F`
+            : `${weather.avgTemp.toFixed()} °C`}
         </span>
       </div>
     </div>
