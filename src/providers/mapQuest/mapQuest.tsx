@@ -13,7 +13,6 @@ export type Coordinates = {
 
 interface MapQuestData {
   typeRequest: TypeRequest;
-  address: string;
   searchString: string;
 }
 
@@ -44,11 +43,7 @@ export const MapQuestProvider: Props = ({ children }) => {
         ? TypeRequest.geocoding
         : TypeRequest.reverse;
 
-    const location = mapQuestData
-      ? mapQuestData.typeRequest === TypeRequest.geocoding
-        ? mapQuestData.address
-        : mapQuestData.searchString
-      : "";
+    const location = mapQuestData?.searchString;
 
     const url = `${mapQuestApi.url}${type}?key=${mapQuestApi.token}&location=${location}`;
 
@@ -58,6 +53,7 @@ export const MapQuestProvider: Props = ({ children }) => {
   const { refetch, isFetching } = useQuery({
     queryKey: ["fetchMapQuestData", ...Object.values(mapQuestData || {})],
     staleTime: Infinity,
+    retry: 0,
     queryFn: fetchMapQuestData,
     onSuccess: (res) => {
       if (res.results[0].locations.length) {

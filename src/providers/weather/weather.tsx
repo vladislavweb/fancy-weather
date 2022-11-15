@@ -35,6 +35,7 @@ export const WeatherProvider: Props = ({ children }) => {
   const { refetch, isFetching } = useQuery({
     queryKey: ["fetchWeather", ...Object.values(coordinates || {})],
     staleTime: Infinity,
+    retry: 0,
     queryFn: fetchWeather,
     onSuccess: (res) => {
       setWeather(weatherMapper(res));

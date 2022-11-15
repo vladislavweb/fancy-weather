@@ -53,6 +53,7 @@ export const BackgroundProvider: Props = ({ children }) => {
 
   const { refetch, isFetching } = useQuery({
     queryKey: ["fetchBackgroundPicture"],
+    retry: 0,
     queryFn: fetchBackgroundPicture,
     onSuccess: (res) => {
       setBackgroundImage(res);
