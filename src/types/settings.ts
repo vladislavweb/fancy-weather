@@ -6,7 +6,7 @@ export enum Scale {
 export enum Language {
   RU = "ru",
   EN = "en",
-  UA = "ua",
+  UK = "uk",
 }
 
 export type LanguageKeys = keyof typeof Language;

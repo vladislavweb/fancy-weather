@@ -38,8 +38,8 @@ const SearchPanel: FC = () => {
 
         break;
       }
-      case Language.UA: {
-        recognition.lang = "ua-US";
+      case Language.UK: {
+        recognition.lang = "uk-US";
 
         break;
       }
@@ -82,13 +82,13 @@ const SearchPanel: FC = () => {
           utterThis.volume = localVolume.read() || 1;
 
           switch (language) {
-            case "ru": {
+            case Language.RU: {
               utterThis.lang = `ru-US`;
 
               break;
             }
-            case "ua": {
-              utterThis.lang = `ua-US`;
+            case Language.UK: {
+              utterThis.lang = `uk-US`;
 
               break;
             }

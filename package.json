@@ -32,8 +32,8 @@
     "extract": "formatjs extract 'src/**/*.tsx' --ignore='**/*.d.ts' --out-file 'src/lang/en.json' --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
     "compile:en": "formatjs compile 'src/lang/en.json' --ast --out-file 'src/compiled-lang/en.json'",
     "compile:ru": "formatjs compile 'src/lang/ru.json' --ast --out-file 'src/compiled-lang/ru.json'",
-    "compile:ua": "formatjs compile 'src/lang/ua.json' --ast --out-file 'src/compiled-lang/ua.json'",
-    "compile": "npm run compile:en && npm run compile:ru && npm run compile:ua"
+    "compile:uk": "formatjs compile 'src/lang/uk.json' --ast --out-file 'src/compiled-lang/uk.json'",
+    "compile": "npm run compile:en && npm run compile:ru && npm run compile:uk"
   },
   "eslintConfig": {
     "extends": [

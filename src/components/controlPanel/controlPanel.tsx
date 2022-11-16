@@ -13,25 +13,16 @@ const ControlPanel: FC = () => {
 
   const speakWeather = () => {
     const synth = window.speechSynthesis;
-    const utterThis = new SpeechSynthesisUtterance(localWeather.read() || "");
+    const voices = synth.getVoices();
 
-    switch (language) {
-      case "ru": {
-        utterThis.lang = `ru-US`;
-
-        break;
-      }
-      case "ua": {
-        utterThis.lang = `ua-US`;
-
-        break;
-      }
-      default: {
-        utterThis.lang = `en-US`;
-
-        break;
-      }
+    if (synth.speaking) {
+      synth.cancel();
     }
+
+    const utterThis = new SpeechSynthesisUtterance(localWeather.read() || "");
+    utterThis.voice = voices[3];
+    utterThis.lang = "en-US";
+    utterThis.rate = 0.8;
 
     synth.speak(utterThis);
   };
@@ -69,14 +60,14 @@ const ControlPanel: FC = () => {
       </Button>
 
       <Button
-        className={classNames("lang-ua", {
-          "current-control": language === Language.UA,
+        className={classNames("lang-uk", {
+          "current-control": language === Language.UK,
         })}
         onClick={() => {
-          changeLanguage(Language.UA);
+          changeLanguage(Language.UK);
         }}
       >
-        UA
+        UK
       </Button>
 
       <Button

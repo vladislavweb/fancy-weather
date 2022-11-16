@@ -32,7 +32,7 @@ const data = {
       "Friday",
       "Saturday",
     ],
-    ua: [
+    uk: [
       "Неділя",
       "Понеділок",
       "Вівторок",
@@ -78,7 +78,7 @@ const data = {
       "November",
       "December",
     ],
-    ua: [
+    uk: [
       "Січень",
       "Лютий",
       "Березень",

@@ -17,8 +17,8 @@ export const LocalizationProvider: Props = ({ children }) => {
       case Language.RU: {
         return import("../../compiled-lang/ru.json");
       }
-      case Language.UA: {
-        return import("../../compiled-lang/ua.json");
+      case Language.UK: {
+        return import("../../compiled-lang/uk.json");
       }
       default: {
         return import("../../compiled-lang/en.json");
