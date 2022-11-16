@@ -1,7 +1,6 @@
 import { FC } from "react";
-import ControlPanel from "../../components/controlPanel";
-import SearchPanel from "../../components/searchPanel";
-import "./header.css";
+import { ControlPanel, SearchPanel } from "../../components";
+import "./header.scss";
 
 const Header: FC = () => (
   <header className="header">

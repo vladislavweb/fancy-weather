@@ -1,15 +1,12 @@
 import { FC } from "react";
-import Weather from "../../components/weather";
-import Map from "../../components/map";
-import "./main.css";
+import { Map, Weather } from "../../components";
+import "./main.scss";
 
-const Main: FC = () => {
-  return (
-    <main className="main">
-      <Weather />
-      <Map />
-    </main>
-  );
-};
+const Main: FC = () => (
+  <main className="main">
+    <Weather />
+    <Map />
+  </main>
+);
 
 export default Main;

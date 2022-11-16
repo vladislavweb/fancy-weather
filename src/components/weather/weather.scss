@@ -1,10 +1,10 @@
 .weather {
   width: calc(100% - 400px);
   font-weight: bold;
-}
 
-.three-days {
-  display: flex;
+  @media only screen and (max-width: 960px) {
+    width: 100%;
+  }
 }
 
 .csd {
@@ -28,7 +28,7 @@
 }
 
 .rn {
-  background-image: url("./assets/rain-night-test.svg");
+  background-image: url("./assets/rain-night.svg");
 }
 
 .scd {
@@ -65,10 +65,4 @@
 
 .mist {
   background-image: url("./assets/scattered-clouds-night.svg");
-}
-
-@media only screen and (max-width: 960px) {
-  .weather {
-    width: 100%;
-  }
 }

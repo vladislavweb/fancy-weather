@@ -1,12 +1,11 @@
 import { useState, useContext, useEffect, FC } from "react";
-import ReactMapGL, { Marker } from "react-map-gl";
-import { ConfigContext } from "../../providers";
-import { MapQuestContext } from "../../providers/mapQuest";
-import { TypeRequest } from "../../types";
 import { useIntl, defineMessages } from "react-intl";
+import ReactMapGL, { Marker } from "react-map-gl";
+import { ConfigContext, MapQuestContext } from "../../providers";
+import { TypeRequest } from "../../types";
 
 import "mapbox-gl/dist/mapbox-gl.css";
-import "./map.css";
+import "./map.scss";
 
 import Mark from "./assets/my-location.svg";
 

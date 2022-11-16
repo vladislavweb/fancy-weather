@@ -1,6 +1,6 @@
 import { FC, ReactNode, useContext, useEffect } from "react";
 import { BackgroundContext } from "../../providers/background";
-import "./layout.css";
+import "./layout.scss";
 
 type Props = {
   children?: ReactNode;

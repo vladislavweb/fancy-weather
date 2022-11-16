@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext, FC, useMemo } from "react";
 import { defineMessages, useIntl } from "react-intl";
+import classNames from "classnames";
 import data from "../../../assets/data";
 import { MapBoxContext, SettingsContext } from "../../../providers";
 import { Scale } from "../../../types";
 import { mapBoxMapper, WeatherNow } from "../../../utils";
-import "./today.css";
+import "./today.scss";
 
 interface Props {
   weatherData: WeatherNow;
@@ -78,7 +79,7 @@ const Today: FC<Props> = ({ weatherData }) => {
         <div className="about-weather">
           <span>{description}</span>
         </div>
-        <div className={`aboutIcon ${img}`}></div>
+        <div className={classNames("about-icon", img)}></div>
       </div>
 
       <div className="parameters">

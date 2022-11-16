@@ -1,9 +1,10 @@
 import { FC, useContext } from "react";
+import classNames from "classnames";
 import data from "../../../../assets/data";
 import { SettingsContext } from "../../../../providers";
 import { Scale } from "../../../../types";
 import { WeatherThreeDays } from "../../../../utils";
-import "./weatherCard.css";
+import "./weatherCard.scss";
 
 interface Props {
   weather: WeatherThreeDays;
@@ -28,7 +29,7 @@ const WeatherCard: FC<Props> = ({ weather, next }) => {
         <div className="weather-description">
           <span>{weather.description}</span>
         </div>
-        <div className={`weather-three-icon ${weather.img}`}></div>
+        <div className={classNames("weather-three-icon", weather.img)}></div>
       </div>
 
       <div className="temperature">

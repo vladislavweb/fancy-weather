@@ -3,7 +3,7 @@ import { WeatherContext } from "../../providers/weather";
 import ThreeDays from "./threeDays";
 import Today from "./today";
 import Loader from "../loader";
-import "./weather.css";
+import "./weather.scss";
 
 const Weather: FC = () => {
   const { weather, isLoading } = useContext(WeatherContext);

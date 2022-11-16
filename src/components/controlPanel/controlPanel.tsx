@@ -4,7 +4,7 @@ import { BackgroundContext, SettingsContext } from "../../providers";
 import { Language, LocalWeather, Scale } from "../../types";
 import Button from "../button";
 import { Store } from "../../service";
-import "./controlPanel.css";
+import "./controlPanel.scss";
 
 const ControlPanel: FC = () => {
   const { updateBackgroundImage, isLoading: backgroundIsLoading } = useContext(BackgroundContext);

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import WeatherCard from "./weatherCard";
 import { WeatherThreeDays } from "../../../utils";
-import "./threeDays.css";
+import "./threeDays.scss";
 
 interface Props {
   weatherData: WeatherThreeDays[];
