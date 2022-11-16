@@ -1,9 +1,0 @@
-.ThreeDays {
-  display: flex;
-}
-
-@media only screen and (max-width: 760px) {
-  .ThreeDays {
-    flex-wrap: wrap;
-  }
-}

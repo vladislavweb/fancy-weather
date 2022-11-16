@@ -1,3 +1,3 @@
 # Fancy Weather
-# [DEMO](https://weather-himimetsu.netlify.app/)
-# ![alt text](screenshots/weather.PNG?raw=true)
+# [DEMO](https://vladislavweb-fancy-weather.netlify.app/)
+# ![app screenshot](screenshots/weather.PNG?raw=true)

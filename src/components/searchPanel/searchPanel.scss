@@ -1,0 +1,57 @@
+.search-panel {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+
+  &.search-panel--speaking {
+    box-shadow: 0 0 10px 10px;
+  }
+
+  .search-form {
+    width: 100%;
+    display: flex;
+
+    .search-input {
+      width: 100%;
+      padding-left: 10px;
+      font-size: 20px;
+      color: white;
+      box-sizing: border-box;
+      border: 2px solid white;
+      border-right: none;
+      border-radius: 5px 0 0 5px;
+      background-color: transparent;
+      backdrop-filter: blur(5px);
+
+      @media only screen and (max-width: 400px) {
+        width: 175px;
+      }
+    }
+
+    .speak-button {
+      width: 40px;
+      background-image: url("./assets/microphone.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 30px;
+      border-right: 0;
+    }
+
+    .search-button {
+      width: 40px;
+      background-image: url("./assets/search.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 30px;
+      border-radius: 0px 5px 5px 0;
+    }
+  }
+
+  @media only screen and (max-width: 730px) {
+    margin: auto;
+  }
+
+  @media only screen and (max-width: 400px) {
+    width: 300px;
+  }
+}

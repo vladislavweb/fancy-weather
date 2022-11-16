@@ -1,0 +1,17 @@
+{
+  "componentsMapLatitude": {
+    "defaultMessage": "Latitude: {gradus}° {minutes} {type}"
+  },
+  "componentsMapLongitude": {
+    "defaultMessage": "Longitude: {gradus}° {minutes} {type}"
+  },
+  "componentsWeatherTodayFeelsLike": {
+    "defaultMessage": "Feels like: {temperature}"
+  },
+  "componentsWeatherTodayHumidity": {
+    "defaultMessage": "Humidity: {humidity}"
+  },
+  "componentsWeatherTodayWindSpeed": {
+    "defaultMessage": "Wind speed: {speed} mph"
+  }
+}

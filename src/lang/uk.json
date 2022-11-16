@@ -1,0 +1,17 @@
+{
+  "componentsMapLatitude": {
+    "defaultMessage": "Широта: {gradus}° {minutes} {type}"
+  },
+  "componentsMapLongitude": {
+    "defaultMessage": "Довгота: {gradus}° {minutes} {type}"
+  },
+  "componentsWeatherTodayFeelsLike": {
+    "defaultMessage": "Відчувається як: {temperature}"
+  },
+  "componentsWeatherTodayHumidity": {
+    "defaultMessage": "Вільготнасць: {humidity}"
+  },
+  "componentsWeatherTodayWindSpeed": {
+    "defaultMessage": "Хуткасць ветру: {speed} м/с"
+  }
+}
