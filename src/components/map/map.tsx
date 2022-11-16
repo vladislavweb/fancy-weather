@@ -1,13 +1,17 @@
 import { useState, useContext, useEffect, FC } from "react";
 import { useIntl, defineMessages } from "react-intl";
 import ReactMapGL, { Marker } from "react-map-gl";
+import mapboxgl from "mapbox-gl";
 import { ConfigContext, MapQuestContext } from "../../providers";
 import { TypeRequest } from "../../types";
 
-import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.scss";
-
+import "mapbox-gl/dist/mapbox-gl.css";
 import Mark from "./assets/my-location.svg";
+
+// @ts-ignore
+// eslint-disable-next-line
+mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 const messages = defineMessages({
   componentsMapLongitude: {
