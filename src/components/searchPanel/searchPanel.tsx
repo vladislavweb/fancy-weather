@@ -25,8 +25,12 @@ const SearchPanel: FC = () => {
   const speak = () => {
     setIsSpeaking(true);
 
-    const speechRecognitionList = new SpeechGrammarList();
-    const recognition = new SpeechRecognition();
+    const speechRecognitionList = window.SpeechGrammarList
+      ? new window.SpeechGrammarList()
+      : new window.webkitSpeechGrammarList();
+    const recognition = window.SpeechRecognition
+      ? new window.SpeechRecognition()
+      : new window.webkitSpeechRecognition();
     const grammar = "#JSGF V1.0;";
     speechRecognitionList.addFromString(grammar, 1);
     recognition.grammars = speechRecognitionList;
@@ -51,6 +55,8 @@ const SearchPanel: FC = () => {
     }
 
     recognition.onresult = function (event) {
+      setIsSpeaking(false);
+
       const currentVolume = localVolume.read() || 1;
       const last = event.results.length - 1;
       const command = event.results[last][0].transcript.toLowerCase();
