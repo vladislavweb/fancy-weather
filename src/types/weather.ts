@@ -1,3 +1,5 @@
+import { Language } from "./settings";
+
 export interface Weather {
   id: number;
   main: string;
@@ -43,4 +45,9 @@ export interface WeatherResponse {
   message: number;
   cnt: number;
   list: WeatherData[];
+}
+
+export interface LocalWeather {
+  language?: Language;
+  weather: string;
 }

@@ -1,5 +1,5 @@
 export type { ApplicationConfig } from "./config";
-export type { Weather, WeatherData, WeatherResponse } from "./weather";
+export type { Weather, WeatherData, WeatherResponse, LocalWeather } from "./weather";
 export type { MapQuestResponse } from "./mapQuest";
 export type { BackgroundResponse } from "./background";
 export type { MapBoxResponse } from "./mapBox";

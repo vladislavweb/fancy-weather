@@ -1,3 +1,5 @@
+import { Language } from "./settings";
+
 export enum MapBoxRequestTypes {
   country = "country",
   place = "place",
@@ -5,6 +7,7 @@ export enum MapBoxRequestTypes {
 
 interface Map {
   id: string;
+  language: Language;
   type: string;
   text: string;
   place_name: string;
