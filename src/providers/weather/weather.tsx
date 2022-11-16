@@ -1,11 +1,12 @@
 import { createContext, FC, ReactNode, useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { ConfigContext } from "../config";
-import { WeatherResponse } from "../../types";
+import { LocalWeather, WeatherResponse } from "../../types";
 import { useQuery } from "@tanstack/react-query";
 import { MapQuestContext } from "../mapQuest";
 import { SettingsContext } from "../settings";
-import { WeatherMap, weatherMapper } from "../../utils";
+import { createWeatherDescription, WeatherMap, weatherMapper } from "../../utils";
+import { Store } from "../../service";
 
 type Props = FC<{ children?: ReactNode }>;
 
@@ -23,6 +24,7 @@ export const WeatherProvider: Props = ({ children }) => {
   const { language } = useContext(SettingsContext);
   const { coordinates } = useContext(MapQuestContext);
   const [weather, setWeather] = useState<WeatherMap>();
+  const localWeather = new Store<LocalWeather>("weather");
 
   const fetchWeather = useCallback(async () => {
     const { url, key } = openWeatherMap;
@@ -30,7 +32,7 @@ export const WeatherProvider: Props = ({ children }) => {
     const weatherUrl = `${url}lat=${coordinates?.lat}&lon=${coordinates?.long}&appid=${key}&lang=${language}&cnt=32&units=metric`;
 
     return await axios.get<WeatherResponse>(weatherUrl).then((res) => res.data);
-  }, [coordinates]);
+  }, [coordinates, language]);
 
   const { refetch, isFetching } = useQuery({
     queryKey: ["fetchWeather", ...Object.values(coordinates || {})],
@@ -39,6 +41,7 @@ export const WeatherProvider: Props = ({ children }) => {
     queryFn: fetchWeather,
     onSuccess: (res) => {
       setWeather(weatherMapper(res));
+      localWeather.write(createWeatherDescription(res, language));
     },
     enabled: false,
   });
