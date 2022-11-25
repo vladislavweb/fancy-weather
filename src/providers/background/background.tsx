@@ -4,17 +4,12 @@ import axios from "axios";
 
 import { ConfigContext } from "../config";
 import { BackgroundResponse } from "../../types";
+import { MapBoxContext } from "../mapBox";
 
 type Props = FC<{ children?: ReactNode }>;
 
-interface ImageInformation {
-  timeOfDay: string;
-  weather: string;
-}
-
 interface BackgroundInterface {
   isLoading: boolean;
-  changeImageInformation: (info: ImageInformation) => void;
   updateBackgroundImage: () => void;
 }
 
@@ -22,12 +17,11 @@ const body = document.querySelector("body");
 
 export const Context = createContext<BackgroundInterface>({
   isLoading: false,
-  changeImageInformation: () => undefined,
   updateBackgroundImage: () => undefined,
 });
 
 export const BackgroundProvider: Props = ({ children }) => {
-  const [imageInformation, setImageInformation] = useState<ImageInformation>();
+  const { mapBoxData } = useContext(MapBoxContext);
   const { unsplash } = useContext(ConfigContext);
 
   const setBackgroundImage = (imageData?: BackgroundResponse) => {
@@ -45,10 +39,10 @@ export const BackgroundProvider: Props = ({ children }) => {
     async () =>
       await axios
         .get<BackgroundResponse>(
-          `${unsplash.url}${imageInformation?.timeOfDay} ${imageInformation?.weather}${unsplash.key}`,
+          `${unsplash.url}${mapBoxData?.features?.[0].place_name}${unsplash.key}`,
         )
         .then((res) => res.data),
-    [imageInformation],
+    [mapBoxData],
   );
 
   const { refetch, isFetching } = useQuery({
@@ -61,22 +55,18 @@ export const BackgroundProvider: Props = ({ children }) => {
     enabled: false,
   });
 
-  const changeImageInformation = (info: ImageInformation) => setImageInformation(info);
-
   const updateBackgroundImage = useCallback(async () => {
     await refetch();
-  }, [imageInformation]);
+  }, [mapBoxData]);
 
   useEffect(() => {
-    if (imageInformation) {
+    if (mapBoxData) {
       refetch();
     }
-  }, [imageInformation]);
+  }, [mapBoxData]);
 
   return (
-    <Context.Provider
-      value={{ isLoading: isFetching, changeImageInformation, updateBackgroundImage }}
-    >
+    <Context.Provider value={{ isLoading: isFetching, updateBackgroundImage }}>
       {children}
     </Context.Provider>
   );
