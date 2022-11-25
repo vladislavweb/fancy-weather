@@ -160,7 +160,7 @@ const SearchPanel: FC = () => {
           readOnly={isSpeaking}
         />
 
-        <Button className="speak-button" onClick={speak} />
+        <Button className="speak-button" onClick={speak} type="button" />
 
         <Button className="search-button" type="submit" disabled={isSpeaking} />
       </form>
