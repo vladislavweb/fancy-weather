@@ -5,7 +5,7 @@ class Store<T> {
     this.key = localKey;
   }
 
-  read(): null | T {
+  read(): undefined | T {
     const wrap = localStorage.getItem(this.key);
 
     if (typeof wrap === "string") {
@@ -13,7 +13,7 @@ class Store<T> {
 
       return parsedWrap.value;
     } else {
-      return wrap;
+      return undefined;
     }
   }
 
