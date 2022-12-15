@@ -2,9 +2,12 @@ import { createContext, FC, ReactNode, useCallback, useContext, useEffect } from
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+import { usePreviousValue } from "../../hooks";
+
 import { ConfigContext } from "../config";
 import { MapBoxContext } from "../mapBox";
 import { SettingsContext } from "../settings";
+
 import { BackgroundResponse, Language } from "../../types";
 
 type Props = FC<{ children?: ReactNode }>;
@@ -26,6 +29,9 @@ export const BackgroundProvider: Props = ({ children }) => {
   const { unsplash } = useContext(ConfigContext);
   const { language } = useContext(SettingsContext);
 
+  const queryString = mapBoxData?.features?.[0].place_name;
+  const prevQueryString = usePreviousValue(mapBoxData?.features?.[0].place_name);
+
   const setBackgroundImage = (imageData?: BackgroundResponse) => {
     if (body && imageData) {
       const image = new Image();
@@ -37,13 +43,15 @@ export const BackgroundProvider: Props = ({ children }) => {
     }
   };
 
-  const fetchBackgroundPicture = useCallback(async () => {
-    const queryString = language === Language.EN ? mapBoxData?.features?.[0].place_name : "";
-
-    return await axios
-      .get<BackgroundResponse>(`${unsplash.url}${queryString}${unsplash.key}`)
-      .then((res) => res.data);
-  }, [mapBoxData, unsplash.url, unsplash.key, language]);
+  const fetchBackgroundPicture = useCallback(
+    async () =>
+      await axios
+        .get<BackgroundResponse>(
+          `${unsplash.url}${language === Language.EN ? queryString : ""}${unsplash.key}`,
+        )
+        .then((res) => res.data),
+    [queryString, unsplash.url, unsplash.key, language],
+  );
 
   const { refetch, isFetching } = useQuery({
     queryKey: ["fetchBackgroundPicture"],
@@ -57,13 +65,13 @@ export const BackgroundProvider: Props = ({ children }) => {
 
   const updateBackgroundImage = useCallback(async () => {
     await refetch();
-  }, [mapBoxData]);
+  }, [refetch]);
 
   useEffect(() => {
-    if (mapBoxData) {
+    if (queryString !== prevQueryString) {
       refetch();
     }
-  }, [mapBoxData]);
+  }, [queryString, prevQueryString, refetch]);
 
   return (
     <Context.Provider value={{ isLoading: isFetching, updateBackgroundImage }}>
