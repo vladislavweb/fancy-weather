@@ -11,42 +11,43 @@ import {
   WeatherProvider,
 } from "./providers";
 import { Store } from "./service";
-import { Language, Scale } from "./types";
+import { Language, LocalWeather, Scale } from "./types";
 
 const queryClient = new QueryClient();
 
-const App: FC = () => {
-  const localTouched = new Store<boolean>("touched");
+const localLanguage = new Store<Language>("language");
+const localScale = new Store<Scale>("scale");
+const localVolume = new Store<number>("volume");
+const localWeather = new Store<LocalWeather>("weather");
 
-  if (!localTouched.read()) {
-    localTouched.write(true);
-    new Store<Language>("language").write(Language.EN);
-    new Store<Scale>("scale").write(Scale.CEL);
-    new Store<number>("volume").write(1);
-  }
+if (!localLanguage.read() || !localScale.read() || !localVolume.read() || !localWeather.read()) {
+  localLanguage.write(Language.EN);
+  localScale.write(Scale.CEL);
+  localVolume.write(1);
+  localWeather.write({ language: Language.EN, weather: "" });
+}
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ConfigProvider>
-        <SettingsProvider>
-          <MapQuestProvider>
-            <MapBoxProvider>
-              <WeatherProvider>
-                <BackgroundProvider>
-                  <LocalizationProvider>
-                    <Layout>
-                      <Header />
-                      <Main />
-                    </Layout>
-                  </LocalizationProvider>
-                </BackgroundProvider>
-              </WeatherProvider>
-            </MapBoxProvider>
-          </MapQuestProvider>
-        </SettingsProvider>
-      </ConfigProvider>
-    </QueryClientProvider>
-  );
-};
+const App: FC = () => (
+  <QueryClientProvider client={queryClient}>
+    <ConfigProvider>
+      <SettingsProvider>
+        <MapQuestProvider>
+          <MapBoxProvider>
+            <WeatherProvider>
+              <BackgroundProvider>
+                <LocalizationProvider>
+                  <Layout>
+                    <Header />
+                    <Main />
+                  </Layout>
+                </LocalizationProvider>
+              </BackgroundProvider>
+            </WeatherProvider>
+          </MapBoxProvider>
+        </MapQuestProvider>
+      </SettingsProvider>
+    </ConfigProvider>
+  </QueryClientProvider>
+);
 
 export default App;
