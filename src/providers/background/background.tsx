@@ -1,10 +1,11 @@
-import { createContext, FC, ReactNode, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, FC, ReactNode, useCallback, useContext, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 import { ConfigContext } from "../config";
-import { BackgroundResponse } from "../../types";
 import { MapBoxContext } from "../mapBox";
+import { SettingsContext } from "../settings";
+import { BackgroundResponse, Language } from "../../types";
 
 type Props = FC<{ children?: ReactNode }>;
 
@@ -23,6 +24,7 @@ export const Context = createContext<BackgroundInterface>({
 export const BackgroundProvider: Props = ({ children }) => {
   const { mapBoxData } = useContext(MapBoxContext);
   const { unsplash } = useContext(ConfigContext);
+  const { language } = useContext(SettingsContext);
 
   const setBackgroundImage = (imageData?: BackgroundResponse) => {
     if (body && imageData) {
@@ -35,15 +37,13 @@ export const BackgroundProvider: Props = ({ children }) => {
     }
   };
 
-  const fetchBackgroundPicture = useCallback(
-    async () =>
-      await axios
-        .get<BackgroundResponse>(
-          `${unsplash.url}${mapBoxData?.features?.[0].place_name}${unsplash.key}`,
-        )
-        .then((res) => res.data),
-    [mapBoxData],
-  );
+  const fetchBackgroundPicture = useCallback(async () => {
+    const queryString = language === Language.EN ? mapBoxData?.features?.[0].place_name : "";
+
+    return await axios
+      .get<BackgroundResponse>(`${unsplash.url}${queryString}${unsplash.key}`)
+      .then((res) => res.data);
+  }, [mapBoxData, unsplash.url, unsplash.key, language]);
 
   const { refetch, isFetching } = useQuery({
     queryKey: ["fetchBackgroundPicture"],
