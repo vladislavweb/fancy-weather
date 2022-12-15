@@ -1,16 +1,18 @@
 import React, { useContext, FC } from "react";
-import { WeatherContext } from "../../providers/weather";
 import ThreeDays from "./threeDays";
 import Today from "./today";
 import Loader from "../loader";
+import { weatherMapper } from "../../utils";
+import { DataContext } from "../../providers";
 import "./weather.scss";
 
 const Weather: FC = () => {
-  const { weather, isLoading } = useContext(WeatherContext);
+  const { data, dataIsLoading } = useContext(DataContext);
+  const weather = data?.weatherData ? weatherMapper(data.weatherData) : undefined;
 
   return (
     <div className="weather">
-      {!isLoading && (
+      {!dataIsLoading && (
         <React.Fragment>
           {weather?.weatherNow && <Today weatherData={weather.weatherNow} />}
 
@@ -18,7 +20,7 @@ const Weather: FC = () => {
         </React.Fragment>
       )}
 
-      {isLoading && <Loader />}
+      {dataIsLoading && <Loader />}
     </div>
   );
 };

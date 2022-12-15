@@ -2,21 +2,21 @@ import React, { useState, useContext, FC, useCallback } from "react";
 import classNames from "classnames";
 import Input from "../input";
 import Button from "../button";
-import { MapQuestContext, SettingsContext } from "../../providers";
-import { Language, TypeRequest } from "../../types";
+import { DataContext, SettingsContext } from "../../providers";
+import { Language } from "../../types";
 import { Store } from "../../service";
+import { TypeFetchData } from "../../api";
 import "./searchPanel.scss";
 
 const SearchPanel: FC = () => {
   const { language } = useContext(SettingsContext);
-  const { changeMapQuestData } = useContext(MapQuestContext);
-  const [searchString, setSearchString] = useState("");
+  const { getData, searchString, changeSearchString } = useContext(DataContext);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const localVolume = new Store<number>("volume");
   const localWeather = new Store<string>("weather");
 
   const onChangeSearchString: React.ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
-    setSearchString(e.target.value);
+    changeSearchString(e.target.value);
   }, []);
 
   const speak = () => {
@@ -108,10 +108,10 @@ const SearchPanel: FC = () => {
         }
         default: {
           if (command) {
-            setSearchString(command);
+            changeSearchString(command);
 
-            changeMapQuestData({
-              typeRequest: TypeRequest.geocoding,
+            getData({
+              type: TypeFetchData.SEARCH_STRING,
               searchString: command,
             });
           }
@@ -132,8 +132,8 @@ const SearchPanel: FC = () => {
     e.preventDefault();
 
     if (searchString) {
-      changeMapQuestData({
-        typeRequest: TypeRequest.geocoding,
+      getData({
+        type: TypeFetchData.SEARCH_STRING,
         searchString,
       });
     }

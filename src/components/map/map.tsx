@@ -2,8 +2,10 @@ import { useState, useContext, useEffect, FC } from "react";
 import { useIntl, defineMessages } from "react-intl";
 import ReactMapGL, { Marker } from "react-map-gl";
 import mapboxgl from "mapbox-gl";
-import { ConfigContext, MapQuestContext } from "../../providers";
-import { TypeRequest } from "../../types";
+import { DataContext } from "../../providers";
+import { TypeFetchData } from "../../api";
+
+import config from "../../application.json";
 
 import "./map.scss";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -25,8 +27,7 @@ const messages = defineMessages({
 });
 
 const Map: FC = () => {
-  const { mapBox } = useContext(ConfigContext);
-  const { coordinates, changeMapQuestData, changeCoordinates } = useContext(MapQuestContext);
+  const { data, getData } = useContext(DataContext);
   const intl = useIntl();
 
   const [latCoord, setLatCoord] = useState({
@@ -42,12 +43,13 @@ const Map: FC = () => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        changeMapQuestData({
-          typeRequest: TypeRequest.reverse,
-          searchString: `${position.coords.latitude},${position.coords.longitude}`,
+        getData({
+          type: TypeFetchData.COORDINATES,
+          coordinates: {
+            lat: position.coords.latitude,
+            long: position.coords.longitude,
+          },
         });
-
-        changeCoordinates({ lat: position.coords.latitude, long: position.coords.longitude });
 
         setLatCoord({
           gradus: Number(position.coords.latitude.toFixed()),
@@ -76,14 +78,14 @@ const Map: FC = () => {
     <div className="map-wrapper">
       <ReactMapGL
         zoom={11}
-        longitude={coordinates?.long || 0}
-        latitude={coordinates?.lat || 0}
-        mapboxAccessToken={mapBox.token}
+        longitude={data?.coordinates?.long || 0}
+        latitude={data?.coordinates?.lat || 0}
+        mapboxAccessToken={config.mapBox.token}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         style={{ height: "400px", width: "400px" }}
       >
-        {coordinates && (
-          <Marker longitude={coordinates?.long} latitude={coordinates?.lat}>
+        {data?.coordinates && (
+          <Marker longitude={data?.coordinates?.long} latitude={data?.coordinates?.lat}>
             <img src={Mark} alt="Marker" height="40px" width="40px" />
           </Marker>
         )}
