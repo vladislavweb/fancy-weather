@@ -54,7 +54,7 @@ export interface MapQuestResponse {
   ];
 }
 
-export enum TypeRequest {
+export enum MapQuestTypeRequest {
   geocoding = "address",
   reverse = "reverse",
 }
