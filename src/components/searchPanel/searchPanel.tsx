@@ -15,12 +15,9 @@ const SearchPanel: FC = () => {
   const localVolume = new Store<number>("volume");
   const localWeather = new Store<string>("weather");
 
-  const onChangeSearchString: React.ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e) => {
-      setSearchString(e.target.value);
-    },
-    [searchString],
-  );
+  const onChangeSearchString: React.ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
+    setSearchString(e.target.value);
+  }, []);
 
   const speak = () => {
     setIsSpeaking(true);
@@ -131,19 +128,16 @@ const SearchPanel: FC = () => {
     recognition.start();
   };
 
-  const handleSubmit: React.ChangeEventHandler<HTMLFormElement> = useCallback(
-    (e) => {
-      e.preventDefault();
+  const handleSubmit: React.ChangeEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
 
-      if (searchString) {
-        changeMapQuestData({
-          typeRequest: TypeRequest.geocoding,
-          searchString,
-        });
-      }
-    },
-    [searchString],
-  );
+    if (searchString) {
+      changeMapQuestData({
+        typeRequest: TypeRequest.geocoding,
+        searchString,
+      });
+    }
+  };
 
   return (
     <div
