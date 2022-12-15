@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext, FC, useMemo } from "react";
 import { defineMessages, useIntl } from "react-intl";
 import classNames from "classnames";
-import data from "../../../assets/data";
-import { MapBoxContext, SettingsContext } from "../../../providers";
+import mockData from "../../../assets/data";
+import { DataContext, SettingsContext } from "../../../providers";
 import { Scale } from "../../../types";
 import { mapBoxMapper, WeatherNow } from "../../../utils";
 import "./today.scss";
@@ -28,10 +28,10 @@ const messages = defineMessages({
 
 const Today: FC<Props> = ({ weatherData }) => {
   const { description, speed, feel, humidity, temp, img } = weatherData;
+  const { data } = useContext(DataContext);
   const { scale, language } = useContext(SettingsContext);
-  const { mapBoxData } = useContext(MapBoxContext);
   const intl = useIntl();
-  const location = useMemo(() => mapBoxMapper(mapBoxData), [mapBoxData]);
+  const location = useMemo(() => mapBoxMapper(data?.mapBoxData), [data?.mapBoxData]);
 
   const [time, setTime] = useState({
     hours: new Date().getHours(),
@@ -60,8 +60,8 @@ const Today: FC<Props> = ({ weatherData }) => {
 
       <div className="date">
         <span>
-          {data.days[language][new Date().getDay()]} &nbsp;
-          {data.months[language][new Date().getMonth()]} &nbsp;
+          {mockData.days[language][new Date().getDay()]} &nbsp;
+          {mockData.months[language][new Date().getMonth()]} &nbsp;
           {new Date().getDate()} &nbsp;
           {new Date().getFullYear()}
         </span>

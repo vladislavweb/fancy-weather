@@ -1,15 +1,7 @@
 import { FC } from "react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { Layout, Header, Main } from "./containers";
-import {
-  BackgroundProvider,
-  ConfigProvider,
-  LocalizationProvider,
-  MapBoxProvider,
-  MapQuestProvider,
-  SettingsProvider,
-  WeatherProvider,
-} from "./providers";
+import { LocalizationProvider, SettingsProvider, DataProivder } from "./providers";
 import { Store } from "./service";
 import { Language, LocalWeather, Scale } from "./types";
 
@@ -29,24 +21,16 @@ if (!localLanguage.read() || !localScale.read() || !localVolume.read() || !local
 
 const App: FC = () => (
   <QueryClientProvider client={queryClient}>
-    <ConfigProvider>
-      <SettingsProvider>
-        <MapQuestProvider>
-          <MapBoxProvider>
-            <WeatherProvider>
-              <BackgroundProvider>
-                <LocalizationProvider>
-                  <Layout>
-                    <Header />
-                    <Main />
-                  </Layout>
-                </LocalizationProvider>
-              </BackgroundProvider>
-            </WeatherProvider>
-          </MapBoxProvider>
-        </MapQuestProvider>
-      </SettingsProvider>
-    </ConfigProvider>
+    <SettingsProvider>
+      <DataProivder>
+        <LocalizationProvider>
+          <Layout>
+            <Header />
+            <Main />
+          </Layout>
+        </LocalizationProvider>
+      </DataProivder>
+    </SettingsProvider>
   </QueryClientProvider>
 );
 

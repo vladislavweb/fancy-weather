@@ -1,13 +1,16 @@
-import { FC, useContext } from "react";
+import { FC, useCallback, useContext } from "react";
 import classNames from "classnames";
-import { BackgroundContext, SettingsContext } from "../../providers";
+import { DataContext, SettingsContext } from "../../providers";
 import { Language, LocalWeather, Scale } from "../../types";
 import Button from "../button";
 import { Store } from "../../service";
+import { setBackgroundImage } from "../../utils";
+import { fetchBackgroundImage } from "../../api";
 import "./controlPanel.scss";
 
 const ControlPanel: FC = () => {
-  const { updateBackgroundImage, isLoading: backgroundIsLoading } = useContext(BackgroundContext);
+  const { searchString, backgroundImageIsLoading, changeBackgroundImageIsLoading } =
+    useContext(DataContext);
   const { scale, language, changeScale, changeLanguage } = useContext(SettingsContext);
   const localWeather = new Store<LocalWeather>("weather");
 
@@ -27,12 +30,22 @@ const ControlPanel: FC = () => {
     synth.speak(utterThis);
   };
 
+  const updateBackgroundHandler = useCallback(() => {
+    fetchBackgroundImage(language, searchString).then((res) => {
+      setBackgroundImage({
+        imageData: res,
+        onStart: () => changeBackgroundImageIsLoading(true),
+        onEnd: () => changeBackgroundImageIsLoading(false),
+      });
+    });
+  }, [searchString]);
+
   return (
     <div className="control-panel">
       <Button
         className="update-background"
-        disabled={backgroundIsLoading}
-        onClick={updateBackgroundImage}
+        disabled={backgroundImageIsLoading}
+        onClick={updateBackgroundHandler}
       />
 
       <Button className="speak-weather" onClick={speakWeather} />
