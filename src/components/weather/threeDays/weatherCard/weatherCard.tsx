@@ -16,8 +16,8 @@ const WeatherCard: FC<Props> = ({ weather, next }) => {
 
   return (
     <div className="weather-card">
-      <div className="date">
-        <span>
+      <div className="weather-card__date date">
+        <span className="date__text">
           {data.days[language][new Date().getDay() + next]} &nbsp;
           {data.months[language][new Date().getMonth()]} &nbsp;
           {new Date().getDate() + next} &nbsp;
@@ -25,15 +25,15 @@ const WeatherCard: FC<Props> = ({ weather, next }) => {
         </span>
       </div>
 
-      <div className="weather-info">
-        <div className="weather-description">
-          <span>{weather.description}</span>
+      <div className="weather-card__info info">
+        <div className="info__description">
+          <span className="info__text">{weather.description}</span>
         </div>
-        <div className={classNames("weather-three-icon", weather.img)}></div>
+        <div className={classNames("info__icon", weather.img)}></div>
       </div>
 
-      <div className="temperature">
-        <span>
+      <div className="weather-card__temperature temperature">
+        <span className="temperature__text">
           {scale === Scale.FAR
             ? `${(weather.avgTemp * 1.8 + 32).toFixed()} °F`
             : `${weather.avgTemp.toFixed()} °C`}

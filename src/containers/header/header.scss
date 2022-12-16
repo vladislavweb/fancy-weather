@@ -1,7 +1,14 @@
 .header {
+  margin-bottom: 40px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 40px 0;
-  text-align: center;
+
+  @media only screen and (max-width: 1400px) {
+    margin-bottom: 20px;
+  }
+
+  @media only screen and (max-width: 760px) {
+    margin-bottom: 16px;
+  }
 }

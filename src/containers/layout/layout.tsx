@@ -6,4 +6,5 @@ type Props = {
 };
 
 const Layout: FC<Props> = ({ children }) => <div className="layout">{children}</div>;
+
 export default Layout;

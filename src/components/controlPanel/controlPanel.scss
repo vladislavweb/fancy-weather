@@ -1,65 +1,52 @@
 .control-panel {
-  display: flex;
-
-  @media only screen and (max-width: 730px) {
-    margin: 0 auto 20px;
+  @media only screen and (max-width: 760px) {
+    width: 100%;
+    margin-bottom: 20px;
   }
 
-  .speak-weather {
-    width: 40px;
-    margin-right: 10px;
-    background-image: url("./assets/sound.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 26px;
-    border-radius: 0 5px 5px 0;
-  }
+  .control-panel__layout {
+    display: flex;
 
-  .update-background {
-    width: 40px;
-    background-image: url("./assets/refresh.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 22px;
-    border-right: 0;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-  }
+    @media only screen and (max-width: 760px) {
+      justify-content: space-between;
+    }
 
-  .lang-ru {
-    border-radius: 5px 0 0 5px;
-  }
+    .control-panel__actions-wrapper,
+    .control-panel__selectors-wrapper {
+      display: flex;
+      border: 2px #ffffff solid;
+      border-radius: 5px;
 
-  .lang-ua {
-    border-radius: 0 5px 5px 0;
-  }
+      .control-panel__button {
+        height: 40px;
+        width: 40px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
 
-  .scale-far {
-    border-radius: 5px 0 0 5px;
-  }
+    & > div:nth-child(2) {
+      margin: 0 10px;
 
-  .scale-cel {
-    border-radius: 0 5px 5px 0;
-  }
+      @media only screen and (max-width: 760px) {
+        margin: 0;
+      }
+    }
 
-  .submit-form {
-    border-radius: 0 5px 5px 0;
-  }
+    .control-panel__selectors-wrapper {
+      .select-button {
+        &.select-button--selected {
+          color: cyan;
 
-  button:nth-child(4) {
-    border-right: 0;
-    border-left: 0;
-  }
+          svg {
+            fill: cyan;
 
-  button:nth-child(5) {
-    margin-right: 10px;
-  }
-
-  button:nth-child(6) {
-    border-right: 0;
-  }
-
-  .current-control {
-    color: cyan;
+            path {
+              fill: cyan;
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -1,60 +1,77 @@
 .weather-card {
   width: 100%;
+  margin: 1%;
+  padding: 1%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 1%;
-  padding: 1%;
-  border: 2px solid white;
+  border: 2px solid #ffffff;
   border-radius: 10px;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(4px);
 
-  .date {
+  .weather-card__date {
     width: 100%;
-    font-size: 22px;
 
-    @media only screen and (max-width: 760px) {
-      font-size: 30px;
-    }
-  }
+    &.date {
+      .date__text {
+        font-size: 22px;
 
-  .weather-info {
-    width: 100%;
-    text-transform: uppercase;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @media only screen and (max-width: 760px) {
-      font-size: 25px;
-    }
-
-    .weather-three-icon {
-      width: 115px;
-      height: 55px;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 75px;
-
-      @media only screen and (max-width: 760px) {
-        width: 175px;
-        height: 60px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 100px;
+        @media only screen and (max-width: 760px) {
+          font-size: 30px;
+        }
       }
     }
   }
 
-  .temperature {
+  .weather-card__info {
     width: 100%;
-    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    @media only screen and (max-width: 760px) {
-      font-size: 60px;
+    &.info {
+      .info__description {
+        .info__text {
+          text-transform: uppercase;
+          font-size: 18px;
+
+          @media only screen and (max-width: 760px) {
+            font-size: 25px;
+          }
+        }
+      }
+
+      .info__icon {
+        width: 115px;
+        height: 55px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 75px;
+
+        @media only screen and (max-width: 760px) {
+          width: 160px;
+          height: 60px;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 100px;
+        }
+      }
+    }
+  }
+
+  .weather-card__temperature {
+    &.temperature {
+      width: 100%;
+
+      .temperature__text {
+        font-size: 40px;
+
+        @media only screen and (max-width: 760px) {
+          font-size: 60px;
+        }
+      }
     }
   }
 }

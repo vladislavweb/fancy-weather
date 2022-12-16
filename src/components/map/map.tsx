@@ -2,6 +2,7 @@ import { useState, useContext, useEffect, FC } from "react";
 import { useIntl, defineMessages } from "react-intl";
 import ReactMapGL, { Marker } from "react-map-gl";
 import mapboxgl from "mapbox-gl";
+import { throttle } from "lodash";
 import { DataContext } from "../../providers";
 import { TypeFetchData } from "../../api";
 
@@ -27,6 +28,7 @@ const messages = defineMessages({
 });
 
 const Map: FC = () => {
+  const [mapSize, setMapSize] = useState(window.screen.width <= 760 ? 300 : 400);
   const { data, getData } = useContext(DataContext);
   const intl = useIntl();
 
@@ -39,6 +41,14 @@ const Map: FC = () => {
     gradus: 0,
     minutes: 0,
   });
+
+  const updateMapSize = throttle(() => {
+    if (window.screen.width <= 760) {
+      setMapSize(300);
+    } else {
+      setMapSize(400);
+    }
+  }, 1000);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -74,15 +84,23 @@ const Map: FC = () => {
     );
   }, []);
 
+  useEffect(() => {
+    window.addEventListener("resize", updateMapSize);
+
+    return () => {
+      window.removeEventListener("resize", updateMapSize);
+    };
+  }, []);
+
   return (
-    <div className="map-wrapper">
+    <div className="map">
       <ReactMapGL
         zoom={11}
         longitude={data?.coordinates?.long || 0}
         latitude={data?.coordinates?.lat || 0}
         mapboxAccessToken={config.mapBox.token}
         mapStyle="mapbox://styles/mapbox/streets-v11"
-        style={{ height: "400px", width: "400px" }}
+        style={{ height: mapSize, width: mapSize }}
       >
         {data?.coordinates && (
           <Marker longitude={data?.coordinates?.long} latitude={data?.coordinates?.lat}>
@@ -91,21 +109,25 @@ const Map: FC = () => {
         )}
       </ReactMapGL>
 
-      <div className="coordinates">
-        <p className="long">
-          {intl.formatMessage(messages.componentsMapLongitude, {
-            gradus: longCoord.gradus,
-            minutes: longCoord.minutes,
-            type: longCoord.gradus > 0 ? "E" : "W",
-          })}
+      <div className="map__coordinates">
+        <p className="map__long">
+          <span>
+            {intl.formatMessage(messages.componentsMapLongitude, {
+              gradus: longCoord.gradus,
+              minutes: longCoord.minutes,
+              type: longCoord.gradus > 0 ? "E" : "W",
+            })}
+          </span>
         </p>
 
-        <p className="lat">
-          {intl.formatMessage(messages.componentsMapLatitude, {
-            gradus: latCoord.gradus,
-            minutes: latCoord.minutes,
-            type: latCoord.gradus > 0 ? "N" : "S",
-          })}
+        <p className="map__lat">
+          <span>
+            {intl.formatMessage(messages.componentsMapLatitude, {
+              gradus: latCoord.gradus,
+              minutes: latCoord.minutes,
+              type: latCoord.gradus > 0 ? "N" : "S",
+            })}
+          </span>
         </p>
       </div>
     </div>

@@ -1,11 +1,6 @@
-.map-wrapper {
-  width: 400px;
+.map {
   margin-left: auto;
   border-radius: 10px;
-
-  @media only screen and (max-width: 960px) {
-    margin: auto;
-  }
 
   @media only screen and (max-width: 400px) {
     width: 300px;
@@ -27,10 +22,15 @@
     }
   }
 
-  .coordinates {
-    font-weight: bold;
-    font-size: 25px;
-    text-align: right;
-    color: white;
+  .map__coordinates {
+    .map__lat,
+    .map__long {
+      span {
+        font-weight: bold;
+        font-size: 25px;
+        text-align: right;
+        color: #ffffff;
+      }
+    }
   }
 }

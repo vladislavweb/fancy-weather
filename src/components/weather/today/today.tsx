@@ -53,13 +53,17 @@ const Today: FC<Props> = ({ weatherData }) => {
 
   return (
     <div className="today">
-      <div className="location">
-        <p className="country">{location.country}</p>
-        <p className="place">{location.place}</p>
+      <div className="today__location location">
+        <p className="location__country">
+          <span>{location.country}</span>
+        </p>
+        <p className="location__place">
+          <span>{location.place}</span>
+        </p>
       </div>
 
-      <div className="date">
-        <span>
+      <div className="today__date date">
+        <span className="date__text">
           {mockData.days[language][new Date().getDay()]} &nbsp;
           {mockData.months[language][new Date().getMonth()]} &nbsp;
           {new Date().getDate()} &nbsp;
@@ -67,23 +71,23 @@ const Today: FC<Props> = ({ weatherData }) => {
         </span>
       </div>
 
-      <div className="time">
-        <div className="old">
+      <div className="today__time time">
+        <div className="time__old">
           {time.hours.toString().length === 1 ? `0${time.hours}` : `${time.hours}`}:
           {time.minutes.toString().length === 1 ? `0${time.minutes}` : `${time.minutes}`}:
           {time.seconds.toString().length === 1 ? `0${time.seconds}` : `${time.seconds}`}
         </div>
       </div>
 
-      <div className="about">
-        <div className="about-weather">
-          <span>{description}</span>
+      <div className="today__about-weather about-weather">
+        <div className="about-weather__wrapper">
+          <span className="about-weather__text">{description}</span>
         </div>
-        <div className={classNames("about-icon", img)}></div>
+        <div className={classNames("about-weather__icon", img)}></div>
       </div>
 
-      <div className="parameters">
-        <div className="temperature">
+      <div className="today__parameters parameters">
+        <div className="parameters__temperature">
           {scale === Scale.FAR ? (
             <div>
               <span>{(temp * 1.8 + 32).toFixed()}</span>
@@ -97,23 +101,27 @@ const Today: FC<Props> = ({ weatherData }) => {
           )}
         </div>
 
-        <div className="details">
-          <div className="speed">
-            {intl.formatMessage(messages.componentsWeatherTodayWindSpeed, {
-              speed,
-            })}
+        <div className="today__details details">
+          <div className="details__speed">
+            <span>
+              {intl.formatMessage(messages.componentsWeatherTodayWindSpeed, {
+                speed,
+              })}
+            </span>
           </div>
 
-          <div className="feel">
-            {intl.formatMessage(messages.componentsWeatherTodayFeelsLike, {
-              temperature:
-                scale === Scale.CEL
-                  ? `${(feel / 1).toFixed()} °C`
-                  : `${((feel / 1) * 1.8 + 32).toFixed()} °F`,
-            })}
+          <div className="details__feel">
+            <span>
+              {intl.formatMessage(messages.componentsWeatherTodayFeelsLike, {
+                temperature:
+                  scale === Scale.CEL
+                    ? `${(feel / 1).toFixed()} °C`
+                    : `${((feel / 1) * 1.8 + 32).toFixed()} °F`,
+              })}
+            </span>
           </div>
 
-          <div className="humidity">
+          <div className="details__humidity">
             <span>{intl.formatMessage(messages.componentsWeatherTodayHumidity, { humidity })}</span>
           </div>
         </div>
