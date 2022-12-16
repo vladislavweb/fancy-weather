@@ -1,11 +1,14 @@
 import React, { useState, useContext, FC, useCallback } from "react";
 import classNames from "classnames";
 import Input from "../input";
-import Button from "../button";
+import { IconButton } from "../button";
 import { DataContext, SettingsContext } from "../../providers";
 import { Language } from "../../types";
 import { Store } from "../../service";
 import { TypeFetchData } from "../../api";
+import Divider from "../divider";
+import { ReactComponent as SearchIcon } from "./assets/search.svg";
+import { ReactComponent as MicrophoneIcon } from "./assets/microphone.svg";
 import "./searchPanel.scss";
 
 const SearchPanel: FC = () => {
@@ -142,22 +145,32 @@ const SearchPanel: FC = () => {
   return (
     <div
       className={classNames("search-panel", {
-        "search-panel--speaking": isSpeaking,
+        "search-panel_speaking": isSpeaking,
       })}
     >
-      <form className="search-form" onSubmit={handleSubmit}>
-        <Input
-          className="search-input"
-          value={searchString}
-          onChange={onChangeSearchString}
-          required={true}
-          readOnly={isSpeaking}
-        />
+      <div className="search-panel__layout">
+        <form className="search-panel__form search-form" onSubmit={handleSubmit}>
+          <Input
+            className="search-form__input"
+            value={searchString}
+            onChange={onChangeSearchString}
+            required={true}
+            readOnly={isSpeaking}
+          />
 
-        <Button className="speak-button" onClick={speak} type="button" />
+          <Divider />
 
-        <Button className="search-button" type="submit" disabled={isSpeaking} />
-      </form>
+          <IconButton className="search-form__speak-button" onClick={speak} type="button">
+            <MicrophoneIcon />
+          </IconButton>
+
+          <Divider />
+
+          <IconButton className="search-form__submit-button" type="submit" disabled={isSpeaking}>
+            <SearchIcon />
+          </IconButton>
+        </form>
+      </div>
     </div>
   );
 };
