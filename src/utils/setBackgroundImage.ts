@@ -6,7 +6,7 @@ interface Params {
   onEnd?: () => void;
 }
 
-type SetBackgroundImage = ({}: Params) => Promise<void>;
+type SetBackgroundImage = (params: Params) => Promise<void>;
 
 export const setBackgroundImage: SetBackgroundImage = async ({ imageData, onStart, onEnd }) => {
   try {

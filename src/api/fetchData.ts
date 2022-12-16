@@ -32,7 +32,7 @@ export interface DataResponse {
   coordinates?: Coordinates;
 }
 
-type FetchData = ({}: FetchDataParams) => Promise<DataResponse | undefined>;
+type FetchData = (params: FetchDataParams) => Promise<DataResponse | undefined>;
 
 const fetchData: FetchData = async ({ language, type, coordinates, searchString }) => {
   if (type === TypeFetchData.COORDINATES && coordinates) {
