@@ -1,4 +1,4 @@
-export { default as Button } from "./button";
+export { default as Button, IconButton } from "./button";
 export { default as ControlPanel } from "./controlPanel";
 export { default as Input } from "./input";
 export { default as Loader } from "./loader";

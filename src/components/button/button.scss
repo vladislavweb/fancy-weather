@@ -1,14 +1,25 @@
-.btn {
-  height: 40px;
-  padding: 5px 10px;
-  color: white;
-  border: 2px solid white;
+.custom-button {
+  color: #ffffff;
   background-color: transparent;
   backdrop-filter: blur(5px);
-  font-size: 18px;
+  border: none;
   cursor: pointer;
 
   &:hover {
     background-color: rgba(186, 210, 255, 0.6);
+  }
+
+  &.custom-icon-button {
+    padding: 4px;
+
+    svg {
+      height: 90%;
+      width: 90%;
+      fill: #ffffff;
+
+      path {
+        fill: #ffffff;
+      }
+    }
   }
 }
