@@ -17,3 +17,9 @@ code {
   font-family: "Jura";
   src: url("./assets/fonts/Jura-VariableFontwght.woff2");
 }
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
