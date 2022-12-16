@@ -5,3 +5,4 @@ export { default as Loader } from "./loader";
 export { default as Map } from "./map";
 export { default as SearchPanel } from "./searchPanel";
 export { default as Weather } from "./weather";
+export { default as Divider } from "./divider";
