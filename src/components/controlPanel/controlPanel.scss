@@ -1,65 +1,39 @@
 .control-panel {
-  display: flex;
+  .control-panel__layout {
+    display: flex;
 
-  @media only screen and (max-width: 730px) {
-    margin: 0 auto 20px;
-  }
+    .control-panel__actions-wrapper,
+    .control-panel__selectors-wrapper {
+      display: flex;
+      border: 2px #ffffff solid;
+      border-radius: 5px;
 
-  .speak-weather {
-    width: 40px;
-    margin-right: 10px;
-    background-image: url("./assets/sound.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 26px;
-    border-radius: 0 5px 5px 0;
-  }
+      .control-panel__button {
+        height: 40px;
+        width: 40px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
 
-  .update-background {
-    width: 40px;
-    background-image: url("./assets/refresh.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 22px;
-    border-right: 0;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-  }
+    & > div:nth-child(2) {
+      margin: 0 10px;
+    }
 
-  .lang-ru {
-    border-radius: 5px 0 0 5px;
-  }
+    .control-panel__selectors-wrapper {
+      .select-button {
+        &.select-button_selected {
+          color: cyan;
 
-  .lang-ua {
-    border-radius: 0 5px 5px 0;
-  }
+          svg {
+            fill: cyan;
 
-  .scale-far {
-    border-radius: 5px 0 0 5px;
-  }
-
-  .scale-cel {
-    border-radius: 0 5px 5px 0;
-  }
-
-  .submit-form {
-    border-radius: 0 5px 5px 0;
-  }
-
-  button:nth-child(4) {
-    border-right: 0;
-    border-left: 0;
-  }
-
-  button:nth-child(5) {
-    margin-right: 10px;
-  }
-
-  button:nth-child(6) {
-    border-right: 0;
-  }
-
-  .current-control {
-    color: cyan;
+            path {
+              fill: cyan;
+            }
+          }
+        }
+      }
+    }
   }
 }

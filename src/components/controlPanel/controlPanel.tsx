@@ -2,10 +2,15 @@ import { FC, useCallback, useContext } from "react";
 import classNames from "classnames";
 import { DataContext, SettingsContext } from "../../providers";
 import { Language, LocalWeather, Scale } from "../../types";
-import Button from "../button";
+import Button, { IconButton } from "../button";
 import { Store } from "../../service";
 import { setBackgroundImage } from "../../utils";
 import { fetchBackgroundImage } from "../../api";
+import { ReactComponent as RefreshIcon } from "./assets/refresh.svg";
+import { ReactComponent as SoundIcon } from "./assets/sound.svg";
+import { ReactComponent as CelsiusIcon } from "./assets/celsius.svg";
+import { ReactComponent as FarenheitIcon } from "./assets/farenheit.svg";
+import Divider from "../divider";
 import "./controlPanel.scss";
 
 const ControlPanel: FC = () => {
@@ -42,68 +47,88 @@ const ControlPanel: FC = () => {
 
   return (
     <div className="control-panel">
-      <Button
-        className="update-background"
-        disabled={backgroundImageIsLoading}
-        onClick={updateBackgroundHandler}
-      />
+      <div className="control-panel__layout">
+        <div className="control-panel__actions-wrapper">
+          <IconButton
+            className="control-panel__button"
+            disabled={backgroundImageIsLoading}
+            onClick={updateBackgroundHandler}
+          >
+            <RefreshIcon />
+          </IconButton>
 
-      <Button className="speak-weather" onClick={speakWeather} />
+          <Divider />
 
-      <Button
-        className={classNames("lang-ru", {
-          "current-control": language === Language.RU,
-        })}
-        onClick={() => {
-          changeLanguage(Language.RU);
-        }}
-      >
-        RU
-      </Button>
+          <IconButton className="control-panel__button" onClick={speakWeather}>
+            <SoundIcon />
+          </IconButton>
+        </div>
 
-      <Button
-        className={classNames("lang-en", {
-          "current-control": language === Language.EN,
-        })}
-        onClick={() => {
-          changeLanguage(Language.EN);
-        }}
-      >
-        EN
-      </Button>
+        <div className="control-panel__selectors-wrapper">
+          <Button
+            className={classNames("control-panel__button", "select-button", "center", {
+              "select-button_selected": language === Language.RU,
+            })}
+            onClick={() => {
+              changeLanguage(Language.RU);
+            }}
+          >
+            RU
+          </Button>
 
-      <Button
-        className={classNames("lang-uk", {
-          "current-control": language === Language.UK,
-        })}
-        onClick={() => {
-          changeLanguage(Language.UK);
-        }}
-      >
-        UK
-      </Button>
+          <Divider />
 
-      <Button
-        className={classNames("scale-far", {
-          "current-control": scale === Scale.FAR,
-        })}
-        onClick={() => {
-          changeScale(Scale.FAR);
-        }}
-      >
-        °F
-      </Button>
+          <Button
+            className={classNames("control-panel__button", "select-button", "center", {
+              "select-button_selected": language === Language.EN,
+            })}
+            onClick={() => {
+              changeLanguage(Language.EN);
+            }}
+          >
+            EN
+          </Button>
 
-      <Button
-        className={classNames("scale-cel", {
-          "current-control": scale === Scale.CEL,
-        })}
-        onClick={() => {
-          changeScale(Scale.CEL);
-        }}
-      >
-        °C
-      </Button>
+          <Divider />
+
+          <Button
+            className={classNames("control-panel__button", "select-button", "center", {
+              "select-button_selected": language === Language.UK,
+            })}
+            onClick={() => {
+              changeLanguage(Language.UK);
+            }}
+          >
+            UK
+          </Button>
+        </div>
+
+        <div className="control-panel__selectors-wrapper">
+          <IconButton
+            className={classNames("control-panel__button", "select-button", {
+              "select-button_selected": scale === Scale.FAR,
+            })}
+            onClick={() => {
+              changeScale(Scale.FAR);
+            }}
+          >
+            <FarenheitIcon />
+          </IconButton>
+
+          <Divider />
+
+          <IconButton
+            className={classNames("control-panel__button", "select-button", {
+              "select-button_selected": scale === Scale.CEL,
+            })}
+            onClick={() => {
+              changeScale(Scale.CEL);
+            }}
+          >
+            <CelsiusIcon />
+          </IconButton>
+        </div>
+      </div>
     </div>
   );
 };
