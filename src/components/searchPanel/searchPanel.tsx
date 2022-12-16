@@ -145,7 +145,7 @@ const SearchPanel: FC = () => {
   return (
     <div
       className={classNames("search-panel", {
-        "search-panel_speaking": isSpeaking,
+        "search-panel--speaking": isSpeaking,
       })}
     >
       <div className="search-panel__layout">

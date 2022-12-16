@@ -67,7 +67,7 @@ const ControlPanel: FC = () => {
         <div className="control-panel__selectors-wrapper">
           <Button
             className={classNames("control-panel__button", "select-button", "center", {
-              "select-button_selected": language === Language.RU,
+              "select-button--selected": language === Language.RU,
             })}
             onClick={() => {
               changeLanguage(Language.RU);
@@ -80,7 +80,7 @@ const ControlPanel: FC = () => {
 
           <Button
             className={classNames("control-panel__button", "select-button", "center", {
-              "select-button_selected": language === Language.EN,
+              "select-button--selected": language === Language.EN,
             })}
             onClick={() => {
               changeLanguage(Language.EN);
@@ -93,7 +93,7 @@ const ControlPanel: FC = () => {
 
           <Button
             className={classNames("control-panel__button", "select-button", "center", {
-              "select-button_selected": language === Language.UK,
+              "select-button--selected": language === Language.UK,
             })}
             onClick={() => {
               changeLanguage(Language.UK);
@@ -106,7 +106,7 @@ const ControlPanel: FC = () => {
         <div className="control-panel__selectors-wrapper">
           <IconButton
             className={classNames("control-panel__button", "select-button", {
-              "select-button_selected": scale === Scale.FAR,
+              "select-button--selected": scale === Scale.FAR,
             })}
             onClick={() => {
               changeScale(Scale.FAR);
@@ -119,7 +119,7 @@ const ControlPanel: FC = () => {
 
           <IconButton
             className={classNames("control-panel__button", "select-button", {
-              "select-button_selected": scale === Scale.CEL,
+              "select-button--selected": scale === Scale.CEL,
             })}
             onClick={() => {
               changeScale(Scale.CEL);

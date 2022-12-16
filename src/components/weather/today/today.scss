@@ -1,68 +1,96 @@
 .today {
   text-align: center;
 
-  .place {
-    margin: 0;
-    font-size: 60px;
-    font-weight: bold;
-  }
+  .today__location {
+    &.location {
+      .location__country {
+        margin: 0;
 
-  .country {
-    margin: 0;
-    font-size: 30px;
-    font-weight: bold;
-    letter-spacing: 2px;
-  }
+        span {
+          font-size: 30px;
+          font-weight: bold;
+          letter-spacing: 2px;
+        }
+      }
 
-  .date {
-    font-size: 40px;
-  }
+      .location__place {
+        margin: 0;
 
-  .time {
-    font-size: 40px;
-  }
-
-  .about {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .about-weather {
-    text-transform: uppercase;
-    font-size: 40px;
-  }
-
-  .about-icon {
-    width: 200px;
-    height: 150px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 200px;
-  }
-
-  .parameters {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @media only screen and (max-width: 700px) {
-      flex-wrap: wrap;
+        span {
+          font-size: 60px;
+          font-weight: bold;
+        }
+      }
     }
   }
 
-  .temperature {
-    font-size: 130px;
+  .today__date {
+    &.date {
+      .date__text {
+        font-size: 40px;
+      }
+    }
   }
 
-  .details {
+  .today__time {
+    &.time {
+      .time__old {
+        font-size: 40px;
+      }
+    }
+  }
+
+  .today__about-weather {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.about-weather {
+      .about-weather__wrapper {
+        .about-weather__text {
+          text-transform: uppercase;
+          font-size: 40px;
+        }
+      }
+
+      .about-weather__icon {
+        width: 200px;
+        height: 150px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 200px;
+      }
+    }
+  }
+
+  .today__parameters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media only screen and (max-width: 760px) {
+      flex-wrap: wrap;
+    }
+
+    &.parameters {
+      .parameters__temperature {
+        font-size: 130px;
+      }
+    }
+  }
+
+  .today__details {
     margin-left: 30px;
     text-align: left;
 
-    .feel,
-    .speed,
-    .humidity {
-      font-size: 30px;
+    &.details {
+      .details__feel,
+      .details__speed,
+      .details__humidity {
+        span {
+          font-size: 30px;
+        }
+      }
     }
   }
 }

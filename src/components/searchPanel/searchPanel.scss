@@ -6,7 +6,11 @@
   border: 2px #ffffff solid;
   border-radius: 5px;
 
-  &.search-panel_speaking {
+  @media only screen and (max-width: 760px) {
+    max-width: none;
+  }
+
+  &.search-panel--speaking {
     box-shadow: 0 0 10px 10px;
   }
 

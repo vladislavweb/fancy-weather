@@ -1,6 +1,15 @@
 .control-panel {
+  @media only screen and (max-width: 760px) {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
   .control-panel__layout {
     display: flex;
+
+    @media only screen and (max-width: 760px) {
+      justify-content: space-between;
+    }
 
     .control-panel__actions-wrapper,
     .control-panel__selectors-wrapper {
@@ -18,11 +27,15 @@
 
     & > div:nth-child(2) {
       margin: 0 10px;
+
+      @media only screen and (max-width: 760px) {
+        margin: 0;
+      }
     }
 
     .control-panel__selectors-wrapper {
       .select-button {
-        &.select-button_selected {
+        &.select-button--selected {
           color: cyan;
 
           svg {
