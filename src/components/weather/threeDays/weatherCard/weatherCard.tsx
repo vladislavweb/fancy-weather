@@ -1,4 +1,4 @@
-import { FC, useContext } from "react";
+import { FC, HTMLProps, useContext } from "react";
 import classNames from "classnames";
 import data from "../../../../assets/data";
 import { SettingsContext } from "../../../../providers";
@@ -6,16 +6,16 @@ import { Scale } from "../../../../types";
 import { WeatherThreeDays } from "../../../../utils";
 import "./weatherCard.scss";
 
-interface Props {
+interface Props extends HTMLProps<HTMLDivElement> {
   weather: WeatherThreeDays;
   next: number;
 }
 
-const WeatherCard: FC<Props> = ({ weather, next }) => {
+const WeatherCard: FC<Props> = ({ weather, next, className, ...restProps }) => {
   const { scale, language } = useContext(SettingsContext);
 
   return (
-    <div className="weather-card">
+    <div className={classNames("weather-card", className)} {...restProps}>
       <div className="weather-card__date date">
         <span className="date__text">
           {data.days[language][new Date().getDay() + next]} &nbsp;

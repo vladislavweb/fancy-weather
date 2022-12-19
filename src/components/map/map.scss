@@ -2,15 +2,6 @@
   margin-left: auto;
   border-radius: 10px;
 
-  @media only screen and (max-width: 400px) {
-    width: 300px;
-
-    &[tabindex="0"] {
-      width: 300px !important;
-      margin: auto;
-    }
-  }
-
   .mapboxgl-map {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -26,7 +17,7 @@
     .map__lat,
     .map__long {
       span {
-        font-weight: bold;
+        font-family: "RobotoRegular";
         font-size: 25px;
         text-align: right;
         color: #ffffff;

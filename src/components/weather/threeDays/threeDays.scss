@@ -1,7 +1,17 @@
 .three-days {
   display: flex;
+  justify-content: space-between;
 
   @media only screen and (max-width: 1200px) {
     flex-wrap: wrap;
+    margin-bottom: 16px;
+
+    .three-days__element {
+      max-width: 100%;
+    }
+
+    .three-days__element:not(:last-child) {
+      margin-bottom: 8px;
+    }
   }
 }

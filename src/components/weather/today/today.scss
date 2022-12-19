@@ -1,5 +1,11 @@
 .today {
   text-align: center;
+  color: #ffffff;
+  font-family: "RobotoRegular";
+
+  @media only screen and (max-width: 760px) {
+    margin-bottom: 16px;
+  }
 
   .today__location {
     &.location {
@@ -7,8 +13,7 @@
         margin: 0;
 
         span {
-          font-size: 30px;
-          font-weight: bold;
+          font-size: 60px;
           letter-spacing: 2px;
         }
       }
@@ -17,8 +22,7 @@
         margin: 0;
 
         span {
-          font-size: 60px;
-          font-weight: bold;
+          font-size: 55px;
         }
       }
     }
@@ -48,8 +52,9 @@
     &.about-weather {
       .about-weather__wrapper {
         .about-weather__text {
-          text-transform: uppercase;
           font-size: 40px;
+          font-family: "RobotoMedium";
+          text-transform: uppercase;
         }
       }
 
