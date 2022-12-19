@@ -10,7 +10,7 @@ interface Props {
 const ThreeDays: FC<Props> = ({ weatherData }) => (
   <div className="three-days">
     {weatherData.map((weather, index) => (
-      <WeatherCard weather={weather} key={index} next={index + 1} />
+      <WeatherCard className="three-days__element" weather={weather} key={index} next={index + 1} />
     ))}
   </div>
 );

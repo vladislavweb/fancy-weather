@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, FC } from "react";
+import { useState, useContext, useEffect, FC, useLayoutEffect } from "react";
 import { useIntl, defineMessages } from "react-intl";
 import ReactMapGL, { Marker } from "react-map-gl";
 import mapboxgl from "mapbox-gl";
@@ -28,7 +28,7 @@ const messages = defineMessages({
 });
 
 const Map: FC = () => {
-  const [mapSize, setMapSize] = useState(window.screen.width <= 760 ? 300 : 400);
+  const [mapSize, setMapSize] = useState(280);
   const { data, getData } = useContext(DataContext);
   const intl = useIntl();
 
@@ -44,7 +44,7 @@ const Map: FC = () => {
 
   const updateMapSize = throttle(() => {
     if (window.screen.width <= 760) {
-      setMapSize(300);
+      setMapSize(280);
     } else {
       setMapSize(400);
     }
@@ -82,6 +82,10 @@ const Map: FC = () => {
         enableHighAccuracy: true,
       },
     );
+  }, []);
+
+  useLayoutEffect(() => {
+    updateMapSize();
   }, []);
 
   useEffect(() => {

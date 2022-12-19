@@ -1,15 +1,17 @@
 .weather-card {
+  max-width: 33%;
   width: 100%;
-  margin: 1%;
   padding: 1%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   border: 2px solid #ffffff;
   border-radius: 10px;
-  text-align: center;
+  box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(4px);
+  font-family: "RobotoRegular";
+  text-align: center;
 
   .weather-card__date {
     width: 100%;
@@ -34,8 +36,8 @@
     &.info {
       .info__description {
         .info__text {
-          text-transform: uppercase;
           font-size: 18px;
+          text-transform: uppercase;
 
           @media only screen and (max-width: 760px) {
             font-size: 25px;
