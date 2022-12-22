@@ -36,7 +36,7 @@ type FetchData = (params: FetchDataParams) => Promise<DataResponse | undefined>;
 
 const fetchData: FetchData = async ({ language, type, coordinates, searchString }) => {
   if (type === TypeFetchData.COORDINATES && coordinates) {
-    const { lat, long } = coordinates || {};
+    const { lat, long } = coordinates;
 
     const mapQuestData = await fetchMapQuestData(MapQuestTypeRequest.reverse, `${lat},${long}`);
 
