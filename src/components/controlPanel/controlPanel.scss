@@ -22,6 +22,11 @@
         width: 40px;
         font-size: 18px;
         font-family: "RobotoBold";
+
+        @media only screen and (max-width: 420px) {
+          height: 36px;
+          width: 36px;
+        }
       }
     }
 
