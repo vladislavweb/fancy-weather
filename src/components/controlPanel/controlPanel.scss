@@ -1,10 +1,13 @@
 .control-panel {
+  height: 40px;
+
   @media only screen and (max-width: 760px) {
     width: 100%;
     margin-bottom: 20px;
   }
 
   .control-panel__layout {
+    height: 100%;
     display: flex;
 
     @media only screen and (max-width: 760px) {
@@ -13,18 +16,19 @@
 
     .control-panel__actions-wrapper,
     .control-panel__selectors-wrapper {
+      height: 100%;
       display: flex;
       border: 2px #ffffff solid;
+      box-sizing: border-box;
       border-radius: 5px;
 
       .control-panel__button {
-        height: 40px;
+        height: 100%;
         width: 40px;
         font-size: 18px;
         font-family: "RobotoBold";
 
         @media only screen and (max-width: 420px) {
-          height: 36px;
           width: 36px;
         }
       }
