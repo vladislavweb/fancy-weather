@@ -1,7 +1,7 @@
 import { FC, ReactNode, useContext, useEffect, useState } from "react";
 import { IntlProvider } from "react-intl";
-import { SettingsContext } from "../settings";
-import { Language } from "../../types";
+import { SettingsContext } from "providers";
+import { Language } from "types";
 
 type Props = FC<{ children?: ReactNode }>;
 

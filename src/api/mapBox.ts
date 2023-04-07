@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../application.json";
-import { Coordinates, Language, MapBoxResponse } from "../types";
+import { Coordinates, Language, MapBoxResponse } from "types";
 
 type FetchMapBoxData = (coordinates: Coordinates, langauge: Language) => Promise<MapBoxResponse>;
 

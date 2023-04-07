@@ -1,9 +1,9 @@
 import { FC, HTMLProps, useContext } from "react";
 import classNames from "classnames";
-import data from "../../../../assets/data";
-import { SettingsContext } from "../../../../providers";
-import { Scale } from "../../../../types";
-import { WeatherThreeDays } from "../../../../utils";
+import data from "assets/data";
+import { SettingsContext } from "providers";
+import { Scale } from "types";
+import { WeatherThreeDays } from "utils";
 import "./weatherCard.scss";
 
 interface Props extends HTMLProps<HTMLDivElement> {

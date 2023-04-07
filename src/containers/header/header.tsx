@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ControlPanel, SearchPanel } from "../../components";
+import { ControlPanel, SearchPanel } from "components";
 import "./header.scss";
 
 const Header: FC = () => (

@@ -1,4 +1,4 @@
-import { Language, LocalWeather, WeatherResponse } from "../types";
+import { Language, LocalWeather, WeatherResponse } from "types";
 
 const getMainDescription = (weatherData: WeatherResponse, language: Language) => {
   const description = {

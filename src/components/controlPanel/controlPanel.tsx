@@ -1,11 +1,11 @@
 import { FC, useCallback, useContext } from "react";
 import classNames from "classnames";
-import { DataContext, SettingsContext } from "../../providers";
-import { Language, LocalWeather, Scale } from "../../types";
-import Button, { IconButton } from "../button";
-import { Store } from "../../service";
-import { setBackgroundImage } from "../../utils";
-import { fetchBackgroundImage } from "../../api";
+import { DataContext, SettingsContext } from "providers";
+import { Language, LocalWeather, Scale } from "types";
+import { Button, IconButton } from "components";
+import { Store } from "service";
+import { setBackgroundImage } from "utils";
+import { fetchBackgroundImage } from "api";
 import { ReactComponent as RefreshIcon } from "./assets/refresh.svg";
 import { ReactComponent as SoundIcon } from "./assets/sound.svg";
 import { ReactComponent as CelsiusIcon } from "./assets/celsius.svg";

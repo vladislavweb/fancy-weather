@@ -1,6 +1,6 @@
 import { FC } from "react";
 import WeatherCard from "./weatherCard";
-import { WeatherThreeDays } from "../../../utils";
+import { WeatherThreeDays } from "utils";
 import "./threeDays.scss";
 
 interface Props {

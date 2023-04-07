@@ -1,9 +1,9 @@
 import React, { useContext, FC } from "react";
 import ThreeDays from "./threeDays";
 import Today from "./today";
-import Loader from "../loader";
-import { weatherMapper } from "../../utils";
-import { DataContext } from "../../providers";
+import { Loader } from "components";
+import { weatherMapper } from "utils";
+import { DataContext } from "providers";
 import "./weather.scss";
 
 const Weather: FC = () => {

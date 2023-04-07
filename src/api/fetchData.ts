@@ -6,7 +6,7 @@ import {
   MapQuestResponse,
   MapQuestTypeRequest,
   WeatherResponse,
-} from "../types";
+} from "types";
 import fetchMapBoxData from "./mapBox";
 import fetchMapQuestData from "./mapQuest";
 import fetchBackgroundImage from "./unsplash";

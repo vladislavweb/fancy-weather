@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../application.json";
-import { BackgroundResponse, Language } from "../types";
+import { BackgroundResponse, Language } from "types";
 
 type FetchBackgroundImage = (
   language: Language,

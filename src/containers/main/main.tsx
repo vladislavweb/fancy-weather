@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Map, Weather } from "../../components";
+import { Map, Weather } from "components";
 import "./main.scss";
 
 const Main: FC = () => (

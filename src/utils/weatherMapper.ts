@@ -1,5 +1,5 @@
-import { WeatherResponse } from "../types";
-import { getWeatherImage } from "./getWeatherImage";
+import { WeatherResponse } from "types";
+import { getWeatherImage } from "utils";
 
 export interface WeatherNow {
   description: string;

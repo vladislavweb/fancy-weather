@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext, FC, useMemo } from "react";
 import { defineMessages, useIntl } from "react-intl";
 import classNames from "classnames";
-import mockData from "../../../assets/data";
-import { DataContext, SettingsContext } from "../../../providers";
-import { Scale } from "../../../types";
-import { mapBoxMapper, WeatherNow } from "../../../utils";
+import mockData from "assets/data";
+import { DataContext, SettingsContext } from "providers";
+import { Scale } from "types";
+import { mapBoxMapper, WeatherNow } from "utils";
 import "./today.scss";
 
 interface Props {

@@ -1,7 +1,7 @@
 import { createContext, FC, ReactNode, useContext, useState } from "react";
-import { DataResponse, fetchData, FetchDataParams } from "../../api";
-import { setBackgroundImage } from "../../utils";
-import { SettingsContext } from "../settings";
+import { DataResponse, fetchData, FetchDataParams } from "api";
+import { setBackgroundImage } from "utils";
+import { SettingsContext } from "providers";
 
 type Props = FC<{ children?: ReactNode }>;
 

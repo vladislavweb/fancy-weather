@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../application.json";
-import { MapQuestResponse, MapQuestTypeRequest } from "../types";
+import { MapQuestResponse, MapQuestTypeRequest } from "types";
 
 type FetchMapQuestData = (
   type?: MapQuestTypeRequest,

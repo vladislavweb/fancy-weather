@@ -1,4 +1,4 @@
-import { BackgroundResponse } from "../types";
+import { BackgroundResponse } from "types";
 
 interface Params {
   imageData: BackgroundResponse;

@@ -1,4 +1,4 @@
-import { MapBoxRequestTypes, MapBoxResponse } from "../types";
+import { MapBoxRequestTypes, MapBoxResponse } from "types";
 
 interface Response {
   country: string;

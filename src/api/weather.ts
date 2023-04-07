@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../application.json";
-import { Coordinates, Language, WeatherResponse } from "../types";
+import { Coordinates, Language, WeatherResponse } from "types";
 
 type FetchWeather = (coordinates: Coordinates, langauge: Language) => Promise<WeatherResponse>;
 

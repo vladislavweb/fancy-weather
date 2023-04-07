@@ -3,8 +3,8 @@ import { useIntl, defineMessages } from "react-intl";
 import ReactMapGL, { Marker } from "react-map-gl";
 import mapboxgl from "mapbox-gl";
 import { throttle } from "lodash";
-import { DataContext } from "../../providers";
-import { TypeFetchData } from "../../api";
+import { DataContext } from "providers";
+import { TypeFetchData } from "api";
 
 import config from "../../application.json";
 

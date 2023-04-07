@@ -1,11 +1,10 @@
 import React, { useState, useContext, FC, useCallback } from "react";
 import classNames from "classnames";
-import Input from "../input";
-import { IconButton } from "../button";
-import { DataContext, SettingsContext } from "../../providers";
-import { Language } from "../../types";
-import { Store } from "../../service";
-import { TypeFetchData } from "../../api";
+import { Input, IconButton } from "components";
+import { DataContext, SettingsContext } from "providers";
+import { Language } from "types";
+import { Store } from "service";
+import { TypeFetchData } from "api";
 import Divider from "../divider";
 import { ReactComponent as SearchIcon } from "./assets/search.svg";
 import { ReactComponent as MicrophoneIcon } from "./assets/microphone.svg";
