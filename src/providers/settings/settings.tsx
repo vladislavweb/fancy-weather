@@ -1,41 +1,72 @@
 import { createContext, FC, ReactNode, useState } from "react";
 import { LanguageStore, ScaleStore, VolumeStore, WeatherStore } from "services";
+import { Language, LocalWeather, Scale } from "types";
 
 type Props = FC<{ children?: ReactNode }>;
 
 interface SettingsProviderInterface {
   scale: Scale;
   language: Language;
+  volume: number;
+  localWeather: LocalWeather;
   changeScale: (scale: Scale) => void;
   changeLanguage: (language: Language) => void;
+  changeVolume: (volume: number) => void;
+  changeLocalWeather: (weather: LocalWeather) => void;
 }
 
 export const Context = createContext<SettingsProviderInterface>({
-  scale: Scale.FAR,
   language: Language.EN,
-  changeScale: () => undefined,
+  scale: Scale.FAR,
+  volume: 1,
+  localWeather: { language: Language.EN, weather: "" },
   changeLanguage: () => undefined,
+  changeScale: () => undefined,
+  changeVolume: () => undefined,
+  changeLocalWeather: () => undefined,
 });
 
 export const SettingsProvider: Props = ({ children }) => {
-  const localScale = new Store<Scale>("scale");
-  const localLanguage = new Store<Language>("language");
+  const [scale, setScale] = useState(ScaleStore.read() || ScaleStore.setDefaultValue());
+  const [language, setLanguage] = useState(LanguageStore.read() || LanguageStore.setDefaultValue());
+  const [volume, setVolume] = useState(VolumeStore.read() || VolumeStore.setDefaultValue());
+  const [localWeather, setLocalWeather] = useState(
+    WeatherStore.read() || WeatherStore.setDefaultValue(),
+  );
 
-  const [scale, setScale] = useState(localScale.read() || Scale.FAR);
-  const [language, setLanguage] = useState(localLanguage.read() || Language.EN);
-
-  const changeScale = (scale: Scale) => {
-    localScale.write(scale);
-    setScale(scale);
+  const changeLanguage = (value: Language) => {
+    LanguageStore.write(value);
+    setLanguage(value);
   };
 
-  const changeLanguage = (language: Language) => {
-    localLanguage.write(language);
-    setLanguage(language);
+  const changeScale = (value: Scale) => {
+    ScaleStore.write(value);
+    setScale(value);
+  };
+
+  const changeVolume = (value: number) => {
+    VolumeStore.write(value);
+    setVolume(value);
+  };
+
+  const changeLocalWeather = (value: LocalWeather) => {
+    WeatherStore.write(value);
+    setLocalWeather(value);
   };
 
   return (
-    <Context.Provider value={{ scale, language, changeScale, changeLanguage }}>
+    <Context.Provider
+      value={{
+        language,
+        scale,
+        volume,
+        localWeather,
+        changeLanguage,
+        changeScale,
+        changeVolume,
+        changeLocalWeather,
+      }}
+    >
       {children}
     </Context.Provider>
   );

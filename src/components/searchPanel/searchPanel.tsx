@@ -10,7 +10,7 @@ import { ReactComponent as MicrophoneIcon } from "./assets/microphone.svg";
 import "./searchPanel.scss";
 
 const SearchPanel: FC = () => {
-  const { language } = useContext(SettingsContext);
+  const { language, volume, localWeather, changeVolume } = useContext(SettingsContext);
   const { getData, searchString, changeSearchString } = useContext(DataContext);
   const [isSpeaking, setIsSpeaking] = useState(false);
 
@@ -53,7 +53,7 @@ const SearchPanel: FC = () => {
     recognition.onresult = function (event) {
       setIsSpeaking(false);
 
-      const currentVolume = localVolume.read() || 1;
+      const currentVolume = volume;
       const last = event.results.length - 1;
       const command = event.results[last][0].transcript.toLowerCase();
 
@@ -62,7 +62,7 @@ const SearchPanel: FC = () => {
         case "громче":
         case "мацней": {
           if (currentVolume < 1) {
-            localVolume.write(Number((currentVolume / 1 + 0.1).toFixed(1)));
+            changeVolume(Number((currentVolume / 1 + 0.1).toFixed(1)));
           }
 
           break;
@@ -71,7 +71,7 @@ const SearchPanel: FC = () => {
         case "тише":
         case "ціхі": {
           if (currentVolume >= 0) {
-            localVolume.write(Number((currentVolume / 1 - 0.1).toFixed(1)));
+            changeVolume(Number((currentVolume / 1 - 0.1).toFixed(1)));
           }
 
           break;
@@ -80,8 +80,8 @@ const SearchPanel: FC = () => {
         case "погода":
         case "надвор'е": {
           const synth = window.speechSynthesis;
-          const utterThis = new SpeechSynthesisUtterance(localWeather.read() || "");
-          utterThis.volume = localVolume.read() || 1;
+          const utterThis = new SpeechSynthesisUtterance(localWeather.weather);
+          utterThis.volume = volume;
 
           switch (language) {
             case Language.RU: {

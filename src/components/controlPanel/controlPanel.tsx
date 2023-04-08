@@ -1,7 +1,7 @@
 import { FC, useCallback, useContext } from "react";
 import classNames from "classnames";
 import { DataContext, SettingsContext } from "providers";
-import { Language, LocalWeather, Scale } from "types";
+import { Language, Scale } from "types";
 import { Button, IconButton } from "components";
 import { setBackgroundImage } from "utils";
 import { fetchBackgroundImage } from "api";
@@ -15,7 +15,8 @@ import "./controlPanel.scss";
 const ControlPanel: FC = () => {
   const { searchString, backgroundImageIsLoading, changeBackgroundImageIsLoading } =
     useContext(DataContext);
-  const { scale, language, changeScale, changeLanguage } = useContext(SettingsContext);
+  const { scale, language, localWeather, changeScale, changeLanguage } =
+    useContext(SettingsContext);
 
   const speakWeather = () => {
     const synth = window.speechSynthesis;
@@ -25,9 +26,9 @@ const ControlPanel: FC = () => {
       synth.cancel();
     }
 
-    const utterThis = new SpeechSynthesisUtterance(localWeather.read()?.weather || "");
+    const utterThis = new SpeechSynthesisUtterance(localWeather.weather);
     utterThis.voice = voices[3];
-    utterThis.lang = `${localWeather.read()?.language || Language.EN}-US`;
+    utterThis.lang = `${localWeather.language || Language.EN}-US`;
     utterThis.rate = 0.8;
 
     synth.speak(utterThis);
