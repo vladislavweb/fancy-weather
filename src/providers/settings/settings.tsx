@@ -1,6 +1,5 @@
 import { createContext, FC, ReactNode, useState } from "react";
-import { Store } from "service";
-import { Language, Scale } from "types";
+import { LanguageStore, ScaleStore, VolumeStore, WeatherStore } from "services";
 
 type Props = FC<{ children?: ReactNode }>;
 

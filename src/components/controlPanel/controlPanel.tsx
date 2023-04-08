@@ -3,7 +3,6 @@ import classNames from "classnames";
 import { DataContext, SettingsContext } from "providers";
 import { Language, LocalWeather, Scale } from "types";
 import { Button, IconButton } from "components";
-import { Store } from "service";
 import { setBackgroundImage } from "utils";
 import { fetchBackgroundImage } from "api";
 import { ReactComponent as RefreshIcon } from "./assets/refresh.svg";
@@ -17,7 +16,6 @@ const ControlPanel: FC = () => {
   const { searchString, backgroundImageIsLoading, changeBackgroundImageIsLoading } =
     useContext(DataContext);
   const { scale, language, changeScale, changeLanguage } = useContext(SettingsContext);
-  const localWeather = new Store<LocalWeather>("weather");
 
   const speakWeather = () => {
     const synth = window.speechSynthesis;

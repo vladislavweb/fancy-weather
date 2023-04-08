@@ -24,7 +24,7 @@
       "containers/*": ["containers/*"],
       "lang/*": ["lang/*"],
       "providers/*": ["providers/*"],
-      "service/*": ["service/*"],
+      "services/*": ["services/*"],
       "types/*": ["types/*"],
       "utils/*": ["utils/*"]
     }

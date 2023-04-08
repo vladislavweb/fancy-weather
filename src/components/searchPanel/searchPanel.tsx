@@ -3,7 +3,6 @@ import classNames from "classnames";
 import { Input, IconButton } from "components";
 import { DataContext, SettingsContext } from "providers";
 import { Language } from "types";
-import { Store } from "service";
 import { TypeFetchData } from "api";
 import Divider from "../divider";
 import { ReactComponent as SearchIcon } from "./assets/search.svg";
@@ -14,8 +13,6 @@ const SearchPanel: FC = () => {
   const { language } = useContext(SettingsContext);
   const { getData, searchString, changeSearchString } = useContext(DataContext);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const localVolume = new Store<number>("volume");
-  const localWeather = new Store<string>("weather");
 
   const onChangeSearchString: React.ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
     changeSearchString(e.target.value);
