@@ -82,24 +82,7 @@ const SearchPanel: FC = () => {
           const synth = window.speechSynthesis;
           const utterThis = new SpeechSynthesisUtterance(localWeather.weather);
           utterThis.volume = volume;
-
-          switch (language) {
-            case Language.RU: {
-              utterThis.lang = `ru-US`;
-
-              break;
-            }
-            case Language.UK: {
-              utterThis.lang = `uk-US`;
-
-              break;
-            }
-            default: {
-              utterThis.lang = `en-US`;
-
-              break;
-            }
-          }
+          utterThis.lang = `${localWeather.language || Language.EN}-US`;
 
           synth.speak(utterThis);
 

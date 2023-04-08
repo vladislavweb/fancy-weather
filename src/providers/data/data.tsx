@@ -1,6 +1,6 @@
 import { createContext, FC, ReactNode, useContext, useState } from "react";
 import { DataResponse, fetchData, FetchDataParams } from "api";
-import { setBackgroundImage } from "utils";
+import { createWeatherDescription, setBackgroundImage } from "utils";
 import { SettingsContext } from "providers";
 
 type Props = FC<{ children?: ReactNode }>;
@@ -27,7 +27,7 @@ export const Context = createContext<DataProviderInterface>({
 });
 
 export const DataProivder: Props = ({ children }) => {
-  const { language } = useContext(SettingsContext);
+  const { language, changeLocalWeather } = useContext(SettingsContext);
   const [data, setData] = useState<DataResponse>();
   const [searchString, setSearchString] = useState("");
   const [dataIsLoading, setDataIsLoading] = useState(false);
@@ -47,6 +47,10 @@ export const DataProivder: Props = ({ children }) => {
     fetchData({ language, ...params })
       .then((res) => {
         setData(res);
+
+        if (res?.weatherData) {
+          changeLocalWeather(createWeatherDescription(res.weatherData, language));
+        }
 
         if (res?.backgroundData) {
           setBackgroundImage({
